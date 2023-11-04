@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cms\UserController;
 use App\Http\Controllers\Cms\UserLevelController;
+use App\Http\Controllers\FrontController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,12 @@ use App\Http\Controllers\Cms\UserLevelController;
 require __DIR__.'/auth.php';
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('ppdb');
 });
+
+// user view
+Route::get('/ppdb', [FrontController::class, 'informasi'])->name('ppdb');
+Route::get('/ppdb/pendaftaran', [FrontController::class, 'pendaftaran']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/cms/dashboard', function () {
@@ -49,3 +54,5 @@ Route::middleware('auth')->group(function () {
         return view('cms.components');
     })->name('cmsComponents');
 });
+
+
