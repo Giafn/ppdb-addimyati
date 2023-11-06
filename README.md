@@ -1,66 +1,75 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Aplikasi PPDB SMK Terpadu Ad-Dimyati
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Deskripsi
+Aplikasi PPDB SMK Terpadu Ad-Dimyati adalah sebuah aplikasi berbasis web yang dirancang khusus untuk mengelola proses Penerimaan Peserta Didik Baru (PPDB) di SMK Terpadu Ad-Dimyati. Aplikasi ini dibangun menggunakan kerangka kerja Laravel, yang memungkinkan pengguna untuk melakukan pendaftaran siswa baru secara online dan efisien, serta mengelola semua tahapan dalam proses PPDB.
 
-## About Laravel
+## Fitur Utama
+Aplikasi PPDB SMK Terpadu Ad-Dimyati memiliki sejumlah fitur utama yang mendukung seluruh proses penerimaan siswa baru:
+#### 1. Pendaftaran Siswa Baru 
+- Calon siswa dapat mengisi formulir pendaftaran secara online melalui antarmuka yang mudah digunakan.
+- Informasi pribadi, riwayat pendidikan, dan data lainnya dapat diunggah dan disimpan.
+- Penggunaan voucher dan keringanan lainnya
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+#### 2. Pembayaran Administrasi
+- Siswa yang diterima dapat melakukan pembayaran administrasi pendaftaran melalui metode pembayaran yang telah ditentukan.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+#### 3. Export laporan
+- Admin dan staf dapat meng export data pendaftaran ke format excel, utuk lebih memudahkan pendokumentasian jika ingin di lakukan print out
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### 4. Monitoring Proses
+- Admin dan staf sekolah dapat memantau seluruh proses PPDB, termasuk status pendaftaran, seleksi, dan pembayaran.
 
-## Learning Laravel
+## Instalasi saat pengembangan
+Langkah-langkah instalasi aplikasi ini:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clone repositori dari GitHub:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+   ```bash
+   git clone https://github.com/Giafn/ppdb-addimyati.git
+   ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. Masuk ke direktori proyek:
 
-## Laravel Sponsors
+   ```bash
+   cd ppdb-addimyati
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+3. Salin file `.env.example` menjadi `.env` dan konfigurasikan variabel-variabel lingkungan (environment variables).
 
-### Premium Partners
+4. Install dependensi PHP dengan Composer:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+   ```bash
+   composer install
+   ```
 
-## Contributing
+5. Generate kunci aplikasi:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   ```bash
+   php artisan key:generate
+   ```
 
-## Code of Conduct
+6. Jalankan migrasi database:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+   ```bash
+   php artisan migrate
+   ```
+7. Compile css setiap ada perubahan:
 
-## Security Vulnerabilities
+   ```bash
+   npm run watch
+   ```
+   
+8. Jalankan aplikasi Laravel:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+   ```bash
+   php artisan serve
+   ```
 
-## License
+Aplikasi akan dijalankan di `http://localhost:8000`.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Catatan Rilis
+Aplikasi masih tahap pengembangan
+
+## Kontak
+jika ada yang ingin di tanyakan tentang aplikasi ini hubungi email `giafauzan11@gmail.com`
