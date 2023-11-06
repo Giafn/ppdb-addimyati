@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    <div class="mb-3 px-8 hidden" id="formPage1">
+    <div class="mb-3 px-8 formPage1">
         <h1 class="text-base font-bold text-emerald-800 mb-3">Informasi Pribadi</h1>
         {{-- nama lengkap --}}
         <div class="mb-3">
@@ -27,6 +27,7 @@
             <div class="mt-1">
                 <input type="number" name="nik" id="nik" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan NIK">
             </div>
+            <div class="text-xs mt-1" id="nikError"></div>
         </div>
         {{-- tangal lahir --}}
         <div class="mb-3">
@@ -41,8 +42,8 @@
             <div class="mt-1">
                 <select name="jenis_kelamin" id="jenis_kelamin" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md">
                     <option value="">Pilih Jenis Kelamin</option>
-                    <option value="laki-laki">Laki-laki</option>
-                    <option value="perempuan">Perempuan</option>
+                    <option value="l">Laki-laki</option>
+                    <option value="p">Perempuan</option>
                 </select>
             </div>
         </div>
@@ -83,7 +84,7 @@
             </div>
         </div>
     </div>
-    <div class="mb-3 px-8" id="formPage2">
+    <div class="mb-3 px-8 formPage2 hidden">
         <h1 class="text-base font-bold text-emerald-800 mb-3">Informasi Akademik</h1>
         {{-- NISN --}}
         <div class="mb-3">
@@ -139,8 +140,14 @@
             </div>
         </div>
     </div>
-    <div class="flex justify-end">
-        <button type="submit" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium mr-8 mb-8">Selanjutnya</button>
+    <div class="px-8 mb-5">
+        <div class="formPage1 flex justify-end">
+            <button type="button" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium" id="nextPage2">Selanjutnya</button>
+        </div>
+        <div class="formPage2 flex justify-between hidden">
+            <button type="button" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium" id="backPage1">Kembali</button>
+            <button type="submit" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium">Kirim</button>
+        </div>
     </div>
 </div>
 {{-- footer --}}
@@ -150,4 +157,65 @@
         <h1 class="text-xs font-bold text-emerald-800 text-center">SMK Terpadu Ad-Dimyati</h1>
     </div>
 </div>
+@endsection
+@section('script')
+<script src="/js/nik_parse.min.js"></script>
+<script>
+    // on keyup nik delay 3sec
+    $('#nik').on('keyup', function() {
+        setTimeout(() => {
+            let nik = $('#nik').val();
+            nikParse(nik, function(result) {
+                if (result.status == "error") {
+                    $('#nikError').html(result.pesan);
+                    $('#nikError').removeClass('text-green-500');
+                    $('#nikError').addClass('text-red-500');
+                } else {
+                    $('#nikError').html(result.pesan);
+                    $('#nikError').removeClass('text-red-500');
+                    $('#nikError').addClass('text-green-500');
+                    $('#nik').addClass('text-green-500');
+
+                    // set value to input
+                    console.log(result);
+                    let tgl = result.data.lahir.split('/');
+                    let tanggal_lahir = tgl[2] + "-" + tgl[1] + "-" + tgl[0];
+                    $('#tanggal_lahir').val(tanggal_lahir);
+                    // jenis kelamin
+                    let jk = result.data.kelamin == "LAKI-LAKI" ? "l" : "p";
+                    $('#jenis_kelamin').val(jk);
+
+                }
+            });
+        }, 2000);
+    });
+
+    // on click next page 2
+    $('#nextPage2').on('click', function() {
+        let nik = $('#nik').val();
+        let nama_lengkap = $('#nama_lengkap').val();
+        let tanggal_lahir = $('#tanggal_lahir').val();
+        let jenis_kelamin = $('#jenis_kelamin').val();
+        let agama = $('#agama').val();
+        let alamat = $('#alamat').val();
+        let no_hp = $('#no_hp').val();
+        let email = $('#email').val();
+
+        if (nik == "" || nama_lengkap == "" || tanggal_lahir == "" || jenis_kelamin == "" || agama == "" || alamat == "" || no_hp == "" || email == "") {
+            alert('Semua data wajib diisi');
+        } else {
+            $('.formPage1').addClass('hidden');
+            $('.formPage2').removeClass('hidden');
+        }
+    });
+
+    // on click back page 1
+    $('#backPage1').on('click', function() {
+        // ambil semua element dengan class formPage1 dan hapus class hidden
+        $('.formPage1').removeClass('hidden');
+        // ambil semua element dengan class formPage2 dan tambahkan class hidden
+        $('.formPage2').addClass('hidden');
+    });
+
+</script>
 @endsection
