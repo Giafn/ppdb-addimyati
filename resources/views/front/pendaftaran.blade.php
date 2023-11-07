@@ -44,20 +44,6 @@
             </div>
         </div>
         <div class="mb-3">
-            <label for="agama" class="block text-sm font-medium text-gray-700">Agama</label>
-            <div class="mt-1">
-                <select name="agama" id="agama" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md">
-                    <option value="">Pilih Agama</option>
-                    <option value="islam">Islam</option>
-                    <option value="kristen">Kristen</option>
-                    <option value="katholik">Katholik</option>
-                    <option value="hindu">Hindu</option>
-                    <option value="budha">Budha</option>
-                    <option value="konghucu">Konghucu</option>
-                </select>
-            </div>
-        </div>
-        <div class="mb-3">
             <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat</label>
             <div class="grid grid-cols-2 gap-2 mt-1">
                 <div class="col-span-2">
@@ -84,6 +70,20 @@
                 <div class="col-span-2">
                     <input type="text" name="alamat" id="alamat" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan detail alamat">
                 </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="agama" class="block text-sm font-medium text-gray-700">Agama</label>
+            <div class="mt-1">
+                <select name="agama" id="agama" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md">
+                    <option value="">Pilih Agama</option>
+                    <option value="islam">Islam</option>
+                    <option value="kristen">Kristen</option>
+                    <option value="katholik">Katholik</option>
+                    <option value="hindu">Hindu</option>
+                    <option value="budha">Budha</option>
+                    <option value="konghucu">Konghucu</option>
+                </select>
             </div>
         </div>
         <div class="mb-3">
