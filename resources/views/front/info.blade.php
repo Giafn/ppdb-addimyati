@@ -2,7 +2,7 @@
 @section('title', 'PPDB Ad-Dimyati | ')
 @section('content')
 @php
-    $dibuka = false;
+    $dibuka = true;
     $tanggal_buka = "10 maret 2024";
 @endphp
 @if ($dibuka)

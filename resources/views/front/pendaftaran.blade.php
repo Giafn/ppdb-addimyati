@@ -2,7 +2,7 @@
 @section('title', 'PPDB Ad-Dimyati | ')
 @section('content')
 
-<div class="">
+<div class="lg:w-1/2 lg:mx-auto">
     <div class="w-full h-fit bg-lime-700 rounded-b-full">
         <div class="container mx-auto px-2 sm:px-6 lg:px-8 pt-10 pb-10 mb-6">
             <div class="flex flex-col items-center justify-center">
@@ -14,14 +14,12 @@
     </div>
     <div class="mb-3 px-8 formPage1">
         <h1 class="text-base font-bold text-emerald-800 mb-3">Informasi Pribadi</h1>
-        {{-- nama lengkap --}}
         <div class="mb-3">
             <label for="nama_lengkap" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
             <div class="mt-1">
                 <input type="text" name="nama_lengkap" id="nama_lengkap" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan nama lengkap">
             </div>
         </div>
-        {{-- nik --}}
         <div class="mb-3">
             <label for="nik" class="block text-sm font-medium text-gray-700">NIK</label>
             <div class="mt-1">
@@ -29,14 +27,12 @@
             </div>
             <div class="text-xs mt-1" id="nikError"></div>
         </div>
-        {{-- tangal lahir --}}
         <div class="mb-3">
             <label for="tanggal_lahir" class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
             <div class="mt-1">
                 <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md">
             </div>
         </div>
-        {{-- jenis kelamin --}}
         <div class="mb-3">
             <label for="jenis_kelamin" class="block text-sm font-medium text-gray-700">Jenis Kelamin</label>
             <div class="mt-1">
@@ -47,7 +43,6 @@
                 </select>
             </div>
         </div>
-        {{-- agama --}}
         <div class="mb-3">
             <label for="agama" class="block text-sm font-medium text-gray-700">Agama</label>
             <div class="mt-1">
@@ -62,21 +57,41 @@
                 </select>
             </div>
         </div>
-        {{-- alamat --}}
         <div class="mb-3">
             <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat</label>
-            <div class="mt-1">
-                <textarea name="alamat" id="alamat" cols="30" rows="5" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan alamat"></textarea>
+            <div class="grid grid-cols-2 gap-2 mt-1">
+                <div class="col-span-2">
+                    <input type="text" name="kecamatan" id="kecamatan" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Kecamatan">
+                </div>
+                <div class="col-span-2">
+                    <input type="text" name="kota" id="kota" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Kota">
+                </div>
+                <div class="col-span-2">
+                    <input type="text" name="provinsi" id="provinsi" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Provinsi">
+                </div>
+                <div>
+                    <input type="text" name="kode_pos" id="kode_pos" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Kode Pos">
+                </div>
+                <div class="col-span-2">
+                    <input type="text" name="desa" id="desa" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Desa">
+                </div>
+                <div>
+                    <input type="text" name="rt" id="rt" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="RT">
+                </div>
+                <div>
+                    <input type="text" name="rw" id="rw" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="RW">
+                </div>
+                <div class="col-span-2">
+                    <input type="text" name="alamat" id="alamat" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan detail alamat">
+                </div>
             </div>
         </div>
-        {{-- no hp --}}
         <div class="mb-3">
             <label for="no_hp" class="block text-sm font-medium text-gray-700">No HP</label>
             <div class="mt-1">
                 <input type="number" name="no_hp" id="no_hp" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan no hp">
             </div>
         </div>
-        {{-- email --}}
         <div class="mb-3">
             <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
             <div class="mt-1">
@@ -86,30 +101,25 @@
     </div>
     <div class="mb-3 px-8 formPage2 hidden">
         <h1 class="text-base font-bold text-emerald-800 mb-3">Informasi Akademik</h1>
-        {{-- NISN --}}
         <div class="mb-3">
             <label for="nisn" class="block text-sm font-medium text-gray-700">NISN</label>
             <div class="mt-1">
                 <input type="number" name="nisn" id="nisn" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan NISN">
             </div>
         </div>
-        {{-- Asal sekolah --}}
         <div class="mb-3">
             <label for="asal_sekolah" class="block text-sm font-medium text-gray-700">Asal Sekolah</label>
             <div class="mt-1">
                 <input type="text" name="asal_sekolah" id="asal_sekolah" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan asal sekolah">
             </div>
         </div>
-        {{-- Alamat sekolah --}}
         <div class="mb-3">
             <label for="alamat_sekolah" class="block text-sm font-medium text-gray-700">Alamat Sekolah</label>
             <div class="mt-1">
                 <textarea name="alamat_sekolah" id="alamat_sekolah" cols="30" rows="5" class="shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan alamat sekolah"></textarea>
             </div>
         </div>
-
         <h1 class="text-base font-bold text-emerald-800 mb-3">Jurusan Dipilih</h1>
-        {{-- jurusan --}}
         <div class="mb-3">
             <label for="jurusan" class="block text-sm font-medium text-gray-700">Jurusan utama</label>
             <div class="mt-1">
@@ -124,7 +134,6 @@
                 </select>
             </div>
         </div>
-        {{-- jurusan 2 --}}
         <div class="mb-3">
             <label for="jurusan2" class="block text-sm font-medium text-gray-700">Jurusan kedua</label>
             <div class="mt-1">
@@ -161,7 +170,6 @@
 @section('script')
 <script src="/js/nik_parse.min.js"></script>
 <script>
-    // on keyup nik delay 3sec
     $('#nik').on('keyup', function() {
         setTimeout(() => {
             let nik = $('#nik').val();
@@ -171,26 +179,27 @@
                     $('#nikError').removeClass('text-green-500');
                     $('#nikError').addClass('text-red-500');
                 } else {
+                    console.log(result);
                     $('#nikError').html(result.pesan);
                     $('#nikError').removeClass('text-red-500');
                     $('#nikError').addClass('text-green-500');
                     $('#nik').addClass('text-green-500');
-
-                    // set value to input
-                    console.log(result);
+                    
                     let tgl = result.data.lahir.split('/');
                     let tanggal_lahir = tgl[2] + "-" + tgl[1] + "-" + tgl[0];
                     $('#tanggal_lahir').val(tanggal_lahir);
-                    // jenis kelamin
                     let jk = result.data.kelamin == "LAKI-LAKI" ? "l" : "p";
                     $('#jenis_kelamin').val(jk);
-
+                    $('#kecamatan').val(result.data.kecamatan);
+                    $('#kota').val(result.data.kotakab);
+                    $('#provinsi').val(result.data.provinsi);
+                    $('#kode_pos').val(result.data.tambahan.kodepos);
+                    
                 }
             });
         }, 2000);
     });
-
-    // on click next page 2
+    
     $('#nextPage2').on('click', function() {
         let nik = $('#nik').val();
         let nama_lengkap = $('#nama_lengkap').val();
@@ -200,7 +209,7 @@
         let alamat = $('#alamat').val();
         let no_hp = $('#no_hp').val();
         let email = $('#email').val();
-
+        
         if (nik == "" || nama_lengkap == "" || tanggal_lahir == "" || jenis_kelamin == "" || agama == "" || alamat == "" || no_hp == "" || email == "") {
             alert('Semua data wajib diisi');
         } else {
@@ -208,14 +217,11 @@
             $('.formPage2').removeClass('hidden');
         }
     });
-
-    // on click back page 1
+    
     $('#backPage1').on('click', function() {
-        // ambil semua element dengan class formPage1 dan hapus class hidden
         $('.formPage1').removeClass('hidden');
-        // ambil semua element dengan class formPage2 dan tambahkan class hidden
         $('.formPage2').addClass('hidden');
     });
-
+    
 </script>
 @endsection
