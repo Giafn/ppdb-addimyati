@@ -53,13 +53,18 @@ Langkah-langkah instalasi aplikasi ini:
    ```bash
    php artisan migrate
    ```
-7. Compile css setiap ada perubahan:
+7. Install package npm
+
+   ```bash
+   npm install
+   ```
+8. Compile css setiap ada perubahan:
 
    ```bash
    npm run watch
    ```
    
-8. Jalankan aplikasi Laravel:
+9. Jalankan aplikasi Laravel:
 
    ```bash
    php artisan serve
