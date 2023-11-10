@@ -12,6 +12,8 @@
             </div>
         </div>
     </div>
+    <form method="POST" action="#" enctype="multipart/form-data" id="formPendaftaran">
+    @csrf
     <div class="mb-3 px-8 formPage1">
         <h1 class="text-base font-bold text-emerald-800 mb-3">Informasi Pribadi</h1>
         <div class="mb-3">
@@ -149,13 +151,14 @@
             </div>
         </div>
     </div>
+    </form>
     <div class="px-8 mb-5">
         <div class="formPage1 flex justify-end">
             <button type="button" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium" id="nextPage2">Selanjutnya</button>
         </div>
         <div class="formPage2 flex justify-between hidden">
             <button type="button" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium" id="backPage1">Kembali</button>
-            <button type="submit" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium">Kirim</button>
+            <button id="subButton" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium">Kirim</button>
         </div>
     </div>
 </div>
@@ -221,6 +224,11 @@
     $('#backPage1').on('click', function() {
         $('.formPage1').removeClass('hidden');
         $('.formPage2').addClass('hidden');
+    });
+
+    $('#subButton').on('click', function() {
+        // form submit
+        $('#formPendaftaran').submit();
     });
     
 </script>

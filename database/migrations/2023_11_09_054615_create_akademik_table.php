@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('akademik', function (Blueprint $table) {
             $table->id();
             $table->string('asal_sekolah');
+            $table->string('alamat_sekolah');
             $table->string('nomor_seri_sttb')->nullable();
             $table->integer('tahun_sttb')->nullable();
             $table->string('nisn');

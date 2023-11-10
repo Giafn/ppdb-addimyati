@@ -25,6 +25,7 @@ Route::get('/', function () {
 // user view
 Route::get('/ppdb', [FrontController::class, 'informasi'])->name('ppdb');
 Route::get('/ppdb/pendaftaran', [FrontController::class, 'pendaftaran']);
+Route::post('/ppdb/pendaftaran', [FrontController::class, 'storePendaftaran']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/cms/dashboard', function () {
