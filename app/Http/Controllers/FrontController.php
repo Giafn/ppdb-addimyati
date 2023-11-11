@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Cms\master\NominalAdministrasiController;
 use App\Http\Controllers\Cms\master\PpdbSettingController;
 use App\Models\Akademik;
 use App\Models\CalonSiswa;
+use App\Models\Pendaftaran;
 use App\Models\ProgramKeahlian;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -82,6 +84,18 @@ class FrontController extends Controller
             "kode_pos" => $request->kode_pos,
         ];
 
+        $ppdbAktif = PpdbSettingController::getPPDBInfo()['ppdbOpen'];
+        $idppdb = $ppdbAktif->id;
+
+        $pendaftaran = new Pendaftaran();
+        $pendaftaran->ppdb_id = $idppdb;
+        $pendaftaran->kode = "PPDB-" . $request->nisn;
+        $pendaftaran->status_pendaftaran = 1;
+        $pendaftaran->status_pembayaran = 1;
+        $pendaftaran->nominal_pembayaran = NominalAdministrasiController::hitungNominal($ppdbAktif->gelombang);
+        $pendaftaran->jurusan_id1 = $request->jurusan;
+        $pendaftaran->jurusan_id2 = $request->jurusan2;
+
         $akademik = new Akademik();
         $akademik->nisn = $request->nisn;
         $akademik->asal_sekolah = $request->asal_sekolah;
@@ -102,17 +116,19 @@ class FrontController extends Controller
         $user->password = bcrypt($request->nisn);
         $user->flag_active = 0;
         $user->user_level_id = 5;
-
+        
         try {
             $akademik->save();
             $calonSiswa->akademik_id = $akademik->id;
             $user->save();
             $calonSiswa->user_id = $user->id;
             $calonSiswa->save();
+            $pendaftaran->calon_siswa_id = $calonSiswa->id;
+            $pendaftaran->save();
+            DB::commit();
             return view('front.pendaftaran-berhasil');
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th->getMessage());
             return view('front.pendaftaran-gagal');
         }
 

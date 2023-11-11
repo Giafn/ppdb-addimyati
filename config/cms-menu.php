@@ -9,12 +9,7 @@ return [
 		'route_name' => "cmsDashboard",
 		'module'	 => [
 			'code' => 'dashboard',
-			'task' => [
-				[
-					'code' => 'add',
-					'name' => 'Add'
-				]
-			]
+			'task' => []
 		],
 		'child'      => [],
 	],
@@ -34,12 +29,7 @@ return [
 				'route_name' => "cmsUserLevel",
 				'module' 	 => [
 					'code' => 'user-level',
-					'task' => [
-						[
-							'code' => 'add',
-							'name' => 'Add'
-						]
-					]
+					'task' => []
 				]
 			],
 			[
@@ -87,5 +77,17 @@ return [
 			],
 
 		],
-	]
+	],
+	[
+		'code'		 => 'listPendaftar',
+		'name'		 => "List Pendaftar",
+		'label'		 => "listPendaftar",
+		'icon'		 => "dashboard",
+		'route_name' => "cmsListPendaftar",
+		'module'	 => [
+			'code' => 'listPendaftar',
+			'task' => []
+		],
+		'child'      => [],
+	],
 ];

@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\Cms\ListPendaftarController;
 use App\Http\Controllers\Cms\master\PpdbSettingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cms\UserController;
 use App\Http\Controllers\Cms\UserLevelController;
 use App\Http\Controllers\FrontController;
-use App\Http\Controllers\NominalAdministrasiController;
+use App\Http\Controllers\Cms\master\NominalAdministrasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,8 +77,15 @@ Route::middleware('auth')->group(function () {
                 Route::delete('/administrasi/{id}', [NominalAdministrasiController::class, 'delete']);
             });
         });
-    });
 
+        // --list pendaftar--
+        Route::prefix('list-pendaftar')->group(function () {
+            Route::get('/', [ListPendaftarController::class, 'index'])->name('cmsListPendaftar');
+            Route::get('/{id}', [ListPendaftarController::class, 'detail']);
+            Route::put('/{id}', [ListPendaftarController::class, 'update']);
+            Route::delete('/{id}', [ListPendaftarController::class, 'delete']);
+        });
+    });
 
    
 

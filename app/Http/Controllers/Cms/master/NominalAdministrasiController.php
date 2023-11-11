@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cms\master;
 
+use App\Http\Controllers\Controller;
 use App\Models\NominalPendaftaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -160,5 +161,21 @@ class NominalAdministrasiController extends Controller
         return response()->json([
             'status' => "OK"
         ]);
+    }
+
+    public static function hitungNominal($gelombang, $voucherKode = null)
+    {
+        $nominalAdministrasi = NominalPendaftaran::where('gelombang', $gelombang)
+            ->get();
+
+        if ($voucherKode) {
+        }
+
+        $sumNominal = 0;
+        foreach ($nominalAdministrasi as $key => $value) {
+            $sumNominal += $value->nominal;
+        }
+
+        return $sumNominal;
     }
 }

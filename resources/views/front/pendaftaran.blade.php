@@ -272,12 +272,12 @@
         let no_hp = $('#no_hp').val();
         let email = $('#email').val();
         
-        // if (nik == "" || nama_lengkap == "" || tanggal_lahir == "" || jenis_kelamin == "" || agama == "" || alamat == "" || no_hp == "" || email == "") {
-        //     alert('Semua data wajib diisi');
-        // } else {
+        if (nik == "" || nama_lengkap == "" || tanggal_lahir == "" || jenis_kelamin == "" || agama == "" || alamat == "" || no_hp == "" || email == "") {
+            alert('Semua Isian wajib diisi');
+        } else {
             $('.formPage1').addClass('hidden');
             $('.formPage2').removeClass('hidden');
-        // }
+        }
     });
     
     $('#backPage1').on('click', function() {
