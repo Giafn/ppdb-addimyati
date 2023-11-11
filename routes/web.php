@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cms\UserController;
 use App\Http\Controllers\Cms\UserLevelController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\NominalAdministrasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +68,12 @@ Route::middleware('auth')->group(function () {
                 Route::get('/setting/{id}', [PpdbSettingController::class, 'detail']);
                 Route::put('/setting/{id}', [PpdbSettingController::class, 'update']);
                 Route::delete('/setting/{id}', [PpdbSettingController::class, 'delete']);
+
+                Route::get('/administrasi', [NominalAdministrasiController::class, 'index'])->name('cmsNominalAdministrasi');
+                Route::post('/administrasi', [NominalAdministrasiController::class, 'store']);
+                Route::get('/administrasi/{id}', [NominalAdministrasiController::class, 'detail']);
+                Route::put('/administrasi/{id}', [NominalAdministrasiController::class, 'update']);
+                Route::delete('/administrasi/{id}', [NominalAdministrasiController::class, 'delete']);
             });
         });
     });

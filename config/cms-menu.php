@@ -73,7 +73,19 @@ return [
 					'code' => 'ppdb',
 					'task' => []
 				]
-			]
+			],
+			[
+				'code'		 => "nominalAdministrasi",
+				'name'		 => "Nominal Administrasi",
+				'label'		 => "nominalAdministrasi",
+				'icon'		 => "",
+				'route_name' => "cmsNominalAdministrasi",
+				'module' 	 => [
+					'code' => 'nominalAdministrasi',
+					'task' => []
+				]
+			],
+
 		],
 	]
 ];

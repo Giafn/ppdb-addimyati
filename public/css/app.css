@@ -1703,6 +1703,9 @@ input:checked + .toggle-bg {
 .cursor-pointer {
   cursor: pointer;
 }
+.resize-none {
+  resize: none;
+}
 .resize {
   resize: both;
 }
@@ -2626,6 +2629,10 @@ input:checked + .toggle-bg {
 :is(.dark .dark\:bg-blue-600) {
   --tw-bg-opacity: 1;
   background-color: rgb(28 100 242 / var(--tw-bg-opacity));
+}
+:is(.dark .dark\:bg-gray-500) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
 :is(.dark .dark\:bg-gray-600) {
   --tw-bg-opacity: 1;
