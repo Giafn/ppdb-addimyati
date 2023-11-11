@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Cms\master\PpdbSettingController;
 use App\Models\Akademik;
 use App\Models\CalonSiswa;
+use App\Models\ProgramKeahlian;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,17 +15,31 @@ class FrontController extends Controller
 {
     public function informasi()
     {
-        return view('front.info');
+        $ppdb = PpdbSettingController::getPPDBInfo();
+        $ppdbNext = $ppdb['ppdbNext'] ? date('d F Y', strtotime($ppdb['ppdbNext'])) : null;
+        $ppdbAktif = $ppdb['ppdbOpen'] ? $ppdb['ppdbOpen']->toArray() : null;
+        
+        if ($ppdbAktif) {
+            $ppdbAktif['start_date'] = date('d F Y', strtotime($ppdbAktif['start_date']));
+            $ppdbAktif['end_date'] = date('d F Y', strtotime($ppdbAktif['end_date']));
+        }
+        
+        return view('front.info', compact('ppdbAktif', 'ppdbNext'));
     }
 
     public function pendaftaran()
     {
-        return view('front.pendaftaran');
-    }
-
-    public function validateForm1(Request $request)
-    {
-        dd($request->all());
+        $ppdb = PpdbSettingController::getPPDBInfo();
+        $dataPpdb = $ppdb['ppdbOpen'] ? $ppdb['ppdbOpen']->toArray() : null;
+        
+        if ($dataPpdb) {
+            $dataPpdb['start_date'] = date('d F Y', strtotime($dataPpdb['start_date']));
+            $dataPpdb['end_date'] = date('d F Y', strtotime($dataPpdb['end_date']));
+        } else {
+            return redirect()->route('ppdb');
+        }
+        $jurusan = ProgramKeahlian::all();
+        return view('front.pendaftaran', compact('jurusan', 'dataPpdb'));
     }
 
     public function storePendaftaran(Request $request)
@@ -43,7 +59,7 @@ class FrontController extends Controller
             "alamat" => "required",
             "agama" => "required",
             "no_hp" => "required",
-            "email" => "required",
+            "email" => "required | email | unique:users,email",
             "nisn" => "required",
             "asal_sekolah" => "required",
             "alamat_sekolah" => "required",
@@ -96,6 +112,7 @@ class FrontController extends Controller
             return view('front.pendaftaran-berhasil');
         } catch (\Throwable $th) {
             DB::rollBack();
+            dd($th->getMessage());
             return view('front.pendaftaran-gagal');
         }
 

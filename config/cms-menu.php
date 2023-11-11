@@ -54,5 +54,26 @@ return [
 				]
 			],
 		],
+	],
+	[
+		'code'		 => 'master',
+		'name'		 => "Master",
+		'label'		 => "master",
+		'icon'		 => "cog",
+		'route_name' => "",
+		'module' 	 => [],
+		'child'      => [
+			[
+				'code'		 => "ppdb",
+				'name'		 => "PPDB Setting",
+				'label'		 => "ppdbSetting",
+				'icon'		 => "",
+				'route_name' => "cmsPpdbSetting",
+				'module' 	 => [
+					'code' => 'ppdb',
+					'task' => []
+				]
+			]
+		],
 	]
 ];

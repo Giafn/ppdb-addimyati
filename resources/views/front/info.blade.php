@@ -2,8 +2,11 @@
 @section('title', 'PPDB Ad-Dimyati | ')
 @section('content')
 @php
-    $dibuka = true;
-    $tanggal_buka = "10 maret 2024";
+    $dibuka = false;
+    if ($ppdbAktif) {
+        $dibuka = true;
+    }
+    $tanggal_buka = $ppdbNext;
 @endphp
 @if ($dibuka)
 <div class="px-9 py-5 w-full lg:h-screen">
