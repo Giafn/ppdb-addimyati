@@ -13,18 +13,18 @@ return new class extends Migration
     {
         Schema::create('calon_siswa', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->nullable();
+            $table->bigInteger('user_id');
             $table->bigInteger('akademik_id');
-            $table->string('nik');
-            $table->string('telepon');
-            $table->string('nama_lengkap');
+            $table->string('nik')->nullable();
+            $table->string('telepon')->nullable();
+            $table->string('nama_lengkap')->nullable();
             $table->string('nama_panggilan')->nullable();
-            $table->string('jenis_kelamin');
-            $table->date('ttl');
-            $table->string('agama');
+            $table->string('jenis_kelamin')->nullable();
+            $table->date('ttl')->nullable();
+            $table->string('agama')->nullable();
             $table->integer('anak_ke')->nullable();
             $table->integer('jumlah_saudara')->nullable();
-            $table->text('alamat_lengkap');
+            $table->text('alamat_lengkap')->nullable();
             $table->bigInteger('program_keahlian_id')->nullable();
             $table->string('ukuran_seragam')->nullable();
             $table->integer('tinggi_badan')->nullable();

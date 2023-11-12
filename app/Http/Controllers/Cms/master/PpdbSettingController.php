@@ -246,4 +246,22 @@ class PpdbSettingController extends Controller
             'ppdbNext' => $ppdbNext
         ];
     }
+
+    public static function listTahunAjaranGelombang()
+    {
+        $ppdb = Ppdb::select('tahun_ajaran', 'gelombang')
+            ->groupBy('tahun_ajaran', 'gelombang')
+            ->orderBy('tahun_ajaran', 'desc')
+            ->get();
+
+        $gelombang = $ppdb->pluck('gelombang')->unique()->toArray();
+        $listTahunAjaran = $ppdb->pluck('tahun_ajaran')->unique()->toArray();
+        $lastTahunAjaran = $listTahunAjaran[0];
+
+        return [
+            'lastTahunAjaran' => $lastTahunAjaran,
+            'listTahunAjaran' => $listTahunAjaran,
+            'listGelombang' => $gelombang
+        ];
+    }
 }

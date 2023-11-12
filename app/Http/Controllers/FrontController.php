@@ -83,41 +83,42 @@ class FrontController extends Controller
             "provinsi" => $request->provinsi,
             "kode_pos" => $request->kode_pos,
         ];
-
-        $ppdbAktif = PpdbSettingController::getPPDBInfo()['ppdbOpen'];
-        $idppdb = $ppdbAktif->id;
-
-        $pendaftaran = new Pendaftaran();
-        $pendaftaran->ppdb_id = $idppdb;
-        $pendaftaran->kode = "PPDB-" . $request->nisn;
-        $pendaftaran->status_pendaftaran = 1;
-        $pendaftaran->status_pembayaran = 1;
-        $pendaftaran->nominal_pembayaran = NominalAdministrasiController::hitungNominal($ppdbAktif->gelombang);
-        $pendaftaran->jurusan_id1 = $request->jurusan;
-        $pendaftaran->jurusan_id2 = $request->jurusan2;
-
-        $akademik = new Akademik();
-        $akademik->nisn = $request->nisn;
-        $akademik->asal_sekolah = $request->asal_sekolah;
-        $akademik->alamat_sekolah = $request->alamat_sekolah;
-
-        $calonSiswa = new CalonSiswa();
-        $calonSiswa->nama_lengkap = $request->nama_lengkap;
-        $calonSiswa->nik = $request->nik;
-        $calonSiswa->ttl = $request->tanggal_lahir;
-        $calonSiswa->jenis_kelamin = $request->jenis_kelamin;
-        $calonSiswa->alamat_lengkap = $this->createAlamat($dataAlamat);
-        $calonSiswa->agama = $request->agama;
-        $calonSiswa->telepon = $request->no_hp;
-
-        $user = new User();
-        $user->name = $request->nama_lengkap;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->nisn);
-        $user->flag_active = 0;
-        $user->user_level_id = 5;
-        
+               
         try {
+            DB::beginTransaction();
+            $ppdbAktif = PpdbSettingController::getPPDBInfo()['ppdbOpen'];
+            $idppdb = $ppdbAktif->id;
+
+            $pendaftaran = new Pendaftaran();
+            $pendaftaran->ppdb_id = $idppdb;
+            $pendaftaran->kode = "PPDB-" . $request->nisn;
+            $pendaftaran->status_pendaftaran = 1;
+            $pendaftaran->status_pembayaran = 1;
+            $pendaftaran->nominal_pembayaran = NominalAdministrasiController::hitungNominal($ppdbAktif->gelombang);
+            $pendaftaran->jurusan_id1 = $request->jurusan;
+            $pendaftaran->jurusan_id2 = $request->jurusan2;
+
+            $akademik = new Akademik();
+            $akademik->nisn = $request->nisn;
+            $akademik->asal_sekolah = $request->asal_sekolah;
+            $akademik->alamat_sekolah = $request->alamat_sekolah;
+
+            $calonSiswa = new CalonSiswa();
+            $calonSiswa->nama_lengkap = $request->nama_lengkap;
+            $calonSiswa->nik = $request->nik;
+            $calonSiswa->ttl = $request->tanggal_lahir;
+            $calonSiswa->jenis_kelamin = $request->jenis_kelamin;
+            $calonSiswa->alamat_lengkap = $this->createAlamat($dataAlamat);
+            $calonSiswa->agama = $request->agama;
+            $calonSiswa->telepon = $request->no_hp;
+
+            $user = new User();
+            $user->name = $request->nama_lengkap;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->nisn);
+            $user->flag_active = 0;
+            $user->user_level_id = 5;
+ 
             $akademik->save();
             $calonSiswa->akademik_id = $akademik->id;
             $user->save();

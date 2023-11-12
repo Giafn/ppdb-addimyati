@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('kode');
             $table->bigInteger('calon_siswa_id');
             $table->bigInteger('ref_voucher_id')->nullable();
-            $table->integer('status_pendaftaran');//(1 = pendaftaran awal, 2 = pembayaran, 3 = pelengkapan_ data, 4 = selesai)
-            $table->integer('status_pembayaran');//(1 = belum bayar, 2 = sudah bayar)
+            $table->integer('status_pendaftaran');//(1 = belum lengkap, 2 = sudah lengkap)
+            $table->integer('status_pembayaran');//(1 = belum bayar, 2 = belum lunas, 3 = lunas)
             $table->bigInteger('nominal_pembayaran')->nullable();
             $table->bigInteger('total_nominal')->nullable();
             $table->string('bukti_bayar_path')->nullable();

@@ -1,9 +1,9 @@
 @layer components {
     .modal {
-        @apply fixed left-0 right-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full hidden;
+        @apply fixed left-0 right-0 z-50 overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full hidden;
 
         > .modal-dialog {
-            @apply relative w-full h-full px-4 md:h-auto;
+            @apply relative w-full mx-auto md:my-4 h-full px-4 md:h-auto;
 
             > .modal-content {
                 @apply relative bg-white rounded-lg shadow dark:bg-gray-800;

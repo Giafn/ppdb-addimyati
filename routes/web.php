@@ -81,6 +81,7 @@ Route::middleware('auth')->group(function () {
         // --list pendaftar--
         Route::prefix('list-pendaftar')->group(function () {
             Route::get('/', [ListPendaftarController::class, 'index'])->name('cmsListPendaftar');
+            Route::post('/', [ListPendaftarController::class, 'daftarManual']);
             Route::get('/{id}', [ListPendaftarController::class, 'detail']);
             Route::put('/{id}', [ListPendaftarController::class, 'update']);
             Route::delete('/{id}', [ListPendaftarController::class, 'delete']);
