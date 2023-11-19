@@ -169,6 +169,32 @@ class ListPendaftarController extends Controller
         ]);
     }
 
+    public function detail($id)
+    {
+        try {
+            $pendaftaran = Pendaftaran::where('id', $id)->first();
+            $calonSiswa = CalonSiswa::where('id', $pendaftaran->calon_siswa_id)->first();
+            $akademik = Akademik::where('id', $calonSiswa->akademik_id)->first();
+            $user = User::where('id', $calonSiswa->user_id)->first();
+
+            $data = [
+                "pendaftaran" => $pendaftaran,
+                "calonSiswa" => $calonSiswa,
+                "akademik" => $akademik,
+                "user" => $user
+            ];
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => "Data tidak ditemukan"
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => "OK",
+            'data' => $data
+        ]);
+    }
+
     public function delete($id)
     {
         try {

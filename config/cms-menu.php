@@ -75,6 +75,17 @@ return [
 					'task' => []
 				]
 			],
+			[
+				'code'		 => "jurusan",
+				'name'		 => "Jurusan",
+				'label'		 => "jurusan",
+				'icon'		 => "",
+				'route_name' => "cmsJurusan",
+				'module' 	 => [
+					'code' => 'jurusan',
+					'task' => []
+				]
+			],
 
 		],
 	],
@@ -86,6 +97,18 @@ return [
 		'route_name' => "cmsListPendaftar",
 		'module'	 => [
 			'code' => 'listPendaftar',
+			'task' => []
+		],
+		'child'      => [],
+	],
+	[
+		'code'		 => 'pembayaran',
+		'name'		 => "Pembayaran",
+		'label'		 => "pembayaran",
+		'icon'		 => "dashboard",
+		'route_name' => "cmsPembayaran",
+		'module'	 => [
+			'code' => 'pembayaran',
 			'task' => []
 		],
 		'child'      => [],
