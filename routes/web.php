@@ -7,6 +7,7 @@ use App\Http\Controllers\Cms\UserController;
 use App\Http\Controllers\Cms\UserLevelController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\Cms\master\NominalAdministrasiController;
+use App\Http\Controllers\Cms\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +20,17 @@ use App\Http\Controllers\Cms\master\NominalAdministrasiController;
 |
 */
 
-require __DIR__.'/auth.php';
-
 Route::get('/', function () {
     return redirect()->route('ppdb');
+});
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthenticatedSessionController::class, 'showLogin']);
+    Route::post('/login', [AuthenticatedSessionController::class, 'login'])->name('login');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthenticatedSessionController::class, 'logout'])->name('logout');
 });
 
 // user view
