@@ -20,6 +20,7 @@ Aplikasi PPDB SMK Terpadu Ad-Dimyati memiliki sejumlah fitur utama yang mendukun
 - Admin dan staf sekolah dapat memantau seluruh proses PPDB, termasuk status pendaftaran, seleksi, dan pembayaran.
 
 ## Instalasi saat pengembangan
+menggunakan laravel 9.5 dan minimal php 8.0
 Langkah-langkah instalasi aplikasi ini:
 
 1. Clone repositori dari GitHub:
