@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('calon_siswa', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
             $table->bigInteger('akademik_id');
             $table->string('nik')->nullable();
             $table->string('telepon')->nullable();
@@ -24,7 +23,7 @@ return new class extends Migration
             $table->string('agama')->nullable();
             $table->integer('anak_ke')->nullable();
             $table->integer('jumlah_saudara')->nullable();
-            $table->text('alamat_lengkap')->nullable();
+            $table->text('alamat_id')->nullable();
             $table->bigInteger('program_keahlian_id')->nullable();
             $table->string('ukuran_seragam')->nullable();
             $table->integer('tinggi_badan')->nullable();

@@ -11,6 +11,7 @@ use App\Models\ProgramKeahlian;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class FrontController extends Controller
@@ -46,31 +47,9 @@ class FrontController extends Controller
 
     public function storePendaftaran(Request $request)
     { 
-        $validator = Validator::make($request->all(),[
-            "nama_lengkap" => "required",
-            "nik" => "required | numeric | digits:16",
-            "tanggal_lahir" => "required | date",
-            "jenis_kelamin" => "required",
-            "kecamatan" => "required",
-            "kota" => "required",
-            "provinsi" => "required",
-            "kode_pos" => "required",
-            "desa" => "required",
-            "rt" => "required",
-            "rw" => "required",
-            "alamat" => "required",
-            "agama" => "required",
-            "no_hp" => "required",
-            "email" => "required | email | unique:users,email",
-            "nisn" => "required",
-            "asal_sekolah" => "required",
-            "alamat_sekolah" => "required",
-            "jurusan" => "required",
-            "jurusan2" => "required",
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+        $validator = $this->validateDaftar($request);
+        if ($validator != null) {
+            return redirect()->back()->withErrors($validator['validator'])->withInput()->with('page', $validator['page']);
         }
 
         $dataAlamat = [
@@ -111,18 +90,10 @@ class FrontController extends Controller
             $calonSiswa->alamat_lengkap = $this->createAlamat($dataAlamat);
             $calonSiswa->agama = $request->agama;
             $calonSiswa->telepon = $request->no_hp;
-
-            $user = new User();
-            $user->name = $request->nama_lengkap;
-            $user->email = $request->email;
-            $user->password = bcrypt($request->nisn);
-            $user->flag_active = 0;
-            $user->user_level_id = 5;
  
             $akademik->save();
             $calonSiswa->akademik_id = $akademik->id;
-            $user->save();
-            $calonSiswa->user_id = $user->id;
+            $calonSiswa->user_id = 0;
             $calonSiswa->save();
             $pendaftaran->calon_siswa_id = $calonSiswa->id;
             $pendaftaran->save();
@@ -149,5 +120,148 @@ class FrontController extends Controller
             }
         }
         return $alamatLengkap;
+    }
+
+    private function validateDaftar($request)
+    {
+        $data = null;
+        $validator = Validator::make($request->all(),[
+            'nama_lengkap' => 'required|string',
+            'nik' => 'required|string',
+            'tanggal_lahir' => 'required|date',
+            'tempat_lahir' => 'required|string',
+            'jenis_kelamin' => 'required|string',
+            'kecamatan' => 'required|string',
+            'kota' => 'required|string',
+            'provinsi' => 'required|string',
+            'desa' => 'required|string',
+            'rt' => 'required|string',
+            'rw' => 'required|string',
+            'jalan' => 'required|string',
+            'gang' => 'required|string',
+            'no_rumah' => 'required|string',
+            'kode_pos' => 'required|string',
+            'agama' => 'required|string',
+            'no_hp' => 'required|string',
+            'saudara' => 'required|numeric',
+            'saudara_tiri' => 'required|numeric',
+            'sudah_sekolah' => 'required|numeric',
+            'belum_sekolah' => 'required|numeric',
+            'nama_ayah' => 'required|string',
+            'nama_ibu' => 'required|string',
+            'pendidikan_ayah' => 'required|string',
+            'pendidikan_ibu' => 'required|string',
+            'pekerjaan_ayah' => 'required|string',
+            'pekerjaan_ibu' => 'required|string',
+            'agama_ayah' => 'required|string',
+            'agama_ibu' => 'required|string',
+            'tanggungan_keluarga' => 'required|numeric',
+            'nisn' => 'required|string',
+            'asal_sekolah' => 'required|string',
+            'no_sttb' => 'required|string',
+            'tahun_sttb' => 'required|string',
+            'jurusan' => 'required|string',
+            'jurusan2' => 'required|string',
+            'tinggi_badan' => 'required|string',
+            'berat_badan' => 'required|string',
+            'golongan_darah' => 'required|string',
+            'rhesus' => 'required|string',
+            'penyakit_kronis' => 'required|string',
+            'cita_cita' => 'required|string',
+            'hobi' => 'required|string',
+            'prestasi' => 'required|string',
+            'keahlian' => 'required|string',
+            'ukuran_seragam' => 'required|string',
+            'referensi' => 'required|string'
+        ]);
+
+        $validator1 = Validator::make($request->all(),[
+            'nama_lengkap' => 'required|string',
+            'nik' => 'required|string',
+            'tanggal_lahir' => 'required|date',
+            'tempat_lahir' => 'required|string',
+            'jenis_kelamin' => 'required|string',
+            'kecamatan' => 'required|string',
+            'kota' => 'required|string',
+            'provinsi' => 'required|string',
+            'desa' => 'required|string',
+            'rt' => 'required|string',
+            'rw' => 'required|string',
+            'jalan' => 'required|string',
+            'gang' => 'required|string',
+            'no_rumah' => 'required|string',
+            'kode_pos' => 'required|string',
+            'agama' => 'required|string',
+            'no_hp' => 'required|string'
+        ]);
+
+        if ($validator1->fails()) {
+            return [
+                "page" => "1",
+                "validator" => $validator
+            ];
+        }
+
+        $validator2 = Validator::make($request->all(),[
+            'saudara' => 'required|numeric',
+            'saudara_tiri' => 'required|numeric',
+            'sudah_sekolah' => 'required|numeric',
+            'belum_sekolah' => 'required|numeric',
+            'nama_ayah' => 'required|string',
+            'nama_ibu' => 'required|string',
+            'pendidikan_ayah' => 'required|string',
+            'pendidikan_ibu' => 'required|string',
+            'pekerjaan_ayah' => 'required|string',
+            'pekerjaan_ibu' => 'required|string',
+            'agama_ayah' => 'required|string',
+            'agama_ibu' => 'required|string',
+            'tanggungan_keluarga' => 'required|numeric',
+        ]);
+
+        if ($validator2->fails()) {
+            return [
+                "page" => "2",
+                "validator" => $validator
+            ];
+        }
+
+        $validator3 = Validator::make($request->all(),[
+            'nisn' => 'required|string',
+            'asal_sekolah' => 'required|string',
+            'no_sttb' => 'required|string',
+            'tahun_sttb' => 'required|string',
+            'jurusan' => 'required|string',
+            'jurusan2' => 'required|string',
+        ]);
+
+        if ($validator3->fails()) {
+            return [
+                "page" => "3",
+                "validator" => $validator
+            ];
+        }
+
+        $validator4 = Validator::make($request->all(),[
+            'tinggi_badan' => 'required|string',
+            'berat_badan' => 'required|string',
+            'golongan_darah' => 'required|string',
+            'rhesus' => 'required|string',
+            'penyakit_kronis' => 'required|string',
+            'cita_cita' => 'required|string',
+            'hobi' => 'required|string',
+            'prestasi' => 'required|string',
+            'keahlian' => 'required|string',
+            'ukuran_seragam' => 'required|string',
+            'referensi' => 'required|string'
+        ]);
+
+        if ($validator4->fails()) {
+            return [
+                "page" => "4",
+                "validator" => $validator
+            ];
+        }
+
+        return $data;
     }
 }

@@ -380,10 +380,8 @@
         axios({
                 method: 'get',
                 url: '/cms/master/ppdb/setting/' + id,
-                responseType: 'stream'
             })
             .then(function(response) {
-                console.log(response.data.results);
                 if (response.data.status == "OK") {
                     document.getElementById("editId").value = response.data.results.id;
                     document.getElementById("editTahunAjaran").value = response.data.results.tahun_ajaran;
