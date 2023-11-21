@@ -38,9 +38,8 @@ class ListPendaftarController extends Controller
 
         $listData  = Pendaftaran::join('calon_siswa', 'pendaftaran.calon_siswa_id', '=', 'calon_siswa.id')
             ->join('ppdb', 'pendaftaran.ppdb_id', '=', 'ppdb.id')
-            ->join('users', 'calon_siswa.user_id', '=', 'users.id')
             ->join('akademik', 'calon_siswa.akademik_id', '=', 'akademik.id')
-            ->select('pendaftaran.id', 'pendaftaran.kode AS daftar_kode', 'akademik.nisn', 'calon_siswa.nama_lengkap AS nama_siswa', 'users.email', 'pendaftaran.status_pendaftaran', 'pendaftaran.status_pembayaran', 'ppdb.gelombang', 'pendaftaran.created_at')
+            ->select('pendaftaran.id', 'pendaftaran.kode AS daftar_kode', 'akademik.nisn', 'calon_siswa.nama_lengkap AS nama_siswa', 'pendaftaran.status_pendaftaran', 'pendaftaran.status_pembayaran', 'ppdb.gelombang', 'pendaftaran.created_at')
             ->when(!empty($search), function ($query) use ($search) {
                 $query->where('pendaftaran.kode', 'LIKE', '%' . $search . '%')
                     ->orWhere('akademik.nisn', 'LIKE', '%' . $search . '%')

@@ -253,15 +253,22 @@ class PpdbSettingController extends Controller
             ->groupBy('tahun_ajaran', 'gelombang')
             ->orderBy('tahun_ajaran', 'desc')
             ->get();
-
-        $gelombang = $ppdb->pluck('gelombang')->unique()->toArray();
-        $listTahunAjaran = $ppdb->pluck('tahun_ajaran')->unique()->toArray();
-        $lastTahunAjaran = $listTahunAjaran[0];
-
-        return [
-            'lastTahunAjaran' => $lastTahunAjaran,
-            'listTahunAjaran' => $listTahunAjaran,
-            'listGelombang' => $gelombang
-        ];
+        if (count($ppdb) == 0) {
+            return [
+                'lastTahunAjaran' => null,
+                'listTahunAjaran' => [],
+                'listGelombang' => []
+            ];
+        } else {
+            $gelombang = $ppdb->pluck('gelombang')->unique()->toArray();
+            $listTahunAjaran = $ppdb->pluck('tahun_ajaran')->unique()->toArray();
+            $lastTahunAjaran = $listTahunAjaran[0];
+    
+            return [
+                'lastTahunAjaran' => $lastTahunAjaran,
+                'listTahunAjaran' => $listTahunAjaran,
+                'listGelombang' => $gelombang
+            ];
+        }
     }
 }

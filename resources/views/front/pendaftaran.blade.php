@@ -161,6 +161,16 @@
         </div>
     </div>
     <div class="mb-3 px-8 formPage2 hidden">
+        {{-- anak ke --}}
+        <div class="mb-3">
+            <label for="anak_ke" class="block text-sm font-medium text-gray-700">Anak Ke<span class="text-xs text-red-800">*</span></label>
+            <div class="mt-1">
+                <input type="number" name="anak_ke" id="anak_ke" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Anak ke" value="{{ old('anak_ke') }}">
+            </div>
+            @if($errors->has('anak_ke'))
+                <div class="text-xs mt-1 text-red-500">{{ $errors->first('anak_ke') }}</div>
+            @endif
+        </div>
         <div class="mb-3">
             <label for="saudara" class="block text-sm font-medium text-gray-700">Jumlah Saudara<span class="text-xs text-red-800">*</span></label>
             <div class="grid grid-cols-2 gap-2 mt-1">
