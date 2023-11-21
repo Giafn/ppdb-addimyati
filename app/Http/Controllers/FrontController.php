@@ -127,26 +127,26 @@ class FrontController extends Controller
         $data = null;
         $validator = Validator::make($request->all(),[
             'nama_lengkap' => 'required|string',
-            'nik' => 'required|string',
+            'nik' => 'required|nik',
             'tanggal_lahir' => 'required|date',
-            'tempat_lahir' => 'required|string',
-            'jenis_kelamin' => 'required|string',
-            'kecamatan' => 'required|string',
-            'kota' => 'required|string',
-            'provinsi' => 'required|string',
-            'desa' => 'required|string',
+            'tempat_lahir' => 'required|string|min:3',
+            'jenis_kelamin' => 'required|string|in:l,p',
+            'kecamatan' => 'required|string|min:3',
+            'kota' => 'required|string|min:3',
+            'provinsi' => 'required|string|min:3',
+            'desa' => 'required|string|min:3',
             'rt' => 'required|string',
             'rw' => 'required|string',
-            'jalan' => 'required|string',
-            'gang' => 'required|string',
+            'jalan' => 'required|string|min:3',
+            'gang' => 'nullable|string',
             'no_rumah' => 'required|string',
             'kode_pos' => 'required|string',
             'agama' => 'required|string',
             'no_hp' => 'required|string',
             'saudara' => 'required|numeric',
-            'saudara_tiri' => 'required|numeric',
-            'sudah_sekolah' => 'required|numeric',
-            'belum_sekolah' => 'required|numeric',
+            'saudara_tiri' => 'nullable|numeric',
+            'sudah_sekolah' => 'nullable|numeric',
+            'belum_sekolah' => 'nullable|numeric',
             'nama_ayah' => 'required|string',
             'nama_ibu' => 'required|string',
             'pendidikan_ayah' => 'required|string',
@@ -160,39 +160,39 @@ class FrontController extends Controller
             'asal_sekolah' => 'required|string',
             'no_sttb' => 'required|string',
             'tahun_sttb' => 'required|string',
-            'jurusan' => 'required|string',
-            'jurusan2' => 'required|string',
-            'tinggi_badan' => 'required|string',
-            'berat_badan' => 'required|string',
-            'golongan_darah' => 'required|string',
-            'rhesus' => 'required|string',
-            'penyakit_kronis' => 'required|string',
-            'cita_cita' => 'required|string',
-            'hobi' => 'required|string',
-            'prestasi' => 'required|string',
-            'keahlian' => 'required|string',
+            'program_studi' => 'required|string',
+            'program_studi_pilihan_2' => 'nullable|string',
+            'tinggi_badan' => 'nullable|string',
+            'berat_badan' => 'nullable|string',
+            'golongan_darah' => 'nullable|string',
+            'rhesus' => 'nullable|string|in:-,+',
+            'penyakit_kronis' => 'nullable|string',
+            'cita_cita' => 'nullable|string',
+            'hobi' => 'nullable|string',
+            'prestasi' => 'nullable|string',
+            'keahlian' => 'nullable|string',
             'ukuran_seragam' => 'required|string',
-            'referensi' => 'required|string'
+            'referensi' => 'nullable|string'
         ]);
 
         $validator1 = Validator::make($request->all(),[
             'nama_lengkap' => 'required|string',
-            'nik' => 'required|string',
+            'nik' => 'required|nik',
             'tanggal_lahir' => 'required|date',
-            'tempat_lahir' => 'required|string',
-            'jenis_kelamin' => 'required|string',
-            'kecamatan' => 'required|string',
-            'kota' => 'required|string',
-            'provinsi' => 'required|string',
-            'desa' => 'required|string',
+            'tempat_lahir' => 'required|string|min:3',
+            'jenis_kelamin' => 'required|string|in:l,p',
+            'kecamatan' => 'required|string|min:3',
+            'kota' => 'required|string|min:3',
+            'provinsi' => 'required|string|min:3',
+            'desa' => 'required|string|min:3',
             'rt' => 'required|string',
             'rw' => 'required|string',
-            'jalan' => 'required|string',
-            'gang' => 'required|string',
+            'jalan' => 'required|string|min:3',
+            'gang' => 'nullable|string',
             'no_rumah' => 'required|string',
             'kode_pos' => 'required|string',
             'agama' => 'required|string',
-            'no_hp' => 'required|string'
+            'no_hp' => 'required|string',
         ]);
 
         if ($validator1->fails()) {
@@ -204,9 +204,9 @@ class FrontController extends Controller
 
         $validator2 = Validator::make($request->all(),[
             'saudara' => 'required|numeric',
-            'saudara_tiri' => 'required|numeric',
-            'sudah_sekolah' => 'required|numeric',
-            'belum_sekolah' => 'required|numeric',
+            'saudara_tiri' => 'nullable|numeric',
+            'sudah_sekolah' => 'nullable|numeric',
+            'belum_sekolah' => 'nullable|numeric',
             'nama_ayah' => 'required|string',
             'nama_ibu' => 'required|string',
             'pendidikan_ayah' => 'required|string',
@@ -217,6 +217,42 @@ class FrontController extends Controller
             'agama_ibu' => 'required|string',
             'tanggungan_keluarga' => 'required|numeric',
         ]);
+
+        if ($request->walicek) {
+            $validator2->addRules([
+                'nama_wali' => 'required|string',
+                'pendidikan_wali' => 'required|string',
+                'pekerjaan_wali' => 'required|string',
+                'agama_wali' => 'required|string',
+                'kecamatan_wali' => 'required|string',
+                'kota_wali' => 'required|string',
+                'provinsi_wali' => 'required|string',
+                'desa_wali' => 'required|string',
+                'rt_wali' => 'required|string',
+                'rw_wali' => 'required|string',
+                'jalan_wali' => 'required|string',
+                'gang_wali' => 'nullable|string',
+                'no_rumah_wali' => 'required|string',
+                'kode_pos_wali' => 'required|string',
+            ]);
+
+            $validator->addRules([
+                'nama_wali' => 'required|string',
+                'pendidikan_wali' => 'required|string',
+                'pekerjaan_wali' => 'required|string',
+                'agama_wali' => 'required|string',
+                'kecamatan_wali' => 'required|string',
+                'kota_wali' => 'required|string',
+                'provinsi_wali' => 'required|string',
+                'desa_wali' => 'required|string',
+                'rt_wali' => 'required|string',
+                'rw_wali' => 'required|string',
+                'jalan_wali' => 'required|string',
+                'gang_wali' => 'nullable|string',
+                'no_rumah_wali' => 'required|string',
+                'kode_pos_wali' => 'required|string',
+            ]);
+        }
 
         if ($validator2->fails()) {
             return [
@@ -230,8 +266,8 @@ class FrontController extends Controller
             'asal_sekolah' => 'required|string',
             'no_sttb' => 'required|string',
             'tahun_sttb' => 'required|string',
-            'jurusan' => 'required|string',
-            'jurusan2' => 'required|string',
+            'program_studi' => 'required|string',
+            'program_studi_pilihan_2' => 'required|string',
         ]);
 
         if ($validator3->fails()) {

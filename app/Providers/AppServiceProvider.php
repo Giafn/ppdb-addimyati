@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,29 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Validator::extend('nik', function ($attribute, $value, $parameters, $validator) {
+            if (preg_match('/^\d{16}$/', $value) !== 1) {
+                return false;
+            }
+
+            $kodeWilayah = substr($value, 0, 6);
+        
+            $tanggalLahir = substr($value, 6, 6);
+            $day = substr($tanggalLahir, 0, 2);
+            $month = substr($tanggalLahir, 2, 2);
+            $year = substr($tanggalLahir, 4, 2);
+        
+            if (!checkdate($month, $day, $year)) {
+                return false;
+            }
+
+            $nomorUrut = substr($value, -4);
+            return true;
+        });
+
+        Validator::replacer('nik', function ($message, $attribute, $rule, $parameters) {
+            return str_replace(':attribute', $attribute, 'NIK tidak valid.');
+        });
+
     }
 }
