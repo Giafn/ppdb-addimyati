@@ -40,6 +40,7 @@
     </div>
     <script src="/js/app.js"></script>
     <script src="/js/modal.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <script>
         function loading(show) {
             var element = document.getElementById("overflowLoading");

@@ -88,6 +88,7 @@
 
         });
     </script>
+    <script src="/js/jquery.min.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/modal.js"></script>
     <script>
