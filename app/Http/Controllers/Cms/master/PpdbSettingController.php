@@ -160,13 +160,6 @@ class PpdbSettingController extends Controller
             ], 422);
         }
 
-        $ppdbEndDateLast = Ppdb::select('end_date')->where('id', '!=', $id)->orderBy('end_date', 'desc')->first();
-        if ($ppdbEndDateLast && $request->start_date < $ppdbEndDateLast->end_date) {
-            return response()->json([
-                'message' => "Format tanggal tidak sesuai, pastikan tanggal dibuka tidak kurang dari tanggal tutup ppdb sebelumnya"
-            ], 422);
-        }
-
         if ($request->start_date < date('Y-m-d') || $request->end_date < $request->start_date) {
             return response()->json([
                 'message' => "Format tanggal tidak sesuai, pastikan tanggal dibuka tidak kurang dari sekarang dan tanggal tutup tidak kurang dari tanggal dibuka"
@@ -253,15 +246,22 @@ class PpdbSettingController extends Controller
             ->groupBy('tahun_ajaran', 'gelombang')
             ->orderBy('tahun_ajaran', 'desc')
             ->get();
-
-        $gelombang = $ppdb->pluck('gelombang')->unique()->toArray();
-        $listTahunAjaran = $ppdb->pluck('tahun_ajaran')->unique()->toArray();
-        $lastTahunAjaran = $listTahunAjaran[0];
-
-        return [
-            'lastTahunAjaran' => $lastTahunAjaran,
-            'listTahunAjaran' => $listTahunAjaran,
-            'listGelombang' => $gelombang
-        ];
+        if (count($ppdb) == 0) {
+            return [
+                'lastTahunAjaran' => null,
+                'listTahunAjaran' => [],
+                'listGelombang' => []
+            ];
+        } else {
+            $gelombang = $ppdb->pluck('gelombang')->unique()->toArray();
+            $listTahunAjaran = $ppdb->pluck('tahun_ajaran')->unique()->toArray();
+            $lastTahunAjaran = $listTahunAjaran[0];
+    
+            return [
+                'lastTahunAjaran' => $lastTahunAjaran,
+                'listTahunAjaran' => $listTahunAjaran,
+                'listGelombang' => $gelombang
+            ];
+        }
     }
 }

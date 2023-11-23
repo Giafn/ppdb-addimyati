@@ -133,9 +133,6 @@
                                 Nama Siswa
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Email
-                            </th>
-                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 Status data
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
@@ -167,9 +164,6 @@
                             </td>
                             <td class="p-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-900 dark:text-white">{{ $data->nama_siswa }}</div>
-                            </td>
-                            <td class="p-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900 dark:text-white">{{ $data->email }}</div>
                             </td>
                             <td class="p-4 whitespace-nowrap">
                                 <span class="text-sm text-gray-900 dark:text-white">

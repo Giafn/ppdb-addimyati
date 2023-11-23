@@ -28,6 +28,16 @@
                 <div class="text-xs mt-1 text-red-500">{{ $errors->first('nama_lengkap') }}</div>
             @endif
         </div>
+        {{-- nama panggilan --}}
+        <div class="mb-3">
+            <label for="nama_panggilan" class="block text-sm font-medium text-gray-700">Nama Panggilan</label>
+            <div class="mt-1">
+                <input type="text" name="nama_panggilan" id="nama_panggilan" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan nama panggilan" value="{{ old('nama_panggilan') }}">
+            </div>
+            @if($errors->has('nama_panggilan'))
+                <div class="text-xs mt-1 text-red-500">{{ $errors->first('nama_panggilan') }}</div>
+            @endif
+        </div>
         <div class="mb-3">
             <label for="nik" class="block text-sm font-medium text-gray-700">NIK<span class="text-xs text-red-800">*</span></label>
             <div class="mt-1">
@@ -161,6 +171,16 @@
         </div>
     </div>
     <div class="mb-3 px-8 formPage2 hidden">
+        {{-- anak ke --}}
+        <div class="mb-3">
+            <label for="anak_ke" class="block text-sm font-medium text-gray-700">Anak Ke<span class="text-xs text-red-800">*</span></label>
+            <div class="mt-1">
+                <input type="number" name="anak_ke" id="anak_ke" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Anak ke" value="{{ old('anak_ke') }}">
+            </div>
+            @if($errors->has('anak_ke'))
+                <div class="text-xs mt-1 text-red-500">{{ $errors->first('anak_ke') }}</div>
+            @endif
+        </div>
         <div class="mb-3">
             <label for="saudara" class="block text-sm font-medium text-gray-700">Jumlah Saudara<span class="text-xs text-red-800">*</span></label>
             <div class="grid grid-cols-2 gap-2 mt-1">
@@ -322,7 +342,7 @@
         {{-- wali --}}
         {{-- cekbox --}}
         <div class="mb-2">
-            <input type="checkbox" name="walicek" id="walicekbox" class="wali">
+            <input type="checkbox" name="walicek" id="walicekbox" class="wali" {{ old('walicek') == 'on' ? "checked" : "" }}>
             <label for="walicekbox" class="text-sm text-gray-500">Memiliki Wali</label>
         </div>
         <div class="mb-3 walifield hidden">
@@ -382,64 +402,64 @@
                     <label class="block text-xs font-medium text-gray-700">Alamat Wali</label>
                     <div class="grid grid-cols-2 gap-2 mt-1">
                         <div class="col-span-2">
-                            <input type="text" name="wali_kecamatan" id="wali_kecamatan" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Kecamatan" value="{{ old('wali_kecamatan') }}">
-                            @if($errors->has('wali_kecamatan'))
-                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('wali_kecamatan') }}</div>
+                            <input type="text" name="kecamatan_wali" id="kecamatan_wali" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Kecamatan" value="{{ old('kecamatan_wali') }}">
+                            @if($errors->has('kecamatan_wali'))
+                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('kecamatan_wali') }}</div>
                             @endif
                         </div>
                         <div class="col-span-2">
-                            <input type="text" name="wali_kota" id="wali_kota" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Kota" value="{{ old('wali_kota') }}">
-                            @if($errors->has('wali_kota'))
-                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('wali_kota') }}</div>
+                            <input type="text" name="kota_wali" id="kota_wali" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Kota" value="{{ old('kota_wali') }}">
+                            @if($errors->has('kota_wali'))
+                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('kota_wali') }}</div>
                             @endif
                         </div>
                         <div class="col-span-2">
-                            <input type="text" name="wali_provinsi" id="wali_provinsi" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Provinsi" value="{{ old('wali_provinsi') }}">
-                            @if($errors->has('wali_provinsi'))
-                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('wali_provinsi') }}</div>
+                            <input type="text" name="provinsi_wali" id="provinsi_wali" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Provinsi" value="{{ old('provinsi_wali') }}">
+                            @if($errors->has('provinsi_wali'))
+                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('provinsi_wali') }}</div>
                             @endif
                         </div>
                         <div class="col-span-2">
-                            <input type="text" name="wali_desa" id="wali_desa" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Desa" value="{{ old('wali_desa') }}">
-                            @if($errors->has('wali_desa'))
-                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('wali_desa') }}</div>
+                            <input type="text" name="desa_wali" id="desa_wali" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Desa" value="{{ old('desa_wali') }}">
+                            @if($errors->has('desa_wali'))
+                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('desa_wali') }}</div>
                             @endif
                         </div>
                         <div>
-                            <input type="text" name="wali_rt" id="wali_rt" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="RT" value="{{ old('wali_rt') }}">
-                            @if($errors->has('wali_rt'))
-                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('wali_rt') }}</div>
+                            <input type="text" name="rt_wali" id="rt_wali" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="RT" value="{{ old('rt_wali') }}">
+                            @if($errors->has('rt_wali'))
+                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('rt_wali') }}</div>
                             @endif
                         </div>
                         <div>
-                            <input type="text" name="wali_rw" id="wali_rw" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="RW" value="{{ old('wali_rw') }}">
-                            @if($errors->has('wali_rw'))
-                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('wali_rw') }}</div>
+                            <input type="text" name="rw_wali" id="rw_wali" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="RW" value="{{ old('rw_wali') }}">
+                            @if($errors->has('rw_wali'))
+                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('rw_wali') }}</div>
                             @endif
                         </div>
                         <div class="col-span-2">
-                            <input type="text" name="wali_jalan" id="wali_jalan" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Jalan" value="{{ old('wali_jalan') }}">
-                            @if($errors->has('wali_jalan'))
-                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('wali_jalan') }}</div>
+                            <input type="text" name="jalan_wali" id="jalan_wali" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Jalan" value="{{ old('jalan_wali') }}">
+                            @if($errors->has('jalan_wali'))
+                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('jalan_wali') }}</div>
                             @endif
                         </div>
                         {{-- gang --}}
                         <div class="col-span-2">
-                            <input type="text" name="wali_gang" id="wali_gang" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Gang/komplek" value="{{ old('wali_gang') }}">
-                            @if($errors->has('wali_gang'))
-                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('wali_gang') }}</div>
+                            <input type="text" name="gang_wali" id="gang_wali" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Gang/komplek" value="{{ old('gang_wali') }}">
+                            @if($errors->has('gang_wali'))
+                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('gang_wali') }}</div>
                             @endif
                         </div>
                         <div class="col-span-1">
-                            <input type="text" name="wali_no_rumah" id="wali_no_rumah" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="No Rumah" value="{{ old('wali_no_rumah') }}">
-                            @if($errors->has('wali_no_rumah'))
-                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('wali_no_rumah') }}</div>
+                            <input type="text" name="no_rumah_wali" id="no_rumah_wali" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="No Rumah" value="{{ old('no_rumah_wali') }}">
+                            @if($errors->has('no_rumah_wali'))
+                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('no_rumah_wali') }}</div>
                             @endif
                         </div>
                         <div>
-                            <input type="text" name="wali_kode_pos" id="wali_kode_pos" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Kode Pos" value="{{ old('wali_kode_pos') }}">
-                            @if($errors->has('wali_kode_pos'))
-                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('wali_kode_pos') }}</div>
+                            <input type="text" name="kode_pos_wali" id="kode_pos_wali" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Kode Pos" value="{{ old('kode_pos_wali') }}">
+                            @if($errors->has('kode_pos_wali'))
+                                <div class="text-xs mt-1 text-red-500">{{ $errors->first('kode_pos_wali') }}</div>
                             @endif
                         </div>
                     </div>
@@ -450,7 +470,7 @@
     <div class="mb-3 px-8 formPage3 hidden">
         <h1 class="text-base font-bold text-emerald-800 mb-3">Informasi Akademik</h1>
         <div class="mb-3">
-            <label for="nisn" class="block text-sm font-medium text-gray-700">NISN</label>
+            <label for="nisn" class="block text-sm font-medium text-gray-700">NISN<span class="text-xs text-red-800">*</span></label>
             <div class="mt-1">
                 <input type="number" name="nisn" id="nisn" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan NISN" value="{{ old('nisn') }}">
             </div>
@@ -459,7 +479,7 @@
             @endif
         </div>
         <div class="mb-3">
-            <label for="asal_sekolah" class="block text-sm font-medium text-gray-700">Asal Sekolah</label>
+            <label for="asal_sekolah" class="block text-sm font-medium text-gray-700">Asal Sekolah<span class="text-xs text-red-800">*</span></label>
             <div class="mt-1">
                 <input type="text" name="asal_sekolah" id="asal_sekolah" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan asal sekolah" value="{{ old('asal_sekolah') }}">
             </div>
@@ -469,7 +489,7 @@
         </div>
         {{-- nomor sttb --}}
         <div class="mb-3">
-            <label for="no_sttb" class="block text-sm font-medium text-gray-700">Nomor STTB (pada izajah)</label>
+            <label for="no_sttb" class="block text-sm font-medium text-gray-700">Nomor STTB (pada izajah)<span class="text-xs text-red-800">*</span></label>
             <div class="mt-1">
                 <input type="text" name="no_sttb" id="no_sttb" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan nomor sttb" value="{{ old('no_sttb') }}">
             </div>
@@ -479,7 +499,7 @@
         </div>
         {{-- tahun sttb --}}
         <div class="mb-3">
-            <label for="tahun_sttb" class="block text-sm font-medium text-gray-700">Tahun STTB (pada izajah)</label>
+            <label for="tahun_sttb" class="block text-sm font-medium text-gray-700">Tahun STTB (pada izajah)<span class="text-xs text-red-800">*</span></label>
             <div class="mt-1">
                 <input type="number" name="tahun_sttb" id="tahun_sttb" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan tahun sttb" value="{{ old('tahun_sttb') }}">
             </div>
@@ -489,31 +509,31 @@
         </div>
         <h1 class="text-base font-bold text-emerald-800 mb-3">Program Studi</h1>
         <div class="mb-3">
-            <label for="jurusan" class="block text-sm font-medium text-gray-700">Utama</label>
+            <label for="program_studi" class="block text-sm font-medium text-gray-700">Utama<span class="text-xs text-red-800">*</span></label>
             <div class="mt-1">
-                <select name="jurusan" id="jurusan" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md">
+                <select name="program_studi" id="program_studi" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md">
                     <option value="">Pilih Program Studi</option>
                     @foreach($jurusan as $j)
-                    <option value="{{ $j->id }}" @if(old('jurusan') == $j->id) selected @endif>{{ $j->nama }}</option>
+                    <option value="{{ $j->id }}" @if(old('program_studi') == $j->id) selected @endif>{{ $j->nama }}</option>
                     @endforeach
                 </select>
             </div>
-            @if($errors->has('jurusan'))
-                <div class="text-xs mt-1 text-red-500">{{ $errors->first('jurusan') }}</div>
+            @if($errors->has('program_studi'))
+                <div class="text-xs mt-1 text-red-500">{{ $errors->first('program_studi') }}</div>
             @endif
         </div>
         <div class="mb-3">
-            <label for="jurusan2" class="block text-sm font-medium text-gray-700">Pilihan Kedua</label>
+            <label for="program_studi_pilihan_2" class="block text-sm font-medium text-gray-700">Pilihan Kedua</label>
             <div class="mt-1">
-                <select name="jurusan2" id="jurusan2" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md">
+                <select name="program_studi_pilihan_2" id="program_studi_pilihan_2" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md">
                     <option value="">Pilih Program Studi</option>
                     @foreach($jurusan as $j)
-                    <option value="{{ $j->id }}" @if(old('jurusan2') == $j->id) selected @endif>{{ $j->nama }}</option>
+                    <option value="{{ $j->id }}" @if(old('program_studi_pilihan_2') == $j->id) selected @endif>{{ $j->nama }}</option>
                     @endforeach
                 </select>
             </div>
-            @if($errors->has('jurusan2'))
-                <div class="text-xs mt-1 text-red-500">{{ $errors->first('jurusan2') }}</div>
+            @if($errors->has('program_studi_pilihan_2'))
+                <div class="text-xs mt-1 text-red-500">{{ $errors->first('program_studi_pilihan_2') }}</div>
             @endif
         </div>
     </div>
@@ -612,7 +632,7 @@
         </div>
         {{-- ukuran seragam --}}
         <div class="mb-3">
-            <label for="ukuran_seragam" class="block text-sm font-medium text-gray-700">Ukuran Seragam</label>
+            <label for="ukuran_seragam" class="block text-sm font-medium text-gray-700">Ukuran Seragam<span class="text-xs text-red-800">*</span></label>
             <select name="ukuran_seragam" id="ukuran_seragam" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md">
                 <option value="">Pilih Ukuran Seragam</option>
                 <option value="s" @if(old('ukuran_seragam') == 's') selected @endif>S</option>
@@ -669,6 +689,10 @@
     // document ready
     $(document).ready(function() {
         const page = '{{ session('page') ?? 1 }}'
+        const walicek = '{{ old('walicek') ?? 'off' }}';
+        if (walicek == 'on') {
+            waliMenu('show');
+        }
         goToPage(page);
     });
     $('#nik').on('keyup', function() {
@@ -748,11 +772,19 @@
 
     $('#walicekbox').on('click', function() {
         if ($(this).is(':checked')) {
+            waliMenu('show');
+        } else {
+            waliMenu('hide');
+        }
+    });
+    
+    // fungsi hide show wali menu
+    function waliMenu(view) {
+        if (view == 'show') {
             $('.walifield').removeClass('hidden');
         } else {
             $('.walifield').addClass('hidden');
         }
-    });
-    
+    }
 </script>
 @endsection

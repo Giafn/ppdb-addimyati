@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Cms\master\NominalAdministrasiController;
 use App\Http\Controllers\Cms\master\PpdbSettingController;
 use App\Models\Akademik;
+use App\Models\Alamat;
 use App\Models\CalonSiswa;
+use App\Models\OrangTua;
 use App\Models\Pendaftaran;
 use App\Models\ProgramKeahlian;
 use App\Models\User;
@@ -51,75 +53,128 @@ class FrontController extends Controller
         if ($validator != null) {
             return redirect()->back()->withErrors($validator['validator'])->withInput()->with('page', $validator['page']);
         }
-
-        $dataAlamat = [
-            "alamat" => $request->alamat,
-            "rt" => $request->rt,
-            "rw" => $request->rw,
-            "desa" => $request->desa,
-            "kecamatan" => $request->kecamatan,
-            "kota" => $request->kota,
-            "provinsi" => $request->provinsi,
-            "kode_pos" => $request->kode_pos,
-        ];
                
         try {
             DB::beginTransaction();
             $ppdbAktif = PpdbSettingController::getPPDBInfo()['ppdbOpen'];
             $idppdb = $ppdbAktif->id;
 
+            $alamatSiswa = new Alamat();
+            $alamatSiswa->kecamatan = $request->kecamatan;
+            $alamatSiswa->kota = $request->kota;
+            $alamatSiswa->provinsi = $request->provinsi;
+            $alamatSiswa->desa = $request->desa;
+            $alamatSiswa->rt = $request->rt;
+            $alamatSiswa->rw = $request->rw;
+            $alamatSiswa->jalan = $request->jalan;
+            $alamatSiswa->gang = $request->gang;
+            $alamatSiswa->no_rumah = $request->no_rumah;
+            $alamatSiswa->kode_pos = $request->kode_pos;
+            $alamatSiswa->save();
+
             $pendaftaran = new Pendaftaran();
             $pendaftaran->ppdb_id = $idppdb;
             $pendaftaran->kode = "PPDB-" . $request->nisn;
             $pendaftaran->status_pendaftaran = 1;
-            $pendaftaran->status_pembayaran = 1;
-            $pendaftaran->nominal_pembayaran = NominalAdministrasiController::hitungNominal($ppdbAktif->gelombang);
-            $pendaftaran->jurusan_id1 = $request->jurusan;
-            $pendaftaran->jurusan_id2 = $request->jurusan2;
+            $pendaftaran->status_pembayaran = 0;
+            $pendaftaran->jurusan_id1 = $request->program_studi;
+            $pendaftaran->jurusan_id2 = $request->program_studi_pilihan_2;
+            $pendaftaran->referensi = $request->referensi;
 
             $akademik = new Akademik();
             $akademik->nisn = $request->nisn;
             $akademik->asal_sekolah = $request->asal_sekolah;
-            $akademik->alamat_sekolah = $request->alamat_sekolah;
+            $akademik->nomor_seri_sttb = $request->no_sttb;
+            $akademik->tahun_sttb = $request->tahun_sttb;
+            $akademik->save();
 
             $calonSiswa = new CalonSiswa();
-            $calonSiswa->nama_lengkap = $request->nama_lengkap;
-            $calonSiswa->nik = $request->nik;
-            $calonSiswa->ttl = $request->tanggal_lahir;
-            $calonSiswa->jenis_kelamin = $request->jenis_kelamin;
-            $calonSiswa->alamat_lengkap = $this->createAlamat($dataAlamat);
-            $calonSiswa->agama = $request->agama;
-            $calonSiswa->telepon = $request->no_hp;
- 
-            $akademik->save();
             $calonSiswa->akademik_id = $akademik->id;
-            $calonSiswa->user_id = 0;
+            $calonSiswa->nik = $request->nik;
+            $calonSiswa->telepon = $request->no_hp;
+            $calonSiswa->nama_lengkap = $request->nama_lengkap;
+            $calonSiswa->nama_panggilan = $request->nama_panggilan;
+            $calonSiswa->jenis_kelamin = $request->jenis_kelamin;
+            $calonSiswa->tanggal_lahir = $request->tanggal_lahir;
+            $calonSiswa->tempat_lahir = $request->tempat_lahir;
+            $calonSiswa->alamat_id = $alamatSiswa->id;
+            $calonSiswa->agama = $request->agama;
+            $calonSiswa->anak_ke = $request->anak_ke;
+            $calonSiswa->ukuran_seragam = $request->ukuran_seragam;
+            $calonSiswa->tinggi_badan = $request->tinggi_badan;
+            $calonSiswa->berat_badan = $request->berat_badan;
+            $calonSiswa->golongan_darah = $request->golongan_darah . $request->rhesus;
+            $calonSiswa->penyakit_kronis = $request->penyakit_kronis;
+            $calonSiswa->cita_cita = $request->cita_cita;
+            $calonSiswa->hobi = $request->hobi;
+            $calonSiswa->prestasi = $request->prestasi;
+            $calonSiswa->keahlian = $request->keahlian;
+            $calonSiswa->jml_saudara_kandung = $request->saudara;
+            $calonSiswa->jml_saudara_tiri = $request->saudara_tiri;
+            $calonSiswa->jml_saudara_sekolah = $request->sudah_sekolah;
+            $calonSiswa->jml_saudara_no_sekolah = $request->belum_sekolah;
+            $calonSiswa->program_keahlian_id = $request->program_studi;
             $calonSiswa->save();
+
+            $ibu = new OrangTua();
+            $ibu->jenis = "ibu";
+            $ibu->nama_lengkap = $request->nama_ibu;
+            $ibu->pendidikan_terakhir = $request->pendidikan_ibu;
+            $ibu->pekerjaan = $request->pekerjaan_ibu;
+            $ibu->agama = $request->agama_ibu;
+            $ibu->tanggungan = $request->tanggungan_keluarga;
+            $ibu->calon_siswa_id = $calonSiswa->id;
+            $ibu->alamat_id = $alamatSiswa->id;
+            $ibu->save();
+
+            $ayah = new OrangTua();
+            $ayah->jenis = "ayah";
+            $ayah->nama_lengkap = $request->nama_ayah;
+            $ayah->pendidikan_terakhir = $request->pendidikan_ayah;
+            $ayah->pekerjaan = $request->pekerjaan_ayah;
+            $ayah->agama = $request->agama_ayah;
+            $ayah->tanggungan = $request->tanggungan_keluarga;
+            $ayah->calon_siswa_id = $calonSiswa->id;
+            $ayah->alamat_id = $alamatSiswa->id;
+            $ayah->save();
+
             $pendaftaran->calon_siswa_id = $calonSiswa->id;
             $pendaftaran->save();
+
+            if ($request->walicek == "on") {
+                $alamatWali = new Alamat();
+                $alamatWali->kecamatan = $request->kecamatan_wali;
+                $alamatWali->kota = $request->kota_wali;
+                $alamatWali->provinsi = $request->provinsi_wali;
+                $alamatWali->desa = $request->desa_wali;
+                $alamatWali->rt = $request->rt_wali;
+                $alamatWali->rw = $request->rw_wali;
+                $alamatWali->jalan = $request->jalan_wali;
+                $alamatWali->gang = $request->gang_wali;
+                $alamatWali->no_rumah = $request->no_rumah_wali;
+                $alamatWali->kode_pos = $request->kode_pos_wali;
+                $alamatWali->save();
+
+                $wali = new OrangTua();
+                $wali->jenis = "wali";
+                $wali->nama_lengkap = $request->nama_wali;
+                $wali->pendidikan_terakhir = $request->pendidikan_wali;
+                $wali->pekerjaan = $request->pekerjaan_wali;
+                $wali->agama = $request->agama_wali;
+                $wali->tanggungan = $request->tanggungan_keluarga;
+                $wali->calon_siswa_id = $calonSiswa->id;
+                $wali->alamat_id = $alamatWali->id;
+                $wali->save();
+            }
+
             DB::commit();
             return view('front.pendaftaran-berhasil');
         } catch (\Throwable $th) {
             DB::rollBack();
+            dd($th->getMessage());
             return view('front.pendaftaran-gagal');
         }
 
-    }
-
-    private function createAlamat($dataAlamat = [])
-    {
-        $alamatLengkap = "";
-        foreach ($dataAlamat as $key => $value) {
-            $key = $key == "kode_pos" ? "kode pos" : $key;
-            $value = $key == "rt" || $key == "rw" ? str_pad((int) $value, 2, "0", STR_PAD_LEFT) : $value;
-            if ($key == "alamat" || $key == "kota" || $key == "provinsi") {
-                $alamatLengkap = $key != "alamat" ? $alamatLengkap . ", ": $alamatLengkap;
-                $alamatLengkap .= ucwords(strtolower($value));
-            } else {
-                $alamatLengkap .= ", ". ucwords(strtolower($key)) . " " . ucwords(strtolower($value));
-            }
-        }
-        return $alamatLengkap;
     }
 
     private function validateDaftar($request)
@@ -127,26 +182,27 @@ class FrontController extends Controller
         $data = null;
         $validator = Validator::make($request->all(),[
             'nama_lengkap' => 'required|string',
-            'nik' => 'required|string',
+            'nik' => 'required|nik',
             'tanggal_lahir' => 'required|date',
-            'tempat_lahir' => 'required|string',
-            'jenis_kelamin' => 'required|string',
-            'kecamatan' => 'required|string',
-            'kota' => 'required|string',
-            'provinsi' => 'required|string',
-            'desa' => 'required|string',
+            'tempat_lahir' => 'required|string|min:3',
+            'jenis_kelamin' => 'required|string|in:l,p',
+            'kecamatan' => 'required|string|min:3',
+            'kota' => 'required|string|min:3',
+            'provinsi' => 'required|string|min:3',
+            'desa' => 'required|string|min:3',
             'rt' => 'required|string',
             'rw' => 'required|string',
-            'jalan' => 'required|string',
-            'gang' => 'required|string',
+            'jalan' => 'required|string|min:3',
+            'gang' => 'nullable|string',
             'no_rumah' => 'required|string',
             'kode_pos' => 'required|string',
             'agama' => 'required|string',
-            'no_hp' => 'required|string',
+            'no_hp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'anak_ke' => 'required|numeric',
             'saudara' => 'required|numeric',
-            'saudara_tiri' => 'required|numeric',
-            'sudah_sekolah' => 'required|numeric',
-            'belum_sekolah' => 'required|numeric',
+            'saudara_tiri' => 'nullable|numeric',
+            'sudah_sekolah' => 'nullable|numeric',
+            'belum_sekolah' => 'nullable|numeric',
             'nama_ayah' => 'required|string',
             'nama_ibu' => 'required|string',
             'pendidikan_ayah' => 'required|string',
@@ -156,110 +212,90 @@ class FrontController extends Controller
             'agama_ayah' => 'required|string',
             'agama_ibu' => 'required|string',
             'tanggungan_keluarga' => 'required|numeric',
-            'nisn' => 'required|string',
+            'nisn' => 'required|string|unique:akademik,nisn|min:10',
             'asal_sekolah' => 'required|string',
-            'no_sttb' => 'required|string',
-            'tahun_sttb' => 'required|string',
-            'jurusan' => 'required|string',
-            'jurusan2' => 'required|string',
-            'tinggi_badan' => 'required|string',
-            'berat_badan' => 'required|string',
-            'golongan_darah' => 'required|string',
-            'rhesus' => 'required|string',
-            'penyakit_kronis' => 'required|string',
-            'cita_cita' => 'required|string',
-            'hobi' => 'required|string',
-            'prestasi' => 'required|string',
-            'keahlian' => 'required|string',
+            'no_sttb' => 'required|string|unique:akademik,nomor_seri_sttb|min:15',
+            'tahun_sttb' => 'required|string|min:4',
+            'program_studi' => 'required|string',
+            'program_studi_pilihan_2' => 'nullable|string',
+            'tinggi_badan' => 'nullable|string',
+            'berat_badan' => 'nullable|string',
+            'golongan_darah' => 'nullable|string',
+            'rhesus' => 'nullable|string|in:-,+',
+            'penyakit_kronis' => 'nullable|string',
+            'cita_cita' => 'nullable|string',
+            'hobi' => 'nullable|string',
+            'prestasi' => 'nullable|string',
+            'keahlian' => 'nullable|string',
             'ukuran_seragam' => 'required|string',
-            'referensi' => 'required|string'
+            'referensi' => 'nullable|string'
         ]);
 
-        $validator1 = Validator::make($request->all(),[
-            'nama_lengkap' => 'required|string',
-            'nik' => 'required|string',
-            'tanggal_lahir' => 'required|date',
-            'tempat_lahir' => 'required|string',
-            'jenis_kelamin' => 'required|string',
-            'kecamatan' => 'required|string',
-            'kota' => 'required|string',
-            'provinsi' => 'required|string',
-            'desa' => 'required|string',
-            'rt' => 'required|string',
-            'rw' => 'required|string',
-            'jalan' => 'required|string',
-            'gang' => 'required|string',
-            'no_rumah' => 'required|string',
-            'kode_pos' => 'required|string',
-            'agama' => 'required|string',
-            'no_hp' => 'required|string'
-        ]);
-
-        if ($validator1->fails()) {
-            return [
-                "page" => "1",
-                "validator" => $validator
-            ];
+        if ($request->walicek) {
+            $validator->addRules([
+                'nama_wali' => 'required|string',
+                'pendidikan_wali' => 'required|string',
+                'pekerjaan_wali' => 'required|string',
+                'agama_wali' => 'required|string',
+                'kecamatan_wali' => 'required|string',
+                'kota_wali' => 'required|string',
+                'provinsi_wali' => 'required|string',
+                'desa_wali' => 'required|string',
+                'rt_wali' => 'required|string',
+                'rw_wali' => 'required|string',
+                'jalan_wali' => 'required|string',
+                'gang_wali' => 'nullable|string',
+                'no_rumah_wali' => 'required|string',
+                'kode_pos_wali' => 'required|string',
+            ]);
         }
 
-        $validator2 = Validator::make($request->all(),[
-            'saudara' => 'required|numeric',
-            'saudara_tiri' => 'required|numeric',
-            'sudah_sekolah' => 'required|numeric',
-            'belum_sekolah' => 'required|numeric',
-            'nama_ayah' => 'required|string',
-            'nama_ibu' => 'required|string',
-            'pendidikan_ayah' => 'required|string',
-            'pendidikan_ibu' => 'required|string',
-            'pekerjaan_ayah' => 'required|string',
-            'pekerjaan_ibu' => 'required|string',
-            'agama_ayah' => 'required|string',
-            'agama_ibu' => 'required|string',
-            'tanggungan_keluarga' => 'required|numeric',
-        ]);
-
-        if ($validator2->fails()) {
-            return [
-                "page" => "2",
-                "validator" => $validator
+        if ($validator->fails()) {
+            $page1 = [
+                'nama_lengkap', 'nik', 'tanggal_lahir', 'tempat_lahir', 'jenis_kelamin', 'kecamatan', 'kota', 'provinsi', 'desa', 'rt', 'rw', 'jalan', 'gang', 'no_rumah', 'kode_pos', 'agama', 'no_hp'
             ];
-        }
+            foreach ($page1 as $value) {
+                if ($validator->errors()->has($value)) {
+                    return [
+                        "page" => "1",
+                        "validator" => $validator
+                    ];
+                    break;
+                }
+            }
 
-        $validator3 = Validator::make($request->all(),[
-            'nisn' => 'required|string',
-            'asal_sekolah' => 'required|string',
-            'no_sttb' => 'required|string',
-            'tahun_sttb' => 'required|string',
-            'jurusan' => 'required|string',
-            'jurusan2' => 'required|string',
-        ]);
+            $page2 = ['anak_ke','saudara', 'saudara_tiri', 'sudah_sekolah', 'belum_sekolah', 'nama_ayah', 'nama_ibu', 'pendidikan_ayah', 'pendidikan_ibu', 'pekerjaan_ayah', 'pekerjaan_ibu', 'agama_ayah', 'agama_ibu', 'tanggungan_keluarga', 'nama_wali', 'pendidikan_wali', 'pekerjaan_wali', 'agama_wali', 'kecamatan_wali', 'kota_wali', 'provinsi_wali', 'desa_wali', 'rt_wali', 'rw_wali', 'jalan_wali', 'gang_wali', 'no_rumah_wali', 'kode_pos_wali'];
+            foreach ($page2 as $value) {
+                if ($validator->errors()->has($value)) {
+                    return [
+                        "page" => "2",
+                        "validator" => $validator
+                    ];
+                    break;
+                }
+            }
 
-        if ($validator3->fails()) {
-            return [
-                "page" => "3",
-                "validator" => $validator
-            ];
-        }
+            $page3 = ['nisn', 'asal_sekolah', 'no_sttb', 'tahun_sttb', 'program_studi', 'program_studi_pilihan_2'];
+            foreach ($page3 as $value) {
+                if ($validator->errors()->has($value)) {
+                    return [
+                        "page" => "3",
+                        "validator" => $validator
+                    ];
+                    break;
+                }
+            }
 
-        $validator4 = Validator::make($request->all(),[
-            'tinggi_badan' => 'required|string',
-            'berat_badan' => 'required|string',
-            'golongan_darah' => 'required|string',
-            'rhesus' => 'required|string',
-            'penyakit_kronis' => 'required|string',
-            'cita_cita' => 'required|string',
-            'hobi' => 'required|string',
-            'prestasi' => 'required|string',
-            'keahlian' => 'required|string',
-            'ukuran_seragam' => 'required|string',
-            'referensi' => 'required|string'
-        ]);
-
-        if ($validator4->fails()) {
-            return [
-                "page" => "4",
-                "validator" => $validator
-            ];
+            $page4 = ['tinggi_badan', 'berat_badan', 'golongan_darah', 'rhesus', 'penyakit_kronis', 'cita_cita', 'hobi', 'prestasi', 'keahlian', 'ukuran_seragam', 'referensi'];
+            foreach ($page4 as $value) {
+                if ($validator->errors()->has($value)) {
+                    return [
+                        "page" => "4",
+                        "validator" => $validator
+                    ];
+                    break;
+                }
+            }
         }
 
         return $data;

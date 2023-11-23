@@ -15,16 +15,18 @@ return new class extends Migration
     {
         Schema::create('alamat', function (Blueprint $table) {
             $table->id();
-            $table->string('jalan');
-            $table->string('gang')->nullable();
+            $table->string('kecamatan');
+            $table->string('kota');
+            $table->string('provinsi');
+            $table->string('desa');
             $table->string('rt');
             $table->string('rw');
-            $table->string('desa_kelurahan');
-            $table->string('kecamatan');
-            $table->string('kota_kab');
+            $table->string('jalan');
+            $table->string('gang')->nullable();
+            $table->string('no_rumah')->nullable();
             $table->string('kode_pos');
-            $table->string('no_rumah');
             $table->timestamps();
+            
         });
     }
 
