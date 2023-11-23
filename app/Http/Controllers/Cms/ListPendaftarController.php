@@ -7,7 +7,9 @@ use App\Http\Controllers\Cms\master\PpdbSettingController;
 use App\Http\Controllers\Controller;
 use App\Models\Akademik;
 use App\Models\CalonSiswa;
+use App\Models\OrangTua;
 use App\Models\Pendaftaran;
+use App\Models\Ppdb;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,6 +37,9 @@ class ListPendaftarController extends Controller
         $statusData = $request->status_data;
         $statusPembayaran = $request->status_pembayaran;
 
+        $ppdb = PpdbSettingController::getPPDBInfo();
+        $tahunAjaranTerakhir = Ppdb::select('tahun_ajaran')->orderBy('tahun_ajaran', 'desc')->whereDate('end_date', '<', date('Y-m-d'))->first()->tahun_ajaran;
+        $tahunSelect = $ppdb["ppdbOpen"] ? $ppdb["ppdbOpen"]->tahun_ajaran : $tahunAjaranTerakhir;
 
         $listData  = Pendaftaran::join('calon_siswa', 'pendaftaran.calon_siswa_id', '=', 'calon_siswa.id')
             ->join('ppdb', 'pendaftaran.ppdb_id', '=', 'ppdb.id')
@@ -43,8 +48,13 @@ class ListPendaftarController extends Controller
             ->when(!empty($search), function ($query) use ($search) {
                 $query->where('pendaftaran.kode', 'LIKE', '%' . $search . '%')
                     ->orWhere('akademik.nisn', 'LIKE', '%' . $search . '%')
-                    ->orWhere('calon_siswa.nama_lengkap', 'LIKE', '%' . $search . '%')
-                    ->orWhere('users.email', 'LIKE', '%' . $search . '%');
+                    ->orWhere('calon_siswa.nama_lengkap', 'LIKE', '%' . $search . '%');
+            })
+            ->when(empty($tahunAjaran), function ($query) use ($tahunSelect) {
+                $query->where('ppdb.tahun_ajaran', $tahunSelect);
+                request()->merge([
+                    'tahun_ajaran' => $tahunSelect
+                ]);
             })
             ->when(!empty($tahunAjaran), function ($query) use ($tahunAjaran) {
                 $query->where('ppdb.tahun_ajaran', $tahunAjaran);
@@ -76,13 +86,13 @@ class ListPendaftarController extends Controller
         ];
 
         $listStatusPembayaran = [
-            "1" => [
+            "0" => [
                 "text" => "Belum Bayar",
             ],
-            "2" => [
+            "1" => [
                 "text" => "Belum Lunas",
             ],
-            "3" => [
+            "2" => [
                 "text" => "Lunas",
             ]
         ];
@@ -174,13 +184,20 @@ class ListPendaftarController extends Controller
             $pendaftaran = Pendaftaran::where('id', $id)->first();
             $calonSiswa = CalonSiswa::where('id', $pendaftaran->calon_siswa_id)->first();
             $akademik = Akademik::where('id', $calonSiswa->akademik_id)->first();
-            $user = User::where('id', $calonSiswa->user_id)->first();
+            $ayah = OrangTua::where('calon_siswa_id', $calonSiswa->id)->where('jenis', 'ayah')->first();
+            $ibu = OrangTua::where('calon_siswa_id', $calonSiswa->id)->where('jenis', 'ibu')->first();
+            $wali = OrangTua::where('calon_siswa_id', $calonSiswa->id)->where('jenis', 'wali')->first();
+
 
             $data = [
                 "pendaftaran" => $pendaftaran,
                 "calonSiswa" => $calonSiswa,
                 "akademik" => $akademik,
-                "user" => $user
+                "orangTuaWali" => [
+                    "ayah" => $ayah,
+                    "ibu" => $ibu,
+                    "wali" => $wali
+                ]
             ];
         } catch (\Throwable $th) {
             return response()->json([
@@ -190,7 +207,7 @@ class ListPendaftarController extends Controller
 
         return response()->json([
             'status' => "OK",
-            'data' => $data
+            'results' => $data
         ]);
     }
 

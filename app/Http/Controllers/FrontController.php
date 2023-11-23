@@ -93,6 +93,7 @@ class FrontController extends Controller
             $calonSiswa->nik = $request->nik;
             $calonSiswa->telepon = $request->no_hp;
             $calonSiswa->nama_lengkap = $request->nama_lengkap;
+            $calonSiswa->nama_panggilan = $request->nama_panggilan;
             $calonSiswa->jenis_kelamin = $request->jenis_kelamin;
             $calonSiswa->tanggal_lahir = $request->tanggal_lahir;
             $calonSiswa->tempat_lahir = $request->tempat_lahir;

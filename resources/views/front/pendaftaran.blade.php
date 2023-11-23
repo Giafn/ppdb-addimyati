@@ -28,6 +28,16 @@
                 <div class="text-xs mt-1 text-red-500">{{ $errors->first('nama_lengkap') }}</div>
             @endif
         </div>
+        {{-- nama panggilan --}}
+        <div class="mb-3">
+            <label for="nama_panggilan" class="block text-sm font-medium text-gray-700">Nama Panggilan</label>
+            <div class="mt-1">
+                <input type="text" name="nama_panggilan" id="nama_panggilan" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan nama panggilan" value="{{ old('nama_panggilan') }}">
+            </div>
+            @if($errors->has('nama_panggilan'))
+                <div class="text-xs mt-1 text-red-500">{{ $errors->first('nama_panggilan') }}</div>
+            @endif
+        </div>
         <div class="mb-3">
             <label for="nik" class="block text-sm font-medium text-gray-700">NIK<span class="text-xs text-red-800">*</span></label>
             <div class="mt-1">
@@ -460,7 +470,7 @@
     <div class="mb-3 px-8 formPage3 hidden">
         <h1 class="text-base font-bold text-emerald-800 mb-3">Informasi Akademik</h1>
         <div class="mb-3">
-            <label for="nisn" class="block text-sm font-medium text-gray-700">NISN</label>
+            <label for="nisn" class="block text-sm font-medium text-gray-700">NISN<span class="text-xs text-red-800">*</span></label>
             <div class="mt-1">
                 <input type="number" name="nisn" id="nisn" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan NISN" value="{{ old('nisn') }}">
             </div>
@@ -469,7 +479,7 @@
             @endif
         </div>
         <div class="mb-3">
-            <label for="asal_sekolah" class="block text-sm font-medium text-gray-700">Asal Sekolah</label>
+            <label for="asal_sekolah" class="block text-sm font-medium text-gray-700">Asal Sekolah<span class="text-xs text-red-800">*</span></label>
             <div class="mt-1">
                 <input type="text" name="asal_sekolah" id="asal_sekolah" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan asal sekolah" value="{{ old('asal_sekolah') }}">
             </div>
@@ -479,7 +489,7 @@
         </div>
         {{-- nomor sttb --}}
         <div class="mb-3">
-            <label for="no_sttb" class="block text-sm font-medium text-gray-700">Nomor STTB (pada izajah)</label>
+            <label for="no_sttb" class="block text-sm font-medium text-gray-700">Nomor STTB (pada izajah)<span class="text-xs text-red-800">*</span></label>
             <div class="mt-1">
                 <input type="text" name="no_sttb" id="no_sttb" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan nomor sttb" value="{{ old('no_sttb') }}">
             </div>
@@ -489,7 +499,7 @@
         </div>
         {{-- tahun sttb --}}
         <div class="mb-3">
-            <label for="tahun_sttb" class="block text-sm font-medium text-gray-700">Tahun STTB (pada izajah)</label>
+            <label for="tahun_sttb" class="block text-sm font-medium text-gray-700">Tahun STTB (pada izajah)<span class="text-xs text-red-800">*</span></label>
             <div class="mt-1">
                 <input type="number" name="tahun_sttb" id="tahun_sttb" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Masukkan tahun sttb" value="{{ old('tahun_sttb') }}">
             </div>
@@ -499,7 +509,7 @@
         </div>
         <h1 class="text-base font-bold text-emerald-800 mb-3">Program Studi</h1>
         <div class="mb-3">
-            <label for="program_studi" class="block text-sm font-medium text-gray-700">Utama</label>
+            <label for="program_studi" class="block text-sm font-medium text-gray-700">Utama<span class="text-xs text-red-800">*</span></label>
             <div class="mt-1">
                 <select name="program_studi" id="program_studi" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md">
                     <option value="">Pilih Program Studi</option>
@@ -622,7 +632,7 @@
         </div>
         {{-- ukuran seragam --}}
         <div class="mb-3">
-            <label for="ukuran_seragam" class="block text-sm font-medium text-gray-700">Ukuran Seragam</label>
+            <label for="ukuran_seragam" class="block text-sm font-medium text-gray-700">Ukuran Seragam<span class="text-xs text-red-800">*</span></label>
             <select name="ukuran_seragam" id="ukuran_seragam" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md">
                 <option value="">Pilih Ukuran Seragam</option>
                 <option value="s" @if(old('ukuran_seragam') == 's') selected @endif>S</option>

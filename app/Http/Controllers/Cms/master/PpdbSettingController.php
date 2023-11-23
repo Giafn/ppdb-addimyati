@@ -160,13 +160,6 @@ class PpdbSettingController extends Controller
             ], 422);
         }
 
-        $ppdbEndDateLast = Ppdb::select('end_date')->where('id', '!=', $id)->orderBy('end_date', 'desc')->first();
-        if ($ppdbEndDateLast && $request->start_date < $ppdbEndDateLast->end_date) {
-            return response()->json([
-                'message' => "Format tanggal tidak sesuai, pastikan tanggal dibuka tidak kurang dari tanggal tutup ppdb sebelumnya"
-            ], 422);
-        }
-
         if ($request->start_date < date('Y-m-d') || $request->end_date < $request->start_date) {
             return response()->json([
                 'message' => "Format tanggal tidak sesuai, pastikan tanggal dibuka tidak kurang dari sekarang dan tanggal tutup tidak kurang dari tanggal dibuka"
