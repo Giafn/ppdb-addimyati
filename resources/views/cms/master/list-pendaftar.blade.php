@@ -250,22 +250,18 @@
                 <form id="formAdd">
                     <div class="">
                         {{ csrf_field() }}
-                        {{-- Kode Pendaftaran --}}
                         <div class="mb-4">
                             <label for=kodePendaftaran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Pendaftaran <span class="text-red-500">*</span></label>
                             <input id="kodePendaftaran" type="text" class="shadow-sm bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Kode Pendaftaran" disabled>
                         </div>
-                        {{-- NISN --}}
                         <div class="mb-4">
                             <label for="NISN" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NISN <span class="text-red-500">*</span></label>
                             <input type="number" name="nisn" id="NISN" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="NISN" required>
                         </div>
-                        {{-- Nama Siswa --}}
                         <div class="mb-4">
                             <label for="namaSiswa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Siswa <span class="text-red-500">*</span></label>
                             <input type="text" name="nama" id="namaSiswa" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Siswa" required>
                         </div>
-                        {{-- Email --}}
                         <div class="mb-4">
                             <label for="Email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email <span class="text-red-500">*</span></label>
                             <input type="email" name="email" id="Email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" required>
@@ -283,9 +279,7 @@
 
 <div id="showModal" class="modal">
     <div class="modal-dialog modal-3xl">
-        <!-- Modal content -->
         <div class="modal-content">
-            <!-- Modal header -->
             <div class="modal-header">
                 <h3 class="modal-title">
                     Detail Data Pendaftar
@@ -296,10 +290,8 @@
                     </svg>
                 </button>
             </div>
-            <!-- Modal body -->
             <div class="modal-body">
                 <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4">
-                    <!-- Right Content -->
                     <div class="col-span-full xl:col-auto">
                         <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <div class="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
@@ -323,20 +315,35 @@
                         </div>
                         <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <div class="flow-root">
-                                <h3 class="text-xl font-semibold dark:text-white">Kontak Info</h3>
+                                <h3 class="text-xl font-semibold dark:text-white">Info Pendaftaran</h3>
                                 <ul class="divide-y divide-gray-200 dark:divide-gray-700">
                                     <li class="py-4">
                                         <div class="flex items-center space-x-4">
                                             <div class="flex-shrink-0">
-                                                <svg class="w-5 h-5 dark:text-white" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="email" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"/></svg>
+                                                <svg  class="w-5 h-5  dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">Fonticons, Inc. --><path fill="currentColor" d="M181.3 32.4c17.4 2.9 29.2 19.4 26.3 36.8L197.8 128h95.1l11.5-69.3c2.9-17.4 19.4-29.2 36.8-26.3s29.2 19.4 26.3 36.8L357.8 128H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H347.1L325.8 320H384c17.7 0 32 14.3 32 32s-14.3 32-32 32H315.1l-11.5 69.3c-2.9 17.4-19.4 29.2-36.8 26.3s-29.2-19.4-26.3-36.8l9.8-58.7H155.1l-11.5 69.3c-2.9 17.4-19.4 29.2-36.8 26.3s-29.2-19.4-26.3-36.8L90.2 384H32c-17.7 0-32-14.3-32-32s14.3-32 32-32h68.9l21.3-128H64c-17.7 0-32-14.3-32-32s14.3-32 32-32h68.9l11.5-69.3c2.9-17.4 19.4-29.2 36.8-26.3zM187.1 192L165.8 320h95.1l21.3-128H187.1z"/></svg>
                                             </div>
                                             <div class="flex-1 min-w-0">
                                                 <span class="block text-base font-semibold text-gray-900 truncate dark:text-white">
-                                                    Alamat Email
+                                                    Kode Pendaftaran
                                                 </span>
-                                                <a href="#" id="userEmailText" class="block text-sm font-normal truncate text-primary-700 hover:underline dark:text-white">
-                                                    giafn@test.com
-                                                </a>
+                                                <span id="infoKodePPDB" class="block text-sm font-normal truncate text-primary-700 dark:text-white">
+                                                    -
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="py-4">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="flex-shrink-0">
+                                                <svg class="w-5 h-5 dark:text-white" xmlns="http://www.w3.org/2000/svg"viewBox="0 0 576 512"><path fill="currentColor" d="M64 64C28.7 64 0 92.7 0 128V384c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H64zm48 160H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zM96 336c0-8.8 7.2-16 16-16H464c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16zM376 160h80c13.3 0 24 10.7 24 24v48c0 13.3-10.7 24-24 24H376c-13.3 0-24-10.7-24-24V184c0-13.3 10.7-24 24-24z"/></svg>
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <span class="block text-base font-semibold text-gray-900 truncate dark:text-white">
+                                                    Status Pembayaran
+                                                </span>
+                                                <span id="infoStatusPembayaran" class="block text-sm font-normal truncate text-primary-700 dark:text-white">
+                                                    Lunas
+                                                </span>
                                             </div>
                                         </div>
                                     </li>
@@ -349,8 +356,23 @@
                                                 <span class="block text-base font-semibold text-gray-900 truncate dark:text-white">
                                                     Whatsapp / No. HP
                                                 </span>
-                                                <a href="#" id="userTelpText" class="block text-sm font-normal truncate text-primary-700 hover:underline dark:text-white">
+                                                <a href="" id="infoNoTlp" class="block text-sm font-normal truncate text-primary-700 hover:underline dark:text-white">
                                                     081234567890
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="py-4">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="flex-shrink-0">
+                                                <svg class="w-5 h-5  dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"/></svg>
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <span class="block text-base font-semibold text-gray-900 truncate dark:text-white">
+                                                    Url untuk edit data
+                                                </span>
+                                                <a href="#" id="infoUrlEdit" class="block text-sm font-normal truncate text-primary-700 hover:underline dark:text-white">
+                                                    https://example.com
                                                 </a>
                                             </div>
                                         </div>
@@ -358,47 +380,23 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                            <div class="flow-root">
-                                <h3 class="mb-4 text-xl font-semibold dark:text-white">Informasi Akun</h3>
-                                <form action="#">
-                                    <div class="grid grid-cols-6 gap-6">
-                                        <div class="col-span-6 sm:col-span-6">
-                                            <label for="userEmailInput" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                            <input type="email" name="email" id="userEmailInput" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Email" required>
-                                        </div>
-                                        <div class="col-span-6 sm:col-span-3">
-                                            <label for="userPasswordInput" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New password</label>
-                                            <input data-popover-placement="bottom" type="password" id="userPasswordInput" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required>
-                                        </div>
-                                        <div class="col-span-6 sm:col-span-3">
-                                            <label for="confirm-password-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-                                            <input type="text" name="confirm-password" id="confirm-password-input" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="••••••••" required>
-                                        </div>
-                                        <div class="col-span-6 sm:col-full">
-                                            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">Save all</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
                     </div>
                     <div class="col-span-2">
                         <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <h3 class="mb-4 text-xl font-semibold dark:text-white">Informasi Pribadi</h3>
                             <form action="#">
-                                <div class="grid grid-cols-6 gap-6">
+                                <div class="grid grid-cols-6 gap-4">
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="siswaNamaLengkap" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Lengkap</label>
-                                        <input type="text" name="nama_lengkap" id="siswaNamaLengkap" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="gia fauzan" required>
+                                        <input type="text" name="nama_lengkap" id="siswaNamaLengkap" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama Lengkap" required>
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="siswaNamaPanggilan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Panggilan</label>
-                                        <input type="text" name="nama_panggilan" id="siswaNamaPanggilan" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="gia" required>
+                                        <input type="text" name="nama_panggilan" id="siswaNamaPanggilan" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Panggilan" required>
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
-                                        <label for="akademikNik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK</label>
-                                        <input type="number" name="nik" id="akademikNik" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="320xxxxxxxxxxxxx" required>
+                                        <label for="siswaNik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK</label>
+                                        <input type="number" name="nik" id="siswaNik" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="320xxxxxxxxxxxxx" required>
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="siswaJk" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
@@ -412,51 +410,99 @@
                                         <input type="text" name="notlpwa" id="siswaNoTlp" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="089723xxxxxxx" required>
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
-                                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                        <input type="email" name="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="example@company.com" required>
+                                        <label for="siswaTanggalLahir" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Lahir</label>
+                                        <input type="date" name="taggal_lahir" id="siswaTanggalLahir" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="15/08/1990" required>
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
-                                        <label for="agamaEdit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Agama</label>
-                                        <select name="agama" id="agamaEdit" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                            <option value="islam">Islam</option>
-                                            <option value="kristen">Kristen</option>
-                                            <option value="katolik">Katolik</option>
-                                            <option value="hindu">Hindu</option>
-                                            <option value="budha">Budha</option>
-                                            <option value="konghucu">Konghucu</option>
-                                        </select>
+                                        <label for="siswaTempatLahir" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tempat Lahir</label>
+                                        <input type="text" name="tempat_lahir" id="siswaTempatLahir" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
-                                        <label for="tanggalLahirEdit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Lahir</label>
-                                        <input type="date" name="taggal_lahir" id="tanggalLahirEdit" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="15/08/1990" required>
+                                        <label for="siswaAgama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Agama</label>
+                                        <input type="text" name="agama" id="siswaAgama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
-                                        <label for="anakKe" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Anak Ke</label>
-                                        <input type="number" name="anak_ke" id="anakKe" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="anak Ke" required>
+                                        <label for="siswaAnakKe" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Anak Ke</label>
+                                        <input type="number" name="anak_ke" id="siswaAnakKe" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="anak Ke" required>
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
-                                        <label for="jumlahSaudara" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Saudara</label>
-                                        <input type="number" name="jumlah_saudara" id="jumlahSaudara" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="jumlah saudara" required>
+                                        <label for="siswaJmlSaudara" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Saudara Kandung</label>
+                                        <input type="number" name="jumlah_saudara" id="siswaJmlSaudara" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="jumlah saudara" required>
                                     </div>
-                                    <div class="col-span-6 sm:col-span-6">
-                                        <label for="alamatLengkap" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat Lengkap</label>
-                                        <textarea name="alamat_lengkap" id="alamatLengkap" cols="30" rows="3" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="siswaJmlSaudaraTiri" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Saudara Tiri</label>
+                                        <input type="number" name="jumlah_saudara_tiri" id="siswaJmlSaudaraTiri" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="jumlah saudara tiri">
                                     </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="siswaJmlSaudaraSekolah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Saudara yang sudah sekolah</label>
+                                        <input type="number" name="jumlah_saudara_sekolah" id="siswaJmlSaudaraSekolah" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="jumlah saudara yang sudah sekolah">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="siswaJmlSaudaraNoSekolah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Saudara yang belum sekolah</label>
+                                        <input type="number" name="jumlah_saudara_belum_sekolah" id="siswaJmlSaudaraNoSekolah" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="jumlah saudara yang belum sekolah">
+                                    </div>
+                                    <label class="block text-sm font-bold text-gray-900 dark:text-white col-span-6">
+                                        <hr class="mb-3">
+                                        <span class="text-gray-700 dark:text-gray-400">Alamat Lengkap</span>
+                                    </label>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="alamatProvinsi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provinsi</label>
+                                        <input type="text" name="provinsi" id="alamatProvinsi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="alamatKabupaten" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kabupaten</label>
+                                        <input type="text" name="kabupaten" id="alamatKabupaten" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="alamatKecamatan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kecamatan</label>
+                                        <input type="text" name="kecamatan" id="alamatKecamatan" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="alamatDesa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Desa</label>
+                                        <input type="text" name="desa" id="alamatDesa" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-2">
+                                        <label for="alamatJalan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jalan</label>
+                                        <input type="text" name="jalan" id="alamatJalan" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 w-full block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-2">
+                                        <label for="alamatGang" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gang / Komplek</label>
+                                        <input type="text" name="gang" id="alamatGang" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 w-full block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-1">
+                                        <label for="alamatRt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">RT</label>
+                                        <input type="number" name="rt" id="alamatRt" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-1">
+                                        <label for="alamatRw" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">RW</label>
+                                        <input type="number" name="rw" id="alamatRw" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-2">
+                                        <label for="alamatNoRumah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Rumah</label>
+                                        <input type="text" name="nomor_rumah" id="alamatNoRumah" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 w-full block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-4">
+                                        <label for="alamatKodePos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Pos</label>
+                                        <input type="number" name="kode_pos" id="alamatKodePos" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 w-full block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    </div>
+                                    <hr class="col-span-6">
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="pilihanJurusan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilihan Jurusan</label>
                                         <select name="pilihan_jurusan" id="pilihanJurusan" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                            <option value="rpl">RPL</option>
-                                            <option value="tkj">TKJ</option>
+                                            @foreach ($jurusan as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="pilihanJurusan2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilihan Jurusan kedua</label>
                                         <select name="pilihan_jurusan2" id="pilihanJurusan2" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                            <option value="rpl">RPL</option>
-                                            <option value="tkj">TKJ</option>
+                                            @foreach ($jurusan as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <div class="col-span-6 sm:col-span-2">
                                         <label for="ukuranSeragam" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ukuran Seragam</label>
                                         <select name="ukuran_seragam" id="ukuranSeragam" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                             <option value="s">S</option>
@@ -466,15 +512,29 @@
                                             <option value="xxl">XXL</option>
                                         </select>
                                     </div>
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <div class="col-span-6 sm:col-span-2">
                                         <label for="tinggiBadan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tinggi Badan</label>
                                         <input type="number" name="tinggi_badan" id="tinggiBadan" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="tinggi badan" required>
                                     </div>
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <div class="col-span-6 sm:col-span-2">
                                         <label for="beratBadan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berat Badan</label>
                                         <input type="number" name="berat_badan" id="beratBadan" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="berat badan" required>
                                     </div>
-                                    <div class="col-span-6 sm:col-span-6">
+                                    {{-- golongan darah --}}
+                                    <div class="col-span-6 sm:col-span-2">
+                                        <label for="golonganDarah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Golongan Darah</label>
+                                        <select name="golongan_darah" id="golonganDarah" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 w-full block py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                                            <option value="">Pilih</option>
+                                            <option value="a-">A-</option>
+                                            <option value="b-">B-</option>
+                                            <option value="ab-">AB-</option>
+                                            <option value="o">O</option>
+                                            <option value="a+">A+</option>
+                                            <option value="b+">B+</option>
+                                            <option value="ab+">AB+</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-4">
                                         <label for="penyakitKronis" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penyakit Kronis</label>
                                         <input type="text" name="penyakit_kronis" id="penyakitKronis" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     </div>
@@ -482,7 +542,6 @@
                                         <label for="prestasi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prestasi</label>
                                         <input type="text" name="prestasi" id="prestasi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     </div>
-                                    {{-- keahlian --}}
                                     <div class="col-span-6 sm:col-span-6">
                                         <label for="keahlian" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keahlian</label>
                                         <input type="text" name="keahlian" id="keahlian" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
@@ -507,10 +566,6 @@
                                         <label for="asalSekolah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Asal Sekolah</label>
                                         <input type="text" name="asal_sekolah" id="asalSekolah" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Asal Sekolah" required>
                                     </div>
-                                    <div class="col-span-6 sm:col-span-6">
-                                        <label for="alamatSekolah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat Sekolah</label>
-                                        <input type="text" name="alamat_sekolah" id="alamatSekolah" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Alamat Sekolah" required>
-                                    </div>
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="nomorSeriSttb" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Seri STTB</label>
                                         <input type="text" name="nomor_seri_sttb" id="nomorSeriSttb" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nomor Seri STTB" required>
@@ -528,56 +583,121 @@
                             </form>
                         </div>
                         <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                            <h3 class="mb-4 text-xl font-semibold dark:text-white">Informasi Orang Tua / Wali</h3>
+                            <h3 class="mb-4 text-xl font-semibold dark:text-white">Informasi Orang Tua</h3>
                             <form action="#">
                                 <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <div class="col-span-6 sm:col-span-6">
                                         <label for="namaAyah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Ayah</label>
                                         <input type="text" name="nama_ayah" id="namaAyah" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </div>
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <div class="col-span-6 sm:col-span-4">
                                         <label for="pekerjaanAyah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pekerjaan Ayah</label>
                                         <input type="text" name="pekerjaan_ayah" id="pekerjaanAyah" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </div>
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <div class="col-span-6 sm:col-span-2">
                                         <label for="pendidikanAyah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pendidikan Ayah</label>
-                                        <input type="text" name="pendidikan_ayah" id="pendidikanAyah" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <select name="pendidikan_ayah" id="pendidikanAyah" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option value="sd">SD</option>
+                                            <option value="smp">SMP</option>
+                                            <option value="sma">SMA</option>
+                                            <option value="s1">S1</option>
+                                            <option value="s2">S2</option>
+                                            <option value="s3">S3</option>
+                                        </select>
                                     </div>
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="penghasilanAyah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penghasilan Ayah</label>
-                                        <input type="text" name="penghasilan_ayah" id="penghasilanAyah" class="nominalFormat shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    </div>
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <div class="col-span-6 sm:col-span-6">
                                         <label for="namaIbu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Ibu</label>
                                         <input type="text" name="nama_ibu" id="namaIbu" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </div>
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <div class="col-span-6 sm:col-span-4">
                                         <label for="pekerjaanIbu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pekerjaan Ibu</label>
                                         <input type="text" name="pekerjaan_ibu" id="pekerjaanIbu" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </div>
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <div class="col-span-6 sm:col-span-2">
                                         <label for="pendidikanIbu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pendidikan Ibu</label>
-                                        <input type="text" name="pendidikan_ibu" id="pendidikanIbu" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <select name="pendidikan_ibu" id="pendidikanIbu" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option value="sd">SD</option>
+                                            <option value="smp">SMP</option>
+                                            <option value="sma">SMA</option>
+                                            <option value="s1">S1</option>
+                                            <option value="s2">S2</option>
+                                            <option value="s3">S3</option>
+                                        </select>
                                     </div>
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="penghasilanIbu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penghasilan Ibu</label>
-                                        <input type="text" name="penghasilan_ibu" id="penghasilanIbu" class="nominalFormat shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <div class="col-span-6 sm:col-full">
+                                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">
+                                            Save all
+                                        </button>
                                     </div>
-                                    <div class="col-span-6 sm:col-span-3">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                            <h3 class="mb-4 text-xl font-semibold dark:text-white">Informasi Wali</h3>
+                            <form action="#">
+                                <div class="grid grid-cols-6 gap-4">
+                                    <div class="col-span-6 sm:col-span-6">
                                         <label for="namaWali" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Wali</label>
                                         <input type="text" name="nama_wali" id="namaWali" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </div>
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <div class="col-span-6 sm:col-span-4">
                                         <label for="pekerjaanWali" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pekerjaan Wali</label>
                                         <input type="text" name="pekerjaan_wali" id="pekerjaanWali" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </div>
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <div class="col-span-6 sm:col-span-2">
                                         <label for="pendidikanWali" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pendidikan Wali</label>
-                                        <input type="text" name="pendidikan_wali" id="pendidikanWali" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <select name="pendidikan_wali" id="pendidikanWali" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option value="sd">SD</option>
+                                            <option value="smp">SMP</option>
+                                            <option value="sma">SMA</option>
+                                            <option value="s1">S1</option>
+                                            <option value="s2">S2</option>
+                                            <option value="s3">S3</option>
+                                        </select>
+                                    </div>
+                                    <label class="block text-sm font-bold text-gray-900 dark:text-white col-span-6">
+                                        <hr class="mb-3">
+                                        <span class="text-gray-700 dark:text-gray-400">Alamat Wali</span>
+                                    </label>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="alamatWaliProvinsi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provinsi</label>
+                                        <input type="text" name="provinsi_wali" id="alamatWaliProvinsi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
-                                        <label for="penghasilanWali" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penghasilan Wali</label>
-                                        <input type="text" name="penghasilan_wali" id="penghasilanWali" class="nominalFormat shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <label for="alamatWaliKabupaten" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kabupaten</label>
+                                        <input type="text" name="kabupaten_wali" id="alamatWaliKabupaten" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="alamatWaliKecamatan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kecamatan</label>
+                                        <input type="text" name="kecamatan_wali" id="alamatWaliKecamatan" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="alamatWaliDesa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Desa</label>
+                                        <input type="text" name="desa_wali" id="alamatWaliDesa" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-2">
+                                        <label for="alamatWaliJalan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jalan</label>
+                                        <input type="text" name="jalan_wali" id="alamatWaliJalan" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-2">
+                                        <label for="alamatWaliGang" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gang / Komplek</label>
+                                        <input type="text" name="gang_wali" id="alamatWaliGang" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-1">
+                                        <label for="alamatWaliRt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">RT</label>
+                                        <input type="number" name="rt_wali" id="alamatWaliRt" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-1">
+                                        <label for="alamatWaliRw" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">RW</label>
+                                        <input type="number" name="rw_wali" id="alamatWaliRw" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-2">
+                                        <label for="alamatWaliNoRumah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Rumah</label>
+                                        <input type="text" name="nomor_rumah_wali" id="alamatWaliNoRumah" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-4">
+                                        <label for="alamatWaliKodePos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Pos</label>
+                                        <input type="number" name="kode_pos_wali" id="alamatWaliKodePos" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full block p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </div>
                                     <div class="col-span-6 sm:col-full">
                                         <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">
@@ -598,7 +718,6 @@
     <div class="modal-dialog modal-2xl">
         <!-- Modal content -->
         <div class="modal-content">
-            <!-- Modal header -->
             <div class="modal-header">
                 <h3 class="modal-title">
                     Edit Item
@@ -609,29 +728,23 @@
                     </svg>
                 </button>
             </div>
-            <!-- Modal body -->
             <div class="modal-body">
                 <form id="formEdit">
                     <div class="">
                         {{ csrf_field() }}
                         <input type="hidden" name="id" id="editId">
-                        
-                        {{-- gelombang --}}
                         <div class="mb-4">
                             <label for="editGelombang" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gelombang <span class="text-red-500">*</span></label>
                             <input type="number" name="gelombang" id="editGelombang" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Gelombang" required>
                         </div>
-                        {{-- nama --}}
                         <div class="mb-4">
                             <label for="editNama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Item <span class="text-red-500">*</span></label>
                             <input type="text" name="nama" id="editNama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="nama item" required>
                         </div>
-                        {{-- nominal --}}
                         <div class="mb-4">
                             <label for="editNominal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nominal <span class="text-red-500">*</span></label>
                             <input type="text" name="nominal" id="editNominal" class="nominalFormat shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nominal" required>
                         </div>
-                        {{-- keterangan --}}
                         <div class="mb-4">
                             <label for="editKeterangan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keterangan <span class="text-red-500">*</span></label>
                             <textarea name="keterangan" id="editKeterangan" rows="3" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 resize-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Keterangan" required></textarea>
@@ -649,9 +762,7 @@
 
 <div class="modal" id="deleteModal">
     <div class="modal-dialog modal-popup">
-        <!-- Modal content -->
         <div class="modal-content">
-            <!-- Modal header -->
             <div class="modal-header">
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" onclick="closeDeleteModal()">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -659,7 +770,6 @@
                     </svg>
                 </button>
             </div>
-            <!-- Modal body -->
             <div class="modal-body">
                 <svg class="w-16 h-16 mx-auto text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -724,84 +834,107 @@
 
     function show(id) {
         loading(true);
-        toggleModal('showModal');
-        loading(false)
+        // toggleModal('showModal');
+        // loading(false)
 
         axios({
                 method: 'get',
-                url: '/cms/list-pendaftar/' + id,
-                responseType: 'stream'
+                url: '/cms/list-pendaftar/' + id
             })
             .then(function(response) {
-                console.log(response.data.results);
-                if (response.data.status == "OK") {
-
+                let data = response.data;
+                if (data.status == "OK") {
+                    filldataShow(data.results);
                     toggleModal('showModal');
-
                     loading(false)
                 }
             });
     }
 
-    // function edit(id) {
-    //     loading(true);
+    function filldataShow(data) {
+        // informasi Pendafataran
+        $("#infoKodePPDB").html(data.pendaftaran.kode);
+        $("#infoStatusPembayaran").html(data.pendaftaran.status_pembayaran == 2 ? "Lunas" : (data.pendaftaran.status_pembayaran == 1 ? "Belum Lunas" : "Belum Bayar"));
+        $("#infoNoTlp").html(data.calonSiswa.telepon);
+        var noTlp = data.calonSiswa.telepon;
+        if (noTlp.charAt(0) != 0) {
+            noTlp = "62" + noTlp;
+        } else if (noTlp.charAt(0) != 62) {
+            noTlp = "62" + noTlp.substr(1);
+        }
+        $("#infoNoTlp").attr("href", "https://wa.me/"+noTlp).attr("target", "_blank");
 
-    //     axios({
-    //             method: 'get',
-    //             url: '/cms/list-pendaftar/' + id,
-    //             responseType: 'stream'
-    //         })
-    //         .then(function(response) {
-    //             console.log(response.data.results);
-    //             if (response.data.status == "OK") {
-    //                 document.getElementById("editId").value = response.data.results.id;
-    //                 document.getElementById("editGelombang").value = response.data.results.gelombang;
-    //                 document.getElementById("editNama").value = response.data.results.nama;
-    //                 document.getElementById("editNominal").value = "Rp. "+response.data.results.nominal;
-    //                 document.getElementById("editKeterangan").value = response.data.results.keterangan;
 
-    //                 toggleModal('editModal');
+        // informasi Pribadi
+        $("#siswaNamaLengkap").val(data.calonSiswa.nama_lengkap);
+        $("#siswaNamaPanggilan").val(data.calonSiswa.nama_panggilan);
+        $("#siswaNik").val(data.calonSiswa.nik);
+        $('#siswaJk').val(data.calonSiswa.jenis_kelamin);
+        $("#siswaNoTlp").val(data.calonSiswa.telepon);
+        $("#siswaTanggalLahir").val(data.calonSiswa.tanggal_lahir);
+        $("#siswaTempatLahir").val(data.calonSiswa.tempat_lahir);
+        $("#siswaAgama").val(data.calonSiswa.agama);
+        $("#siswaAnakKe").val(data.calonSiswa.anak_ke);
+        $("#siswaJmlSaudara").val(data.calonSiswa.jml_saudara_kandung);
+        $("#siswaJmlSaudaraTiri").val(data.calonSiswa.jml_saudara_tiri);
+        $("#siswaJmlSaudaraSekolah").val(data.calonSiswa.jml_saudara_sekolah);
+        $("#siswaJmlSaudaraNoSekolah").val(data.calonSiswa.jml_saudara_no_sekolah);
 
-    //                 loading(false)
-    //             }
-    //         });
-    // }
+        $("#alamatProvinsi").val(data.alamat.provinsi);
+        $("#alamatKabupaten").val(data.alamat.kota);
+        $("#alamatKecamatan").val(data.alamat.kecamatan);
+        $("#alamatDesa").val(data.alamat.desa);
+        $("#alamatJalan").val(data.alamat.jalan);
+        $("#alamatGang").val(data.alamat.gang);
+        $("#alamatRt").val(data.alamat.rt);
+        $("#alamatRw").val(data.alamat.rw);
+        $("#alamatNoRumah").val(data.alamat.no_rumah);
+        $("#alamatKodePos").val(data.alamat.kode_pos);
 
-    // function update() {
-    //     var form = document.forms["formEdit"];
+        $("#pilihanJurusan").val(data.pendaftaran.jurusan_id1);
+        $("#pilihanJurusan2").val(data.pendaftaran.jurusan_id2);
 
-    //     var formData = new FormData(form);
-    //     var formDataObj = new Object;
-    //     formData.forEach((value, key) => (formDataObj[key] = value));
+        $("#ukuranSeragam").val(data.calonSiswa.ukuran_seragam);
+        $("#tinggiBadan").val(data.calonSiswa.tinggi_badan);
+        $("#beratBadan").val(data.calonSiswa.berat_badan);
+        $("#golonganDarah").val(data.calonSiswa.golongan_darah);
+        $("#penyakitKronis").val(data.calonSiswa.penyakit_kronis);
+        $("#prestasi").val(data.calonSiswa.prestasi);
+        $("#keahlian").val(data.calonSiswa.keahlian);
 
-    //     loading(true)
-    //     axios({
-    //             method: 'put',
-    //             url: '/cms/list-pendaftar/' + formData.get('id'),
-    //             data: formDataObj
-    //         })
-    //         .then(function(response) {
-    //             if (response.data.status == "OK") {
-    //                 location.reload();
-    //             }
-    //         })
-    //         .catch(function(error) {
-    //             loading(false)
-    //             if (error.response) {
-    //                 let message = error.response.data.message;
-    //                 let errors = error.response.data.errors;
-    //                 let alertMessage = message;
+        // informasi Akademik
+        $("#nisn").val(data.akademik.nisn);
+        $("#asalSekolah").val(data.akademik.asal_sekolah);
+        $("#nomorSeriSttb").val(data.akademik.nomor_seri_sttb);
+        $("#tahunSttb").val(data.akademik.tahun_sttb);
 
-    //                 for (var key in errors) {
-    //                     alertMessage = alertMessage + "\n- " + errors[key]
-    //                 }
+        // informasi Orang Tua
+        $("#namaAyah").val(data.orangTuaWali.ayah.nama_lengkap);
+        $("#pekerjaanAyah").val(data.orangTuaWali.ayah.pekerjaan);
+        $("#pendidikanAyah").val(data.orangTuaWali.ayah.pendidikan_terakhir);
 
-    //                 alert(alertMessage)
-    //             } else {
-    //                 alert("Unknown Error")
-    //             }
-    //         });
-    // }
+        $("#namaIbu").val(data.orangTuaWali.ibu.nama_lengkap);
+        $("#pekerjaanIbu").val(data.orangTuaWali.ibu.pekerjaan);
+        $("#pendidikanIbu").val(data.orangTuaWali.ibu.pendidikan_terakhir);
+
+        // informasi Wali
+        if (data.orangTuaWali.wali != null) {
+            $("#namaWali").val(data.orangTuaWali.wali.nama_lengkap);
+            $("#pekerjaanWali").val(data.orangTuaWali.wali.pekerjaan);
+            $("#pendidikanWali").val(data.orangTuaWali.wali.pendidikan_terakhir);
+            
+            $("#alamatWaliProvinsi").val(data.orangTuaWali.wali.provinsi);
+            $("#alamatWaliKabupaten").val(data.orangTuaWali.wali.kota);
+            $("#alamatWaliKecamatan").val(data.orangTuaWali.wali.kecamatan);
+            $("#alamatWaliDesa").val(data.orangTuaWali.wali.desa);
+            $("#alamatWaliJalan").val(data.orangTuaWali.wali.jalan);
+            $("#alamatWaliGang").val(data.orangTuaWali.wali.gang);
+            $("#alamatWaliRt").val(data.orangTuaWali.wali.rt);
+            $("#alamatWaliRw").val(data.orangTuaWali.wali.rw);
+            $("#alamatWaliNoRumah").val(data.orangTuaWali.wali.no_rumah);
+            $("#alamatWaliKodePos").val(data.orangTuaWali.wali.kode_pos);
+        }
+    }
 
     function deleteModal(id) {
         document.getElementById("buttonDelete").setAttribute('data-id', id);

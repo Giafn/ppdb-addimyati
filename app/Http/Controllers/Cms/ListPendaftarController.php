@@ -6,10 +6,12 @@ use App\Http\Controllers\Cms\master\NominalAdministrasiController;
 use App\Http\Controllers\Cms\master\PpdbSettingController;
 use App\Http\Controllers\Controller;
 use App\Models\Akademik;
+use App\Models\Alamat;
 use App\Models\CalonSiswa;
 use App\Models\OrangTua;
 use App\Models\Pendaftaran;
 use App\Models\Ppdb;
+use App\Models\ProgramKeahlian;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -115,7 +117,9 @@ class ListPendaftarController extends Controller
             "list_gelombang" => $listppdb["listGelombang"]
         ];
 
-        return view('cms.master.list-pendaftar', compact('listData', 'paginationData', 'listStatusPembayaran', 'listStatusData', 'fillSelectFilter'));
+        $jurusan = ProgramKeahlian::select('id', 'nama')->get();
+
+        return view('cms.master.list-pendaftar', compact('listData', 'paginationData', 'listStatusPembayaran', 'listStatusData', 'fillSelectFilter', 'jurusan'));
     }
 
     public function daftarManual(Request $request)
@@ -186,8 +190,12 @@ class ListPendaftarController extends Controller
             $akademik = Akademik::where('id', $calonSiswa->akademik_id)->first();
             $ayah = OrangTua::where('calon_siswa_id', $calonSiswa->id)->where('jenis', 'ayah')->first();
             $ibu = OrangTua::where('calon_siswa_id', $calonSiswa->id)->where('jenis', 'ibu')->first();
-            $wali = OrangTua::where('calon_siswa_id', $calonSiswa->id)->where('jenis', 'wali')->first();
-
+            $wali = OrangTua::join('alamat', 'orang_tua_wali.alamat_id', '=', 'alamat.id')
+                ->where('calon_siswa_id', $calonSiswa->id)
+                ->where('jenis', 'wali')
+                ->first();
+            
+            $alamat = Alamat::where('id', $calonSiswa->alamat_id)->first();
 
             $data = [
                 "pendaftaran" => $pendaftaran,
@@ -196,10 +204,12 @@ class ListPendaftarController extends Controller
                 "orangTuaWali" => [
                     "ayah" => $ayah,
                     "ibu" => $ibu,
-                    "wali" => $wali
-                ]
+                    "wali" => $wali,
+                ],
+                'alamat' => $alamat
             ];
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             return response()->json([
                 'message' => "Data tidak ditemukan"
             ], 404);
