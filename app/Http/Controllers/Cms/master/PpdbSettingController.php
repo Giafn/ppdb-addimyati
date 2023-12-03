@@ -154,17 +154,17 @@ class PpdbSettingController extends Controller
         }
 
         $ppdb = Ppdb::where('tahun_ajaran', $request->tahunAjaran)->where('gelombang', $request->gelombang)->where('id', '!=', $id)->first();
-        if ($ppdb) {
-            return response()->json([
-                'message' => "PPDB dengan tahun ajaran " . $request->tahunAjaran . " dan gelombang " . $request->gelombang . " sudah ada"
-            ], 422);
-        }
+        // if ($ppdb) {
+        //     return response()->json([
+        //         'message' => "PPDB dengan tahun ajaran " . $request->tahunAjaran . " dan gelombang " . $request->gelombang . " sudah ada"
+        //     ], 422);
+        // }
 
-        if ($request->start_date < date('Y-m-d') || $request->end_date < $request->start_date) {
-            return response()->json([
-                'message' => "Format tanggal tidak sesuai, pastikan tanggal dibuka tidak kurang dari sekarang dan tanggal tutup tidak kurang dari tanggal dibuka"
-            ], 422);
-        }
+        // if ($request->start_date < date('Y-m-d') || $request->end_date < $request->start_date) {
+        //     return response()->json([
+        //         'message' => "Format tanggal tidak sesuai, pastikan tanggal dibuka tidak kurang dari sekarang dan tanggal tutup tidak kurang dari tanggal dibuka"
+        //     ], 422);
+        // }
 
         $tahunAjaran = $request->tahunAjaran;
         $gelombang = $request->gelombang;

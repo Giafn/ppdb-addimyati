@@ -93,6 +93,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/{id}', [ListPendaftarController::class, 'detail']);
             Route::put('/{id}', [ListPendaftarController::class, 'update']);
             Route::delete('/{id}', [ListPendaftarController::class, 'delete']);
+            Route::patch('/update/profile/{id}', [ListPendaftarController::class, 'updateProfile']);
         });
     });
 

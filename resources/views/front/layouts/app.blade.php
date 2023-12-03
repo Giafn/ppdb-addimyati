@@ -22,7 +22,6 @@
 
 <body class="bg-white h-screen">
     <div class="flex overflow-hidden bg-white h-full">
-        {{-- <div class="fixed inset-0 z-10 hidden bg-gray-900/50" id="sidebarBackdrop"></div> --}}
         <div id="main-content" class="relative w-full h-full overflow-y-auto">
             <main class="h-full">
                 @yield('content')
@@ -51,6 +50,7 @@
             }
         }
     </script>
+    <script src="/js/gtoast.js"></script>
     @yield('script')
 </body>
 

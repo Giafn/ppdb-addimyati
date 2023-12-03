@@ -1,6 +1,7 @@
 @extends('cms.layouts.dashboard-admin')
 @section('title', 'List pendaftar | ')
 @section('content')
+<div id="toast-container" class="fixed top-5 right-5 z-100"></div>
 <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
     <div class="w-full mb-1">
         <div class="mb-4">
@@ -382,9 +383,10 @@
                         </div>
                     </div>
                     <div class="col-span-2">
+                        <input type="hidden" id="infoId">
                         <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <h3 class="mb-4 text-xl font-semibold dark:text-white">Informasi Pribadi</h3>
-                            <form action="#">
+                            <form id="formPribadi">
                                 <div class="grid grid-cols-6 gap-4">
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="siswaNamaLengkap" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Lengkap</label>
@@ -514,11 +516,11 @@
                                     </div>
                                     <div class="col-span-6 sm:col-span-2">
                                         <label for="tinggiBadan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tinggi Badan</label>
-                                        <input type="number" name="tinggi_badan" id="tinggiBadan" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="tinggi badan" required>
+                                        <input type="number" name="tinggi_badan" id="tinggiBadan" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="tinggi badan">
                                     </div>
                                     <div class="col-span-6 sm:col-span-2">
                                         <label for="beratBadan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berat Badan</label>
-                                        <input type="number" name="berat_badan" id="beratBadan" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="berat badan" required>
+                                        <input type="number" name="berat_badan" id="beratBadan" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="berat badan">
                                     </div>
                                     {{-- golongan darah --}}
                                     <div class="col-span-6 sm:col-span-2">
@@ -547,9 +549,9 @@
                                         <input type="text" name="keahlian" id="keahlian" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     </div>
                                     <div class="col-span-6 sm:col-full">
-                                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">
+                                        <a onclick="updatePribadi()" class="hover:cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">
                                             Save all
-                                        </button>
+</a>
                                     </div>
                                 </div>
                             </form>
@@ -788,7 +790,6 @@
 @endsection
 @section('script')
 <script>
-    // on keyup nisn ubah value kode pendaftaran dengan PPDB-nisn
     $("#NISN").keyup(function() {
         console.log($(this).val());
         var nisn = $(this).val();
@@ -864,6 +865,8 @@
         }
         $("#infoNoTlp").attr("href", "https://wa.me/"+noTlp).attr("target", "_blank");
 
+        // id
+        $("#infoId").val(data.pendaftaran.id);
 
         // informasi Pribadi
         $("#siswaNamaLengkap").val(data.calonSiswa.nama_lengkap);
@@ -987,6 +990,47 @@
         $("body").find(".modal-backdrop").remove();
         // remove overflow hidden class
         $("body").removeClass("overflow-hidden");
+    }
+
+    function updatePribadi() {
+        var form = document.forms["formPribadi"];
+
+        var formData = new FormData(form);
+        // id 
+        var id = $("#infoId").val();
+        var formDataObj = new Object;
+        formData.forEach((value, key) => (formDataObj[key] = value));
+        console.log(formDataObj);
+
+        loading(true)
+        axios({
+                method: 'PATCH',
+                url: '/cms/list-pendaftar/update/profile/' + id,
+                data: formDataObj
+            })
+            .then(function(response) {
+                if (response.data.status == "OK") {
+                    gtoast.showToast('Berhasil update data', 'success', 5000);
+                }
+            })
+            .catch(function(error) {
+                loading(false)
+                if (error.response) {
+                    let message = error.response.data.message;
+                    let errors = error.response.data.errors;
+                    let alertMessage = message;
+
+                    for (var key in errors) {
+                        alertMessage = alertMessage + "\n- " + errors[key]
+                        gtoast.showToast(errors[key], 'error', 10000);
+                    }
+
+                    // alert(alertMessage)
+                } else {
+                    alert("Unknown Error")
+                }
+            });
+        loading(false)
     }
 </script>
 @endsection
