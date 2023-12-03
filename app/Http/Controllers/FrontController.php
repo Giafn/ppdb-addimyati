@@ -182,7 +182,7 @@ class FrontController extends Controller
         $data = null;
         $validator = Validator::make($request->all(),[
             'nama_lengkap' => 'required|string',
-            'nik' => 'required|nik',
+            'nik' => 'required|nik|unique:calon_siswa,nik|min:16',
             'tanggal_lahir' => 'required|date',
             'tempat_lahir' => 'required|string|min:3',
             'jenis_kelamin' => 'required|string|in:l,p',

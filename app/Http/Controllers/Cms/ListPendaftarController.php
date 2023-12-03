@@ -6,13 +6,16 @@ use App\Http\Controllers\Cms\master\NominalAdministrasiController;
 use App\Http\Controllers\Cms\master\PpdbSettingController;
 use App\Http\Controllers\Controller;
 use App\Models\Akademik;
+use App\Models\Alamat;
 use App\Models\CalonSiswa;
 use App\Models\OrangTua;
 use App\Models\Pendaftaran;
 use App\Models\Ppdb;
+use App\Models\ProgramKeahlian;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ListPendaftarController extends Controller
 {
@@ -38,7 +41,10 @@ class ListPendaftarController extends Controller
         $statusPembayaran = $request->status_pembayaran;
 
         $ppdb = PpdbSettingController::getPPDBInfo();
-        $tahunAjaranTerakhir = Ppdb::select('tahun_ajaran')->orderBy('tahun_ajaran', 'desc')->whereDate('end_date', '<', date('Y-m-d'))->first()->tahun_ajaran;
+        $tahunAjaranTerakhir = Ppdb::select('tahun_ajaran', 'end_date')->orderBy('end_date', 'desc')
+            ->whereDate('end_date', '<=', date("Y-m-d"))
+            ->first();
+        $tahunAjaranTerakhir = $tahunAjaranTerakhir ? $tahunAjaranTerakhir->tahun_ajaran : null;
         $tahunSelect = $ppdb["ppdbOpen"] ? $ppdb["ppdbOpen"]->tahun_ajaran : $tahunAjaranTerakhir;
 
         $listData  = Pendaftaran::join('calon_siswa', 'pendaftaran.calon_siswa_id', '=', 'calon_siswa.id')
@@ -115,7 +121,9 @@ class ListPendaftarController extends Controller
             "list_gelombang" => $listppdb["listGelombang"]
         ];
 
-        return view('cms.master.list-pendaftar', compact('listData', 'paginationData', 'listStatusPembayaran', 'listStatusData', 'fillSelectFilter'));
+        $jurusan = ProgramKeahlian::select('id', 'nama')->get();
+
+        return view('cms.master.list-pendaftar', compact('listData', 'paginationData', 'listStatusPembayaran', 'listStatusData', 'fillSelectFilter', 'jurusan'));
     }
 
     public function daftarManual(Request $request)
@@ -186,8 +194,12 @@ class ListPendaftarController extends Controller
             $akademik = Akademik::where('id', $calonSiswa->akademik_id)->first();
             $ayah = OrangTua::where('calon_siswa_id', $calonSiswa->id)->where('jenis', 'ayah')->first();
             $ibu = OrangTua::where('calon_siswa_id', $calonSiswa->id)->where('jenis', 'ibu')->first();
-            $wali = OrangTua::where('calon_siswa_id', $calonSiswa->id)->where('jenis', 'wali')->first();
-
+            $wali = OrangTua::join('alamat', 'orang_tua_wali.alamat_id', '=', 'alamat.id')
+                ->where('calon_siswa_id', $calonSiswa->id)
+                ->where('jenis', 'wali')
+                ->first();
+            
+            $alamat = Alamat::where('id', $calonSiswa->alamat_id)->first();
 
             $data = [
                 "pendaftaran" => $pendaftaran,
@@ -196,10 +208,12 @@ class ListPendaftarController extends Controller
                 "orangTuaWali" => [
                     "ayah" => $ayah,
                     "ibu" => $ibu,
-                    "wali" => $wali
-                ]
+                    "wali" => $wali,
+                ],
+                'alamat' => $alamat
             ];
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             return response()->json([
                 'message' => "Data tidak ditemukan"
             ], 404);
@@ -238,8 +252,108 @@ class ListPendaftarController extends Controller
         ]);
     }
 
-    // public function fillSelectfilter()
-    // {
-    //     $listTahunAjaran =
-    // }
+    public function updateProfile(Request $req, $id)
+    {
+        $validator = Validator::make($req->all(), [
+            "nik" => "numeric|required",
+            "notlpwa" => "numeric|required",
+            "nama_lengkap" => "string|required",
+            "nama_panggilan" => "string|nullable",
+            "jk" => "string|required",
+            "taggal_lahir" => "date|required",
+            "tempat_lahir" => "string|required",
+            "agama" => "string|required",
+            "anak_ke" => "numeric|required",
+            "jumlah_saudara" => "numeric|required",
+            "jumlah_saudara_tiri" => "numeric|nullable",
+            "jumlah_saudara_sekolah" => "numeric|nullable",
+            "jumlah_saudara_belum_sekolah" => "numeric|nullable",
+            "golongan_darah" => "string|nullable",
+            "provinsi" => "string|required",
+            "kabupaten" => "string|required",
+            "kecamatan" => "string|required",
+            "desa" => "string|required",
+            "jalan" => "string|required",
+            "gang" => "string|nullable",
+            "rt" => "numeric|required",
+            "rw" => "numeric|required",
+            "nomor_rumah" => "numeric|required",
+            "kode_pos" => "numeric|required",
+            "pilihan_jurusan" => "numeric|required",
+            "pilihan_jurusan2" => "numeric|nullable",
+            "ukuran_seragam" => "string|required",
+            "tinggi_badan" => "numeric|nullable",
+            "berat_badan" => "numeric|nullable",
+            "penyakit_kronis" => "string|nullable",
+            "prestasi" => "string|nullable",
+            "keahlian" => "string|nullable",
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => "ERROR",
+                'message' => "Data tidak valid",
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            DB::beginTransaction();
+            $pendaftaran = Pendaftaran::where('id', $id)->first();
+            $calonSiswa = CalonSiswa::where('id', $pendaftaran->calon_siswa_id)->first();
+            $akademik = Akademik::where('id', $calonSiswa->akademik_id)->first();
+            $alamat = Alamat::where('id', $calonSiswa->alamat_id)->first();
+
+            $calonSiswa->nik = $req->nik;
+            $calonSiswa->telepon = $req->notlpwa;
+            $calonSiswa->nama_lengkap = $req->nama_lengkap;
+            $calonSiswa->nama_panggilan = $req->nama_panggilan;
+            $calonSiswa->jenis_kelamin = $req->jk;
+            $calonSiswa->tanggal_lahir = $req->taggal_lahir;
+            $calonSiswa->tempat_lahir = $req->tempat_lahir;
+            $calonSiswa->agama = $req->agama;
+            $calonSiswa->anak_ke = $req->anak_ke;
+            $calonSiswa->jml_saudara_kandung = $req->jumlah_saudara;
+            $calonSiswa->jml_saudara_tiri = $req->jumlah_saudara_tiri;
+            $calonSiswa->jml_saudara_sekolah = $req->jumlah_saudara_sekolah;
+            $calonSiswa->jml_saudara_no_sekolah = $req->jumlah_saudara_belum_sekolah;
+            $calonSiswa->berat_badan = $req->berat_badan;
+            $calonSiswa->golongan_darah = $req->golongan_darah;
+            $calonSiswa->ukuran_seragam = $req->ukuran_seragam;
+            $calonSiswa->tinggi_badan = $req->tinggi_badan;
+            $calonSiswa->penyakit_kronis = $req->penyakit_kronis;
+            $calonSiswa->prestasi = $req->prestasi;
+            $calonSiswa->keahlian = $req->keahlian;
+            $calonSiswa->save();
+
+            $alamat->provinsi = $req->provinsi;
+            $alamat->kota = $req->kabupaten;
+            $alamat->kecamatan = $req->kecamatan;
+            $alamat->desa = $req->desa;
+            $alamat->jalan = $req->jalan;
+            $alamat->gang = $req->gang;
+            $alamat->rt = $req->rt;
+            $alamat->rw = $req->rw;
+            $alamat->no_rumah = $req->nomor_rumah;
+            $alamat-> kode_pos = $req->kode_pos;
+            $alamat->save();
+
+            $pendaftaran->jurusan_id1 = $req->pilihan_jurusan;
+            $pendaftaran->jurusan_id2 = $req->pilihan_jurusan2;
+            $pendaftaran->save();
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json([
+                'status' => "ERROR",
+                'message' => "Gagal mengubah data siswa, silahkan coba lagi",
+                'debug' => $th->getMessage()
+            ], 500);
+        }
+
+        return response()->json([
+            'status' => "OK"
+        ]);
+    }
 }

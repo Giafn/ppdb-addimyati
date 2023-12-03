@@ -113,13 +113,13 @@
                     @endif
                 </div>
                 <div>
-                    <input type="text" name="rt" id="rt" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="RT" value="{{ old('rt') }}">
+                    <input type="number" name="rt" id="rt" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="RT" value="{{ old('rt') }}">
                     @if($errors->has('rt'))
                         <div class="text-xs mt-1 text-red-500">{{ $errors->first('rt') }}</div>
                     @endif
                 </div>
                 <div>
-                    <input type="text" name="rw" id="rw" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="RW" value="{{ old('rw') }}">
+                    <input type="number" name="rw" id="rw" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="RW" value="{{ old('rw') }}">
                     @if($errors->has('rw'))
                         <div class="text-xs mt-1 text-red-500">{{ $errors->first('rw') }}</div>
                     @endif
@@ -144,7 +144,7 @@
                     @endif
                 </div>
                 <div>
-                    <input type="text" name="kode_pos" id="kode_pos" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Kode Pos" value="{{ old('kode_pos') }}">
+                    <input type="number" name="kode_pos" id="kode_pos" class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Kode Pos" value="{{ old('kode_pos') }}">
                     @if($errors->has('kode_pos'))
                         <div class="text-xs mt-1 text-red-500">{{ $errors->first('kode_pos') }}</div>
                     @endif
