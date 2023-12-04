@@ -228,20 +228,31 @@ class ListPendaftarController extends Controller
     public function delete($id)
     {
         try {
+            DB::beginTransaction();
             $pendaftaran = Pendaftaran::findOrFail($id);
-            $calonSiswa = null;
-            if ($pendaftaran) {
-                $calonSiswa = CalonSiswa::findOrFail($pendaftaran->calon_siswa_id);
-            }
-            if ($calonSiswa) {
-                $akademik = Akademik::findOrFail($calonSiswa->akademik_id);
-                $user = User::findOrFail($calonSiswa->user_id);
-                $calonSiswa->delete();
-                $akademik->delete();
-                $user->delete();
+            $calonSiswa = CalonSiswa::where('id', $pendaftaran->calon_siswa_id)->first();
+            $akademik = Akademik::where('id', $calonSiswa->akademik_id)->first();
+            $orangTua = OrangTua::where('calon_siswa_id', $calonSiswa->id)->get();
+            $alamat = Alamat::where('id', $calonSiswa->alamat_id)->first();
+            $wali = OrangTua::where('calon_siswa_id', $calonSiswa->id)->where('jenis', 'wali')->first();
+            
+            if ($wali) {
+                $alamatWali = Alamat::where('id', $wali->alamat_id)->first();
+                $alamatWali->delete();
             }
             $pendaftaran->delete();
+            $calonSiswa->delete();
+            $akademik->delete();
+            foreach ($orangTua as $key => $value) {
+                $value->delete();
+            }
+            $alamat->delete();
+            
+
+            DB::commit();
         } catch (\Throwable $th) {
+            DB::rollback();
+            dd($th->getMessage());
             return response()->json([
                 'message' => "Data tidak ditemukan"
             ], 404);
