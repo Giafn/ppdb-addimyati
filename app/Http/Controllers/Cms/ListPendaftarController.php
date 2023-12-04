@@ -356,4 +356,173 @@ class ListPendaftarController extends Controller
             'status' => "OK"
         ]);
     }
+
+    public function updateAkademik(Request $req, $id)
+    {
+        $validator = Validator::make($req->all(), [
+            "nisn" => "numeric|required",
+            "asal_sekolah" => "string|required",
+            "nomor_seri_sttb" => "string|required|min:10",
+            "tahun_sttb" => "numeric|required|min:4",
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => "ERROR",
+                'message' => "Data tidak valid",
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            DB::beginTransaction();
+            $akademik = Akademik::where('id', $id)->first();
+            $akademik->nisn= $req->nisn;
+            $akademik->asal_sekolah = $req->asal_sekolah;
+            $akademik->nomor_seri_sttb = $req->nomor_seri_sttb;
+            $akademik->tahun_sttb = $req->tahun_sttb;
+            $akademik->save();
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json([
+                'status' => "ERROR",
+                'message' => "Gagal mengubah data siswa, silahkan coba lagi",
+                'debug' => $th->getMessage()
+            ], 500);
+        }
+
+        return response()->json([
+            'status' => "OK"
+        ]);
+    }
+
+    public function updateOrangTua(Request $req, $id)
+    {
+        $validator = Validator::make($req->all(), [
+            "nama_ayah" => "string|required",
+            "pekerjaan_ayah" => "string|required",
+            "pendidikan_ayah" => "string|required",
+            "nama_ibu" => "string|required",
+            "pekerjaan_ibu" => "string|required",
+            "pendidikan_ibu" => "string|required",
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => "ERROR",
+                'message' => "Data tidak valid",
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            DB::beginTransaction();
+            $calonSiswa = CalonSiswa::where('id', $id)->first();
+            $ayah = OrangTua::where('calon_siswa_id', $calonSiswa->id)->where('jenis', 'ayah')->first();
+            $ibu = OrangTua::where('calon_siswa_id', $calonSiswa->id)->where('jenis', 'ibu')->first();
+
+            $ayah->nama_lengkap = $req->nama_ayah;
+            $ayah->pekerjaan = $req->pekerjaan_ayah;
+            $ayah->pendidikan_terakhir = $req->pendidikan_ayah;
+            $ayah->save();
+
+            $ibu->nama_lengkap = $req->nama_ibu;
+            $ibu->pekerjaan = $req->pekerjaan_ibu;
+            $ibu->pendidikan_terakhir = $req->pendidikan_ibu;
+            $ibu->save();
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json([
+                'status' => "ERROR",
+                'message' => "Gagal mengubah data Orang Tua, silahkan coba lagi",
+                'debug' => $th->getMessage()
+            ], 500);
+        }
+
+        return response()->json([
+            'status' => "OK"
+        ]);
+
+    }
+
+    public function updateWali(Request $req, $id)
+    {
+        $validator = Validator::make($req->all(), [
+            "nama_wali" => "string|required",
+            "pekerjaan_wali" => "string|required",
+            "pendidikan_wali" => "string|required",
+            "tanggungan_wali" => "numeric|required",
+            "agama_wali" => "string|required",
+            "provinsi_wali" => "string|required",
+            "kabupaten_wali" => "string|required",
+            "kecamatan_wali" => "string|required",
+            "desa_wali" => "string|required",
+            "jalan_wali" => "string|required",
+            "gang_wali" => "string|nullable",
+            "rt_wali" => "numeric|required",
+            "rw_wali" => "numeric|required",
+            "nomor_rumah_wali" => "numeric|required",
+            "kode_pos_wali" => "numeric|required",
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => "ERROR",
+                'message' => "Data tidak valid",
+                'errors' => $validator->errors()
+            ], 422);
+        }
+        try {
+            $wali = OrangTua::where('calon_siswa_id', $id)
+                ->where('jenis', 'wali')
+                ->first();
+
+            if ($wali) {
+                $alamat = Alamat::where('id', $wali->alamat_id)->first();
+            } else {
+                $alamat = new Alamat();
+            }
+            $alamat->provinsi = $req->provinsi_wali;
+            $alamat->kota = $req->kabupaten_wali;
+            $alamat->kecamatan = $req->kecamatan_wali;
+            $alamat->desa = $req->desa_wali;
+            $alamat->jalan = $req->jalan_wali;
+            $alamat->gang = $req->gang_wali;
+            $alamat->rt = $req->rt_wali;
+            $alamat->rw = $req->rw_wali;
+            $alamat->no_rumah = $req->nomor_rumah_wali;
+            $alamat-> kode_pos = $req->kode_pos_wali;
+            $alamat->save();
+            
+            if (!$wali) {
+                $wali = new OrangTua();
+                $wali->calon_siswa_id = $id;
+                $wali->jenis = "wali";
+            }
+
+            $wali->nama_lengkap = $req->nama_wali;
+            $wali->pekerjaan = $req->pekerjaan_wali;
+            $wali->pendidikan_terakhir = $req->pendidikan_wali;
+            $wali->alamat_id = $alamat->id;
+            $wali->tanggungan = $req->tanggungan_wali;
+            $wali->agama = $req->agama_wali;
+            $wali->save(); 
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+            return response()->json([
+                'status' => "ERROR",
+                'message' => "Gagal mengubah data Wali, silahkan coba lagi",
+                'debug' => $th->getMessage()
+            ], 500);
+        }
+
+        return response()->json([
+            'status' => "OK"
+        ]);
+    }
+
 }
