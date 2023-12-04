@@ -94,6 +94,9 @@ Route::middleware('auth')->group(function () {
             Route::put('/{id}', [ListPendaftarController::class, 'update']);
             Route::delete('/{id}', [ListPendaftarController::class, 'delete']);
             Route::patch('/update/profile/{id}', [ListPendaftarController::class, 'updateProfile']);
+            Route::patch('/update/akademik/{id}', [ListPendaftarController::class, 'updateAkademik']);
+            Route::patch('/update/ortu/{id}', [ListPendaftarController::class, 'updateOrangTua']);
+            Route::patch('/update/wali/{id}', [ListPendaftarController::class, 'updateWali']);
         });
     });
 

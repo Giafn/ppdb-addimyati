@@ -384,6 +384,8 @@
                     </div>
                     <div class="col-span-2">
                         <input type="hidden" id="infoId">
+                        <input type="hidden" id="infoAkademikId">
+                        <input type="hidden" id="infoSiswaId">
                         <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <h3 class="mb-4 text-xl font-semibold dark:text-white">Informasi Pribadi</h3>
                             <form id="formPribadi">
@@ -551,14 +553,14 @@
                                     <div class="col-span-6 sm:col-full">
                                         <a onclick="updatePribadi()" class="hover:cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">
                                             Save all
-</a>
+                                        </a>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <h3 class="mb-4 text-xl font-semibold dark:text-white">Informasi Akademik</h3>
-                            <form action="#">
+                            <form id="formAkademik">
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="nisn" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NISN</label>
@@ -577,16 +579,16 @@
                                         <input type="number" name="tahun_sttb" id="tahunSttb" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tahun STTB" required>
                                     </div>
                                     <div class="col-span-6 sm:col-full">
-                                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">
+                                        <a class="hover:cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="updateAkademik()">
                                             Save all
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <h3 class="mb-4 text-xl font-semibold dark:text-white">Informasi Orang Tua</h3>
-                            <form action="#">
+                            <form id="formOrtu">
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 sm:col-span-6">
                                         <label for="namaAyah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Ayah</label>
@@ -627,16 +629,16 @@
                                         </select>
                                     </div>
                                     <div class="col-span-6 sm:col-full">
-                                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">
+                                        <a class="hover:cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="updateOrangTua()">
                                             Save all
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <h3 class="mb-4 text-xl font-semibold dark:text-white">Informasi Wali</h3>
-                            <form action="#">
+                            <form id="formWali">
                                 <div class="grid grid-cols-6 gap-4">
                                     <div class="col-span-6 sm:col-span-6">
                                         <label for="namaWali" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Wali</label>
@@ -656,6 +658,14 @@
                                             <option value="s2">S2</option>
                                             <option value="s3">S3</option>
                                         </select>
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-2">
+                                        <label for="tanggunganWali" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggungan Wali</label>
+                                        <input type="number" name="tanggungan_wali" id="tanggunganWali" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="tanggungan wali">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-2">
+                                        <label for="agamaWali" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Agama Wali</label>
+                                        <input type="text" name="agama_wali" id="agamaWali" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                                     </div>
                                     <label class="block text-sm font-bold text-gray-900 dark:text-white col-span-6">
                                         <hr class="mb-3">
@@ -702,9 +712,9 @@
                                         <input type="number" name="kode_pos_wali" id="alamatWaliKodePos" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full block p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </div>
                                     <div class="col-span-6 sm:col-full">
-                                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">
+                                        <a class="hover:cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="updateWali()">
                                             Save all
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </form>
@@ -867,6 +877,8 @@
 
         // id
         $("#infoId").val(data.pendaftaran.id);
+        $("#infoAkademikId").val(data.akademik.id);
+        $("#infoSiswaId").val(data.calonSiswa.id);
 
         // informasi Pribadi
         $("#siswaNamaLengkap").val(data.calonSiswa.nama_lengkap);
@@ -925,6 +937,8 @@
             $("#namaWali").val(data.orangTuaWali.wali.nama_lengkap);
             $("#pekerjaanWali").val(data.orangTuaWali.wali.pekerjaan);
             $("#pendidikanWali").val(data.orangTuaWali.wali.pendidikan_terakhir);
+            $("#tanggunganWali").val(data.orangTuaWali.wali.tanggungan);
+            $("#agamaWali").val(data.orangTuaWali.wali.agama);
             
             $("#alamatWaliProvinsi").val(data.orangTuaWali.wali.provinsi);
             $("#alamatWaliKabupaten").val(data.orangTuaWali.wali.kota);
@@ -1026,6 +1040,120 @@
                     }
 
                     // alert(alertMessage)
+                } else {
+                    alert("Unknown Error")
+                }
+            });
+        loading(false)
+    }
+
+    function updateAkademik() {
+        var form = document.forms["formAkademik"];
+
+        var formData = new FormData(form);
+        // id 
+        var id = $("#infoAkademikId").val();
+        var formDataObj = new Object;
+        formData.forEach((value, key) => (formDataObj[key] = value));
+        console.log(formDataObj);
+
+        loading(true)
+        axios({
+                method: 'PATCH',
+                url: '/cms/list-pendaftar/update/akademik/' + id,
+                data: formDataObj
+            })
+            .then(function(response) {
+                if (response.data.status == "OK") {
+                    gtoast.showToast('Berhasil update data', 'success', 5000);
+                }
+            })
+            .catch(function(error) {
+                loading(false)
+                if (error.response) {
+                    let message = error.response.data.message;
+                    let errors = error.response.data.errors;
+                    let alertMessage = message;
+
+                    for (var key in errors) {
+                        gtoast.showToast(errors[key], 'error', 10000);
+                    }
+                } else {
+                    alert("Unknown Error")
+                }
+            });
+        loading(false)
+    }
+
+    function updateOrangTua() {
+        var form = document.forms["formOrtu"];
+
+        var formData = new FormData(form);
+        // id 
+        var id = $("#infoSiswaId").val();
+        var formDataObj = new Object;
+        formData.forEach((value, key) => (formDataObj[key] = value));
+        console.log(formDataObj);
+
+        loading(true)
+        axios({
+                method: 'PATCH',
+                url: '/cms/list-pendaftar/update/ortu/' + id,
+                data: formDataObj
+            })
+            .then(function(response) {
+                if (response.data.status == "OK") {
+                    gtoast.showToast('Berhasil update data', 'success', 5000);
+                }
+            })
+            .catch(function(error) {
+                loading(false)
+                if (error.response) {
+                    let message = error.response.data.message;
+                    let errors = error.response.data.errors;
+                    let alertMessage = message;
+
+                    for (var key in errors) {
+                        gtoast.showToast(errors[key], 'error', 10000);
+                    }
+                } else {
+                    alert("Unknown Error")
+                }
+            });
+        loading(false)
+    }
+
+    function updateWali() {
+        var form = document.forms["formWali"];
+
+        var formData = new FormData(form);
+        // id 
+        var id = $("#infoSiswaId").val();
+        var formDataObj = new Object;
+        formData.forEach((value, key) => (formDataObj[key] = value));
+        console.log(formDataObj);
+
+        loading(true)
+        axios({
+                method: 'PATCH',
+                url: '/cms/list-pendaftar/update/wali/' + id,
+                data: formDataObj
+            })
+            .then(function(response) {
+                if (response.data.status == "OK") {
+                    gtoast.showToast('Berhasil update data', 'success', 5000);
+                }
+            })
+            .catch(function(error) {
+                loading(false)
+                if (error.response) {
+                    let message = error.response.data.message;
+                    let errors = error.response.data.errors;
+                    let alertMessage = message;
+
+                    for (var key in errors) {
+                        gtoast.showToast(errors[key], 'error', 10000);
+                    }
                 } else {
                     alert("Unknown Error")
                 }
