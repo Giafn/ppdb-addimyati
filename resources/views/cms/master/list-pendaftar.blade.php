@@ -840,6 +840,7 @@
     }
 
     function show(id) {
+        resetForm();
         loading(true);
         // toggleModal('showModal');
         // loading(false)
@@ -856,6 +857,22 @@
                     loading(false)
                 }
             });
+    }
+
+    function resetForm() {
+        // set value '' for all input
+        $("#formPribadi input").val('');
+        $("#formPribadi select").val('');
+        $("#formPribadi textarea").val('');
+        $("#formAkademik input").val('');
+        $("#formAkademik select").val('');
+        $("#formAkademik textarea").val('');
+        $("#formOrtu input").val('');
+        $("#formOrtu select").val('');
+        $("#formOrtu textarea").val('');
+        $("#formWali input").val('');
+        $("#formWali select").val('');
+        $("#formWali textarea").val('');
     }
 
     function filldataShow(data) {
