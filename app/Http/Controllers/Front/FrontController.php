@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Cms\master\PpdbSettingController;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendNotifEmailJob;
 use App\Models\Akademik;
 use App\Models\Alamat;
 use App\Models\CalonSiswa;
@@ -197,10 +198,13 @@ class FrontController extends Controller
         }
 
         try {
+            DB::beginTransaction();
             $subEmail = new SubsEmail();
             $subEmail->email = $request->email;
             $subEmail->save();
+            DB::commit();
         } catch (\Throwable $th) {
+            DB::rollBack();
             return response()->json([
                 'status' => 'error',
                 'message' => $th->getMessage()
