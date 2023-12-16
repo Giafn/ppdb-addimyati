@@ -69,7 +69,7 @@
                     <input type="text" name="search" id="search" value="{{ app('request')->input('search') }}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari berdasarkan nama, nisn, dan email">
                 </div>
             </div>
-            <div class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700 me-2">
+            <!-- <div class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700 me-2">
                 <label for="status_data" class="sr-only">Status Data</label>
                 <div class="relative mt-1 lg:w-64 xl:w-96">
                     <select name="status_data" id="status_data" class="block w-full py-2.5 px-5 pr-10 text-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -79,12 +79,12 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
+            </div> -->
             <div class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700 me-2">
                 <label for="status_pembayaran" class="sr-only">Status Pembayaran</label>
                 <div class="relative mt-1 lg:w-64 xl:w-96">
                     <select name="status_pembayaran" id="status_pembayaran" class="block w-full py-2.5 px-5 pr-10 text-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value="">Pilih Status Pembayaran</option>
+                        <option value="" selected>Pilih Status Pembayaran</option>
                         @foreach($fillSelectFilter['status_pembayaran'] as $key => $status_pembayaran)
                         <option value="{{ $key }}" {{ $key == request()->input('status_pembayaran') ? 'selected' : '' }}>{{ $status_pembayaran['text'] }}</option>
                         @endforeach
@@ -133,9 +133,9 @@
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 Nama Siswa
                             </th>
-                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                            <!-- <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 Status data
-                            </th>
+                            </th> -->
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 Status Pembayaran
                             </th>
@@ -166,11 +166,11 @@
                             <td class="p-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-900 dark:text-white">{{ $data->nama_siswa }}</div>
                             </td>
-                            <td class="p-4 whitespace-nowrap">
+                            <!-- <td class="p-4 whitespace-nowrap">
                                 <span class="text-sm text-gray-900 dark:text-white">
                                     {{ $listStatusData[$data->status_pendaftaran]['text'] }}
                                 </span>
-                            </td>
+                            </td> -->
                             <td class="p-4 whitespace-nowrap">
                                 <span class="text-sm text-gray-900 dark:text-white">
                                     {{ $listStatusPembayaran[$data->status_pembayaran]['text'] }}
@@ -262,10 +262,6 @@
                         <div class="mb-4">
                             <label for="namaSiswa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Siswa <span class="text-red-500">*</span></label>
                             <input type="text" name="nama" id="namaSiswa" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Siswa" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="Email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email <span class="text-red-500">*</span></label>
-                            <input type="email" name="email" id="Email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" required>
                         </div>
                     </div>
                 </form>
@@ -844,6 +840,7 @@
     }
 
     function show(id) {
+        resetForm();
         loading(true);
         // toggleModal('showModal');
         // loading(false)
@@ -862,8 +859,24 @@
             });
     }
 
+    function resetForm() {
+        // set value '' for all input
+        $("#formPribadi input").val('');
+        $("#formPribadi select").val('');
+        $("#formPribadi textarea").val('');
+        $("#formAkademik input").val('');
+        $("#formAkademik select").val('');
+        $("#formAkademik textarea").val('');
+        $("#formOrtu input").val('');
+        $("#formOrtu select").val('');
+        $("#formOrtu textarea").val('');
+        $("#formWali input").val('');
+        $("#formWali select").val('');
+        $("#formWali textarea").val('');
+    }
+
     function filldataShow(data) {
-        // informasi Pendafataran
+        $(".validation-error").remove();
         $("#infoKodePPDB").html(data.pendaftaran.kode);
         $("#infoStatusPembayaran").html(data.pendaftaran.status_pembayaran == 2 ? "Lunas" : (data.pendaftaran.status_pembayaran == 1 ? "Belum Lunas" : "Belum Bayar"));
         $("#infoNoTlp").html(data.calonSiswa.telepon);
@@ -1014,7 +1027,6 @@
         var id = $("#infoId").val();
         var formDataObj = new Object;
         formData.forEach((value, key) => (formDataObj[key] = value));
-        console.log(formDataObj);
 
         loading(true)
         axios({
@@ -1030,16 +1042,19 @@
             .catch(function(error) {
                 loading(false)
                 if (error.response) {
-                    let message = error.response.data.message;
+                    gtoast.showToast('Gagal update data', 'error', 5000);
+                    $("#formPribadi").find(".validation-error").remove();
                     let errors = error.response.data.errors;
-                    let alertMessage = message;
 
+                    var elementForm ="";
                     for (var key in errors) {
-                        alertMessage = alertMessage + "\n- " + errors[key]
-                        gtoast.showToast(errors[key], 'error', 10000);
+                        elementForm = $("#formPribadi").find("[name='" + key + "']");
+                        if (!elementForm.parent().find(".validation-error").length) {
+                            elementForm.after('<span class="validation-error text-red-500 text-sm mt-1">'+errors[key]+'</span>');
+                        } else {
+                            elementForm.parent().find(".validation-error").html(errors[key]);
+                        }
                     }
-
-                    // alert(alertMessage)
                 } else {
                     alert("Unknown Error")
                 }
@@ -1065,18 +1080,24 @@
             })
             .then(function(response) {
                 if (response.data.status == "OK") {
+                    $("#formAkademik").find(".validation-error").remove();
                     gtoast.showToast('Berhasil update data', 'success', 5000);
                 }
             })
             .catch(function(error) {
                 loading(false)
                 if (error.response) {
-                    let message = error.response.data.message;
+                    gtoast.showToast('Gagal update data', 'error', 5000);
                     let errors = error.response.data.errors;
-                    let alertMessage = message;
 
+                    var elementForm ="";
                     for (var key in errors) {
-                        gtoast.showToast(errors[key], 'error', 10000);
+                        elementForm = $("#formAkademik").find("[name='" + key + "']");
+                        if (!elementForm.parent().find(".validation-error").length) {
+                            elementForm.after('<span class="validation-error text-red-500 text-sm mt-1">'+errors[key]+'</span>');
+                        } else {
+                            elementForm.parent().find(".validation-error").html(errors[key]);
+                        }
                     }
                 } else {
                     alert("Unknown Error")
@@ -1103,18 +1124,24 @@
             })
             .then(function(response) {
                 if (response.data.status == "OK") {
+                    $("#formOrtu").find(".validation-error").remove();
                     gtoast.showToast('Berhasil update data', 'success', 5000);
                 }
             })
             .catch(function(error) {
                 loading(false)
                 if (error.response) {
-                    let message = error.response.data.message;
+                    gtoast.showToast('Gagal update data', 'error', 5000);
                     let errors = error.response.data.errors;
-                    let alertMessage = message;
 
+                    var elementForm ="";
                     for (var key in errors) {
-                        gtoast.showToast(errors[key], 'error', 10000);
+                        elementForm = $("#formOrtu").find("[name='" + key + "']");
+                        if (!elementForm.parent().find(".validation-error").length) {
+                            elementForm.after('<span class="validation-error text-red-500 text-sm mt-1">'+errors[key]+'</span>');
+                        } else {
+                            elementForm.parent().find(".validation-error").html(errors[key]);
+                        }
                     }
                 } else {
                     alert("Unknown Error")
@@ -1141,18 +1168,24 @@
             })
             .then(function(response) {
                 if (response.data.status == "OK") {
+                    $("#formWali").find(".validation-error").remove();
                     gtoast.showToast('Berhasil update data', 'success', 5000);
                 }
             })
             .catch(function(error) {
                 loading(false)
                 if (error.response) {
-                    let message = error.response.data.message;
+                    gtoast.showToast('Gagal update data', 'error', 5000);
                     let errors = error.response.data.errors;
-                    let alertMessage = message;
-
+                    
+                    var elementForm ="";
                     for (var key in errors) {
-                        gtoast.showToast(errors[key], 'error', 10000);
+                        elementForm = $("#formWali").find("[name='" + key + "']");
+                        if (!elementForm.parent().find(".validation-error").length) {
+                            elementForm.after('<span class="validation-error text-red-500 text-sm mt-1">'+errors[key]+'</span>');
+                        } else {
+                            elementForm.parent().find(".validation-error").html(errors[key]);
+                        }
                     }
                 } else {
                     alert("Unknown Error")

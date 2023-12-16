@@ -5,9 +5,10 @@ use App\Http\Controllers\Cms\master\PpdbSettingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cms\UserController;
 use App\Http\Controllers\Cms\UserLevelController;
-use App\Http\Controllers\FrontController;
+use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Cms\master\NominalAdministrasiController;
 use App\Http\Controllers\Cms\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Cms\master\JurusanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,9 @@ Route::middleware('auth')->group(function () {
 // user view
 Route::get('/ppdb', [FrontController::class, 'informasi'])->name('ppdb');
 Route::get('/ppdb/pendaftaran', [FrontController::class, 'pendaftaran']);
+Route::get('/ppdb/flow-daftar', [FrontController::class, 'flowDaftar']);
 Route::post('/ppdb/pendaftaran', [FrontController::class, 'storePendaftaran']);
+Route::post('/ppdb/pendaftaran/sub-email', [FrontController::class, 'subEmail']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/cms/dashboard', function () {
@@ -83,6 +86,11 @@ Route::middleware('auth')->group(function () {
                 Route::get('/administrasi/{id}', [NominalAdministrasiController::class, 'detail']);
                 Route::put('/administrasi/{id}', [NominalAdministrasiController::class, 'update']);
                 Route::delete('/administrasi/{id}', [NominalAdministrasiController::class, 'delete']);
+
+                Route::get('/program-studi', [JurusanController::class, 'index'])->name('cmsProgramStudi');
+                Route::post('/program-studi', [JurusanController::class, 'storeOrUpdate']);
+                Route::get('/program-studi/{id}', [JurusanController::class, 'detail']);
+                Route::delete('/program-studi/{id}', [JurusanController::class, 'delete']);
             });
         });
 

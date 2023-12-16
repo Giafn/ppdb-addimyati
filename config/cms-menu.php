@@ -64,25 +64,25 @@ return [
 					'task' => []
 				]
 			],
+			// [
+			// 	'code'		 => "nominalAdministrasi",
+			// 	'name'		 => "Nominal Administrasi",
+			// 	'label'		 => "nominalAdministrasi",
+			// 	'icon'		 => "",
+			// 	'route_name' => "cmsNominalAdministrasi",
+			// 	'module' 	 => [
+			// 		'code' => 'nominalAdministrasi',
+			// 		'task' => []
+			// 	]
+			// ],
 			[
-				'code'		 => "nominalAdministrasi",
-				'name'		 => "Nominal Administrasi",
-				'label'		 => "nominalAdministrasi",
+				'code'		 => "programStudi",
+				'name'		 => "Program Studi",
+				'label'		 => "programStudi",
 				'icon'		 => "",
-				'route_name' => "cmsNominalAdministrasi",
+				'route_name' => "cmsProgramStudi",
 				'module' 	 => [
-					'code' => 'nominalAdministrasi',
-					'task' => []
-				]
-			],
-			[
-				'code'		 => "jurusan",
-				'name'		 => "Jurusan",
-				'label'		 => "jurusan",
-				'icon'		 => "",
-				'route_name' => "cmsJurusan",
-				'module' 	 => [
-					'code' => 'jurusan',
+					'code' => 'programStudi',
 					'task' => []
 				]
 			],

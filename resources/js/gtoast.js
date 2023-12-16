@@ -1,6 +1,6 @@
 
 window.gtoast = {
-    showToast: function(message, type, timeout) {
+    showToast: function(message, type, timeout, idToast = 'toast-container', maxToast = 5) {
         var color = '';
         var icon = '';
         if (typeof timeout === 'undefined') {
@@ -44,7 +44,7 @@ window.gtoast = {
 
         var randomId = Math.floor(Math.random() * 1000000000);
 
-        var toastHTML = `<div id="${randomId}" class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+        var toastHTML = `<div id="${randomId}" class="shadow-lg flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg dark:text-gray-400 dark:bg-gray-800" role="alert">
                 <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg ${color} sm:w-10 sm:h-10">
                     ${icon}
                 </div>
@@ -57,8 +57,15 @@ window.gtoast = {
                 </button>
             </div>`;
 
-        $('#toast-container').append(toastHTML);
+        let toast = $('#'+idToast);
+        if (toast.length == 0) {
+            $('body').prepend('<div id="'+idToast+'" class="fixed top-5 right-5 z-100"></div>');
+        }
         $('#' + randomId).css('z-index', 999999999);
+        if (toast.children().length >= maxToast) {
+            toast.children().last().remove();
+        }
+        $('#' + idToast).prepend(toastHTML);
 
         setTimeout(function () {
             $('#' + randomId).remove();

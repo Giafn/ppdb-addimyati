@@ -683,7 +683,7 @@
     </div>
 </div>
 @endsection
-@section('script')
+@push('script')
 <script src="/js/nik_parse.min.js"></script>
 <script>
     // document ready
@@ -787,4 +787,4 @@
         }
     }
 </script>
-@endsection
+@endpush

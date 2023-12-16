@@ -1,5 +1,5 @@
 @extends('cms.layouts.dashboard-admin')
-@section('title', 'PPDB Setting | ')
+@section('title', 'Program Studi | ')
 @section('content')
 <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
     <div class="w-full mb-1">
@@ -32,14 +32,14 @@
                     </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Pembukaan dan Penutupan Penerimaan Peserta Didik Baru</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">List Program Studi</h1>
         </div>
         <div class="sm:flex">
             <div class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
                 <form class="lg:pr-3" action="#" method="GET">
                     <label for="search" class="sr-only">Search</label>
                     <div class="relative mt-1 lg:w-64 xl:w-96">
-                        <input type="text" name="search" id="search" value="{{ app('request')->input('search') }}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari berdasarkan tahun ajaran">
+                        <input type="text" name="search" id="search" value="{{ app('request')->input('search') }}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari Jurusan">
                     </div>
                 </form>
             </div>
@@ -68,19 +68,10 @@
                                 </div>
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Tahun Ajaran
+                                Nama
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Gelombang
-                            </th>
-                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Tangal Dibuka
-                            </th>
-                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Tangal Ditutup
-                            </th>
-                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                status
+                                Deskripsi
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 Actions
@@ -98,31 +89,10 @@
                                 </div>
                             </td>
                             <td class="p-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900 dark:text-white">{{ $data->tahun_ajaran }}</div>
+                                <div class="text-sm text-gray-900 dark:text-white">{{ $data->nama }}</div>
                             </td>
                             <td class="p-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900 dark:text-white">{{ $data->gelombang }}</div>
-                            </td>
-                            <td class="p-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900 dark:text-white">{{ date('d F Y', strtotime($data->start_date)) }}</div>
-                            </td>
-                            <td class="p-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900 dark:text-white">{{ date('d F Y', strtotime($data->end_date)) }}</div>
-                            </td>
-                            <td class="p-4 space-x-2 whitespace-nowrap">
-                                @if($data->status_waktu == "open")
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100">
-                                    Telah Dibuka
-                                </span>
-                                @elseif($data->status_waktu == "close")
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100">
-                                    @if ($data->end_date < date('Y-m-d'))
-                                    Ditutup
-                                    @else
-                                    Belum Dibuka
-                                    @endif
-                                </span>
-                                @endif
+                                <div class="text-sm text-gray-900 dark:text-white">{{ $data->deskripsi }}</div>
                             </td>
                             <td class="p-4 space-x-2 whitespace-nowrap">
                                 <div>
@@ -145,7 +115,7 @@
                         @endforeach
                         @else
                         <tr class="">
-                            <td class="p-4 text-center text-gray-900 whitespace-nowrap dark:text-white" colspan="7">No Data</td>
+                            <td class="p-4 text-center text-gray-900 whitespace-nowrap dark:text-white" colspan="3">No Data</td>
                         </tr>
                         @endif
                     </tbody>
@@ -189,7 +159,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">
-                    Tambah PPDB
+                    Tambah Program Studi
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-mana-modal-toggle="tambahModal">
                     @includeif('components.icons.close')
@@ -199,37 +169,13 @@
                 <form id="formAdd">
                     <div class="">
                         {{ csrf_field() }}
-                        {{-- tahun ajaran --}}
                         <div class="mb-4">
-                            <label for="tahunAjaran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tahun Ajaran <span class="text-red-500">*</span></label>
-                            <input type="text" name="tahunAjaran" id="tahunAjaran" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tahun Ajaran (format 2020/2021)" required>
-                        </div>
-                        {{-- gelombang --}}
-                        <div class="mb-4">
-                            <label for="gelombang" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gelombang <span class="text-red-500">*</span></label>
-                            <input type="number" name="gelombang" id="gelombang" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Gelombang" required>
+                            <label for="namaAdd" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Jurusan <span class="text-red-500">*</span></label>
+                            <input type="text" name="nama" id="namaAdd" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Jurusan" required>
                         </div>
                         <div class="mb-4">
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Periode <span class="text-red-500">*</span></label>
-                            <div class="flex items-center">
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                                        </svg>
-                                    </div>
-                                    <input name="start_date" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tanggal Dibuka" value="" autocomplete="off" onfocus="this.showPicker()">
-                                </div>
-                                <span class="mx-4 text-gray-500">Sampai</span>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                                        </svg>
-                                    </div>
-                                    <input name="end_date" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tanggal Ditutup" value="" autocomplete="off" onfocus="this.showPicker()">
-                                </div>
-                            </div>
+                            <label for="deskripsiAdd" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gelombang <span class="text-red-500">*</span></label>
+                            <input type="text" name="deskripsi" id="deskripsiAdd" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Deskripsi" required>
                         </div>
                     </div>
                 </form>
@@ -250,7 +196,7 @@
             <!-- Modal header -->
             <div class="modal-header">
                 <h3 class="modal-title">
-                    Edit PPDB
+                    Edit Program Studi
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-mana-modal-toggle="editModal">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -264,37 +210,13 @@
                     <div class="">
                         {{ csrf_field() }}
                         <input type="hidden" name="id" id="editId">
-                        {{-- tahun ajaran --}}
                         <div class="mb-4">
-                            <label for="editTahunAjaran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tahun Ajaran <span class="text-red-500">*</span></label>
-                            <input type="text" name="tahunAjaran" id="editTahunAjaran" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tahun Ajaran (format 2020/2021)" required>
-                        </div>
-                        {{-- gelombang --}}
-                        <div class="mb-4">
-                            <label for="editGelombang" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gelombang <span class="text-red-500">*</span></label>
-                            <input type="number" name="gelombang" id="editGelombang" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Gelombang" required>
+                            <label for="namaEdit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Jurusan <span class="text-red-500">*</span></label>
+                            <input type="text" name="nama" id="editNama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Jurusan" required>
                         </div>
                         <div class="mb-4">
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Periode <span class="text-red-500">*</span></label>
-                            <div class="flex items-center" id="rangePickerEdit">
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                                        </svg>
-                                    </div>
-                                    <input id="editStartDate" name="start_date" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tanggal Dibuka" value="" autocomplete="off" onfocus="this.showPicker()">
-                                </div>
-                                <span class="mx-4 text-gray-500">Sampai</span>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                                        </svg>
-                                    </div>
-                                    <input id="editEndDate" name="end_date" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tanggal Ditutup" value="" autocomplete="off" onfocus="this.showPicker()">
-                                </div>
-                            </div>
+                            <label for="deskripsiEdit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi <span class="text-red-500">*</span></label>
+                            <input type="text" name="deskripsi" id="editDeskripsi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Deskripsi" required>
                         </div>
                     </div>
                 </form>
@@ -324,7 +246,7 @@
                 <svg class="w-16 h-16 mx-auto text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                <h3 class="mt-5 mb-6 text-lg text-gray-500 dark:text-gray-400">Apakah Anda yakin ingin menghapus data ini? Semua data PPDB yang berkaitan Akan di hapus</h3>
+                <h3 class="mt-5 mb-6 text-lg text-gray-500 dark:text-gray-400">Apakah Anda yakin ingin menghapus data ini?</h3>
                 <button type="button" id="buttonDelete" data-id="" onclick="deleteAction()" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 dark:focus:ring-red-800">
                     Ya, Hapus
                 </button>
@@ -348,7 +270,7 @@
         loading(true)
         axios({
                 method: 'post',
-                url: '/cms/master/ppdb/setting',
+                url: '/cms/master/ppdb/program-studi',
                 data: formDataObj
             })
             .then(function(response) {
@@ -379,15 +301,13 @@
 
         axios({
                 method: 'get',
-                url: '/cms/master/ppdb/setting/' + id,
+                url: '/cms/master/ppdb/program-studi/' + id,
             })
             .then(function(response) {
                 if (response.data.status == "OK") {
                     document.getElementById("editId").value = response.data.results.id;
-                    document.getElementById("editTahunAjaran").value = response.data.results.tahun_ajaran;
-                    document.getElementById("editGelombang").value = response.data.results.gelombang;
-                    document.getElementById("editStartDate").value = response.data.results.start_date;
-                    document.getElementById("editEndDate").value = response.data.results.end_date;
+                    document.getElementById("editNama").value = response.data.results.nama;
+                    document.getElementById("editDeskripsi").value = response.data.results.deskripsi;
                     toggleModal('editModal');
 
                     loading(false)
@@ -404,8 +324,8 @@
 
         loading(true)
         axios({
-                method: 'put',
-                url: '/cms/master/ppdb/setting/' + formData.get('id'),
+                method: 'post',
+                url: '/cms/master/ppdb/program-studi',
                 data: formDataObj
             })
             .then(function(response) {
@@ -445,7 +365,7 @@
         loading(true)
         axios({
                 method: 'delete',
-                url: '/cms/master/ppdb/setting/' + id,
+                url: '/cms/master/ppdb/program-studi/' + id,
                 data: {
                     _token: "{{ csrf_token() }}"
                 }

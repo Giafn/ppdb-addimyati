@@ -130,8 +130,7 @@ class ListPendaftarController extends Controller
     {
         $request->validate([
             'nisn'       => 'required|numeric|unique:akademik,nisn',
-            'nama'       => 'required',
-            'email'      => 'required|email|unique:users,email'
+            'nama'       => 'required|string',
         ]);
         $ppdbActive = PpdbSettingController::getPPDBInfo()["ppdbOpen"];
         if (!$ppdbActive) {
@@ -141,30 +140,44 @@ class ListPendaftarController extends Controller
         }
         try {
             DB::beginTransaction();
-            $user = new User();
-            $user->name = $request->nama;
-            $user->email = $request->email;
-            $user->password = bcrypt($request->nisn);
-            $user->user_level_id = 5;
-            $user->flag_active = 0;
-            $user->save();
-
-            $idUser = $user->id;
 
             $akademik = new Akademik();
             $akademik->nisn = $request->nisn;
+            $akademik->asal_sekolah = "-";
             $akademik->save();
 
+            $alamat = new Alamat();
+            $alamat->provinsi = "-";
+            $alamat->kota = "-";
+            $alamat->kecamatan = "-";
+            $alamat->desa = "-";
+            $alamat->jalan = "-";
+            $alamat->gang = "-";
+            $alamat->rt = 0;
+            $alamat->rw = 0;
+            $alamat->no_rumah = 0;
+            $alamat-> kode_pos = 0;
+            $alamat->save();
+
             $calonSiswa = new CalonSiswa();
+            $calonSiswa->nik = "0";
             $calonSiswa->nama_lengkap = $request->nama;
-            $calonSiswa->user_id = $idUser;
+            $calonSiswa->telepon = "0";
+            $calonSiswa->jenis_kelamin = "L";
+            $calonSiswa->tanggal_lahir = "2000-01-01";
+            $calonSiswa->tempat_lahir = "-";
+            $calonSiswa->agama = "Islam";
+            $calonSiswa->anak_ke = 0;
+            $calonSiswa->jml_saudara_kandung = 0;
+            $calonSiswa->alamat_id = $alamat->id;
+            $calonSiswa->program_keahlian_id = 0;
+            $calonSiswa->ukuran_seragam = "L";
             $calonSiswa->akademik_id = $akademik->id;
             $calonSiswa->save();
 
             $pendaftaran = new Pendaftaran();
             $pendaftaran->calon_siswa_id = $calonSiswa->id;
             $pendaftaran->ppdb_id = $ppdbActive->id;
-            $pendaftaran->nominal_pembayaran = NominalAdministrasiController::hitungNominal($ppdbActive->gelombang);
             $pendaftaran->kode = "PPDB-" . $akademik->nisn;
             $pendaftaran->status_pendaftaran = 1;
             $pendaftaran->status_pembayaran = 1;
@@ -172,9 +185,32 @@ class ListPendaftarController extends Controller
             $pendaftaran->jurusan_id2 = 0;
             $pendaftaran->save();
 
+            $orangTuaAyah = new OrangTua();
+            $orangTuaAyah->calon_siswa_id = $calonSiswa->id;
+            $orangTuaAyah->jenis = "ayah";
+            $orangTuaAyah->nama_lengkap = "-";
+            $orangTuaAyah->pekerjaan = "-";
+            $orangTuaAyah->pendidikan_terakhir = "-";
+            $orangTuaAyah->alamat_id = $alamat->id;
+            $orangTuaAyah->tanggungan = 0;
+            $orangTuaAyah->agama = "-";
+            $orangTuaAyah->save();
+
+            $orangTuaIbu = new OrangTua();
+            $orangTuaIbu->calon_siswa_id = $calonSiswa->id;
+            $orangTuaIbu->jenis = "ibu";
+            $orangTuaIbu->nama_lengkap = "-";
+            $orangTuaIbu->pekerjaan = "-";
+            $orangTuaIbu->pendidikan_terakhir = "-";
+            $orangTuaIbu->alamat_id = $alamat->id;
+            $orangTuaIbu->tanggungan = 0;
+            $orangTuaIbu->agama = "-";
+            $orangTuaIbu->save();
+
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollback();
+            dd($th->getMessage());
             return response()->json([
                 'message' => "Gagal menambahkan data siswa, silahkan coba lagi",
                 'debug' => $th->getMessage()
@@ -228,20 +264,31 @@ class ListPendaftarController extends Controller
     public function delete($id)
     {
         try {
+            DB::beginTransaction();
             $pendaftaran = Pendaftaran::findOrFail($id);
-            $calonSiswa = null;
-            if ($pendaftaran) {
-                $calonSiswa = CalonSiswa::findOrFail($pendaftaran->calon_siswa_id);
-            }
-            if ($calonSiswa) {
-                $akademik = Akademik::findOrFail($calonSiswa->akademik_id);
-                $user = User::findOrFail($calonSiswa->user_id);
-                $calonSiswa->delete();
-                $akademik->delete();
-                $user->delete();
+            $calonSiswa = CalonSiswa::where('id', $pendaftaran->calon_siswa_id)->first();
+            $akademik = Akademik::where('id', $calonSiswa->akademik_id)->first();
+            $orangTua = OrangTua::where('calon_siswa_id', $calonSiswa->id)->get();
+            $alamat = Alamat::where('id', $calonSiswa->alamat_id)->first();
+            $wali = OrangTua::where('calon_siswa_id', $calonSiswa->id)->where('jenis', 'wali')->first();
+            
+            if ($wali) {
+                $alamatWali = Alamat::where('id', $wali->alamat_id)->first();
+                $alamatWali->delete();
             }
             $pendaftaran->delete();
+            $calonSiswa->delete();
+            $akademik->delete();
+            foreach ($orangTua as $key => $value) {
+                $value->delete();
+            }
+            $alamat->delete();
+            
+
+            DB::commit();
         } catch (\Throwable $th) {
+            DB::rollback();
+            dd($th->getMessage());
             return response()->json([
                 'message' => "Data tidak ditemukan"
             ], 404);
@@ -280,7 +327,7 @@ class ListPendaftarController extends Controller
             "nomor_rumah" => "numeric|required",
             "kode_pos" => "numeric|required",
             "pilihan_jurusan" => "numeric|required",
-            "pilihan_jurusan2" => "numeric|nullable",
+            "pilihan_jurusan2" => "numeric|required",
             "ukuran_seragam" => "string|required",
             "tinggi_badan" => "numeric|nullable",
             "berat_badan" => "numeric|nullable",
