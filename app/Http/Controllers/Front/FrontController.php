@@ -10,6 +10,7 @@ use App\Models\CalonSiswa;
 use App\Models\OrangTua;
 use App\Models\Pendaftaran;
 use App\Models\ProgramKeahlian;
+use App\Models\SubsEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -173,6 +174,43 @@ class FrontController extends Controller
             return view('front.pendaftaran-gagal');
         }
 
+    }
+
+    public function subEmail(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'email' => 'required|email'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $validator->errors()->first('email')
+            ], 422);
+        }
+
+        if (SubsEmail::where('email', $request->email)->first()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Email sudah terdaftar'
+            ], 422);
+        }
+
+        try {
+            $subEmail = new SubsEmail();
+            $subEmail->email = $request->email;
+            $subEmail->save();
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage()
+            ], 500);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Berhasil subscribe email'
+        ]);
     }
 
     private function validateDaftar($request)

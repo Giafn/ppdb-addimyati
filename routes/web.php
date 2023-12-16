@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/ppdb', [FrontController::class, 'informasi'])->name('ppdb');
 Route::get('/ppdb/pendaftaran', [FrontController::class, 'pendaftaran']);
 Route::post('/ppdb/pendaftaran', [FrontController::class, 'storePendaftaran']);
+Route::post('/ppdb/pendaftaran/sub-email', [FrontController::class, 'subEmail']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/cms/dashboard', function () {

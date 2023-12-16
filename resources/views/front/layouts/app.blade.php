@@ -50,8 +50,7 @@
             }
         }
     </script>
-    <script src="/js/gtoast.js"></script>
-    @yield('script')
+    @stack('script')
 </body>
 
 </html>

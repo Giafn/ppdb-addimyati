@@ -3018,6 +3018,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.gtoast = {
   showToast: function showToast(message, type, timeout) {
+    var idToast = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'toast-container';
+    var maxToast = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 5;
     var color = '';
     var icon = '';
     if (typeof timeout === 'undefined') {
@@ -3046,9 +3048,16 @@ window.gtoast = {
       icon = "<svg class=\"w-5 h-5\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"currentColor\" viewBox=\"0 0 20 20\">\n                        <path d=\"M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z\"/>\n                    </svg>\n                    <span class=\"sr-only\">Warning icon</span>";
     }
     var randomId = Math.floor(Math.random() * 1000000000);
-    var toastHTML = "<div id=\"".concat(randomId, "\" class=\"flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800\" role=\"alert\">\n                <div class=\"inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg ").concat(color, " sm:w-10 sm:h-10\">\n                    ").concat(icon, "\n                </div>\n                <div class=\"ms-3 text-sm font-normal\">").concat(message, "</div>\n                <button type=\"button\" class=\"ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700\" onclick=\"$('#").concat(randomId, "').remove()\">\n                    <span class=\"sr-only\">Close</span>\n                    <svg class=\"w-3 h-3\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 14 14\">\n                        <path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6\"/>\n                    </svg>\n                </button>\n            </div>");
-    $('#toast-container').append(toastHTML);
+    var toastHTML = "<div id=\"".concat(randomId, "\" class=\"shadow-lg flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg dark:text-gray-400 dark:bg-gray-800\" role=\"alert\">\n                <div class=\"inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg ").concat(color, " sm:w-10 sm:h-10\">\n                    ").concat(icon, "\n                </div>\n                <div class=\"ms-3 text-sm font-normal\">").concat(message, "</div>\n                <button type=\"button\" class=\"ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700\" onclick=\"$('#").concat(randomId, "').remove()\">\n                    <span class=\"sr-only\">Close</span>\n                    <svg class=\"w-3 h-3\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 14 14\">\n                        <path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6\"/>\n                    </svg>\n                </button>\n            </div>");
+    var toast = $('#' + idToast);
+    if (toast.length == 0) {
+      $('body').prepend('<div id="' + idToast + '" class="fixed top-5 right-5 z-100"></div>');
+    }
     $('#' + randomId).css('z-index', 999999999);
+    if (toast.children().length >= maxToast) {
+      toast.children().last().remove();
+    }
+    $('#' + idToast).prepend(toastHTML);
     setTimeout(function () {
       $('#' + randomId).remove();
     }, timeout);
