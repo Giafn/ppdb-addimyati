@@ -177,6 +177,11 @@ class FrontController extends Controller
 
     }
 
+    public function flowDaftar()
+    {
+        return view('front.flow-ppdb');
+    }
+
     public function subEmail(Request $request)
     {
         $validator = Validator::make($request->all(),[

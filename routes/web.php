@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
 // user view
 Route::get('/ppdb', [FrontController::class, 'informasi'])->name('ppdb');
 Route::get('/ppdb/pendaftaran', [FrontController::class, 'pendaftaran']);
+Route::get('/ppdb/flow-daftar', [FrontController::class, 'flowDaftar']);
 Route::post('/ppdb/pendaftaran', [FrontController::class, 'storePendaftaran']);
 Route::post('/ppdb/pendaftaran/sub-email', [FrontController::class, 'subEmail']);
 

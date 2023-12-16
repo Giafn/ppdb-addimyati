@@ -30,7 +30,7 @@
                     Yuk <span class="text-base lg:text-2xl px-1 bg-emerald-800 text-white">Daftar Online</span> Sekarang !</h2>
             </div>
             <a href="/ppdb/pendaftaran" class="block w-4/5 mx-auto mt-4 bg-lime-700 text-white text-center py-2 rounded-full text-sm font-semibold lg:inline lg:px-4 lg:me-4 lg:text-md">Daftar Sekarang</a>
-            <a href="" class="block w-4/5 mx-auto mt-4 text-emerald-800 text-center text-sm font-semibold lg:inline lg:text-md">Informasi pendaftaran</a>
+            <a href="/ppdb/flow-daftar" class="block w-4/5 mx-auto mt-4 text-emerald-800 text-center text-sm font-semibold lg:inline lg:text-md">Informasi pendaftaran</a>
         </div>
     </div>
 </div>
