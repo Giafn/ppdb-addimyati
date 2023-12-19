@@ -7,8 +7,8 @@
     "outputDirectory": "public",
     "routes": [
         {
-            "src": "/build/(.*)",
-            "dest": "/build/$1"
+            "src": "/build(.)",
+            "dest": "/public/assets/"
         },
         {
             "src": "/(.*)",
