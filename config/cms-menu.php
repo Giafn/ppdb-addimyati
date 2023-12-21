@@ -64,17 +64,6 @@ return [
 					'task' => []
 				]
 			],
-			// [
-			// 	'code'		 => "nominalAdministrasi",
-			// 	'name'		 => "Nominal Administrasi",
-			// 	'label'		 => "nominalAdministrasi",
-			// 	'icon'		 => "",
-			// 	'route_name' => "cmsNominalAdministrasi",
-			// 	'module' 	 => [
-			// 		'code' => 'nominalAdministrasi',
-			// 		'task' => []
-			// 	]
-			// ],
 			[
 				'code'		 => "programStudi",
 				'name'		 => "Program Studi",
@@ -86,7 +75,17 @@ return [
 					'task' => []
 				]
 			],
-
+			[
+				'code'		 => "informasiPpdb",
+				'name'		 => "Informasi PPDB",
+				'label'		 => "informasiPpdb",
+				'icon'		 => "",
+				'route_name' => "cmsInformasiPpdb",
+				'module' 	 => [
+					'code' => 'informasiPpdb',
+					'task' => []
+				]
+			],
 		],
 	],
 	[
