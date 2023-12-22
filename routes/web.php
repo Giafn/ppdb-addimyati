@@ -9,6 +9,7 @@ use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Cms\master\NominalAdministrasiController;
 use App\Http\Controllers\Cms\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Cms\master\JurusanController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,15 +23,19 @@ use App\Http\Controllers\Cms\master\JurusanController;
 */
 
 Route::get('/', function () {
-    return redirect()->route('ppdb');
+    if (Auth::User()) {
+        return redirect()->route('cmsDashboard');
+    } else {
+        return redirect()->route('ppdb');
+    }
 });
 
 Route::middleware('guest')->group(function () {
-    Route::get('cms/login', [AuthenticatedSessionController::class, 'showLogin']);
-    Route::post('cms/login', [AuthenticatedSessionController::class, 'login'])->name('login');
     Route::get('/login', function () {
         return redirect()->route('login');
     });
+    Route::get('cms/login', [AuthenticatedSessionController::class, 'showLogin']);
+    Route::post('cms/login', [AuthenticatedSessionController::class, 'login'])->name('login');
 });
 
 Route::middleware('auth')->group(function () {
