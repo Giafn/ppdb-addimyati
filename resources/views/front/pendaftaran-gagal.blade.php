@@ -9,7 +9,7 @@
         <h1 class="font-bold text-2xl text-emerald-800 text-center">Pendaftaran Gagal!</h1>
         <p class="text-sm text-gray-600 text-center">Mohon maaf, pendaftaran anda tidak dapat diproses.</p>
         <p class="text-sm text-gray-600 text-center">Silahkan coba lagi atau hubungi admin.</p>
-        <a href="/" class="inline-block mt-4 px-4 py-2 bg-lime-800 text-white rounded-md hover:bg-lime-700">Kembali ke Beranda</a>
+        <a href="/" class="inline-block mt-4 px-4 py-2 bg-lime-800 text-white rounded-md hover:bg-lime-700">Kembali</a>
     </div>
   </div>
 @endsection
