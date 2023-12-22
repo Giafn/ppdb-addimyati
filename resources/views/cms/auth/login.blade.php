@@ -24,40 +24,45 @@
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-800">
-    <main class="bg-gray-50 dark:bg-gray-900">
-        <div class="flex flex-col items-center justify-center px-6 pt-8 mx-auto md:h-screen pt:mt-0 dark:bg-gray-900">
-            <a href="#" class="flex items-center justify-center mb-8 text-2xl font-semibold lg:mb-10 dark:text-white">
-                <img src="/image/logo.png" class="mr-4 h-11" alt="FlowBite Logo">
-                <span>SMKT Ad-Dimyati</span>
-            </a>
-            <!-- Card -->
-            <div class="w-full max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow dark:bg-gray-800">
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-                    Masuk ke akun Anda
-                </h2>
-                <form class="mt-8 space-y-6" method="POST">
-                    {{ csrf_field() }}
-                    <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required>
-                    </div>
-                    <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                    </div>
-                    <div class="flex items-start">
-                        <div class="flex items-center h-5">
-                            <input id="remember" aria-describedby="remember" name="remember" type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
+    <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
+        <div class="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
+            <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-12 flex items-center justify-center">
+                <div class="mt-12 flex flex-col items-center">
+                    <h1 class="text-xl xl:text-1xl font-bold text-center mb-4">
+                        Sistem PPDB Online
+                        <br>
+                        <span class="block">SMK Terpadu <span class="text-emerald-800">Ad-Dimyati</span></span>
+                    </h1>
+                    <img src="/image/logo.png" class="h-24 mx-auto" alt="logo">
+                    <div class="w-full flex-1 mt-8 items-center">
+                        <div class="mx-auto max-w-xs">
+                            <form class="mt-8 space-y-6" method="POST">
+                                {{ csrf_field() }}
+                                <input name="email" class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" type="email" placeholder="Email" value="{{ old('email') }}" />
+                                <input name="password" class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5" type="password" placeholder="Password" />
+                                <button type="submit" class="mt-5 tracking-wide font-semibold bg-lime-700 text-gray-100 w-full py-4 rounded-lg hover:bg-lime-800 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 -ml-2" fill="currentColor" viewBox="0 0 512 512">
+                                        <path d="M352 96l64 0c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0c53 0 96-43 96-96l0-256c0-53-43-96-96-96l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-9.4 182.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L242.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"/>
+                                    </svg>
+                                    <span class="ml-3">
+                                        Login
+                                    </span>
+                                </button>
+                            </form>
+                            <p class="mt-6 text-xs text-gray-600 text-center">
+                                Anda hanya dapat login dengan akun yang telah terdaftar
+                            </p>
                         </div>
-                        <div class="ml-3 text-sm">
-                            <label for="remember" class="font-medium text-gray-900 dark:text-white">Remember me</label>
-                        </div>
                     </div>
-                    <button type="submit" class="w-full px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
-                </form>
+                </div>
+            </div>
+            <div class="flex-1 bg-lime-100 text-center hidden lg:flex">
+                <div class="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat"
+                    style="background-image: url('/image/illustrasi/ilustrasi-green.webp');">
+                </div>
             </div>
         </div>
-    </main>
+    </div>
 </body>
 
 </html>

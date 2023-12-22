@@ -25,9 +25,12 @@ Route::get('/', function () {
     return redirect()->route('ppdb');
 });
 
-Route::get('/login', [AuthenticatedSessionController::class, 'showLogin']);
-Route::post('/login', [AuthenticatedSessionController::class, 'login'])->name('login');
 Route::middleware('guest')->group(function () {
+    Route::get('cms/login', [AuthenticatedSessionController::class, 'showLogin']);
+    Route::post('cms/login', [AuthenticatedSessionController::class, 'login'])->name('login');
+    Route::get('/login', function () {
+        return redirect()->route('login');
+    });
 });
 
 Route::middleware('auth')->group(function () {

@@ -9,12 +9,12 @@
     $tanggal_buka = $ppdbNext;
 @endphp
 @if ($dibuka)
+<div id="toast-container" class="fixed top-5 right-5 z-100"></div>
 <div class="px-9 py-5 w-full lg:h-screen">
     <div class="lg:hidden">
         <img src="/image/logo.png" class="h-12 mx-auto" alt="logo">
         <h2 class="font-semibold text-sm text-emerald-800 text-center">SMK Terpadu Ad-Dimyati</h2>
     </div>
-    <div id="toast-container" class="fixed top-5 right-5 z-100"></div>
     <div class="w-full fixed bottom-0 left-0 lg:static right-0 pb-10 px-4 lg:grid lg:grid-cols-2 lg:place-items-center lg:h-full">
         <div class="w-full lg:col-span-1">
             <img src="/image/illustrasi/ppdb_sudah_dibuka.svg" class="w-4/5 mx-auto lg:w-1/2" alt="logo" style="margin-bottom: 4vh;">
@@ -27,7 +27,7 @@
             <div class="judul mx-8 lg:mb-6 lg:mx-0">
                 <h2 class="font-semibold text-sm text-emerald-800 text-center lg:text-left lg:text-lg lg:text-2xl">Alhamdulillah,</h2>
                 <h2 class="font-semibold text-sm text-emerald-800 text-center lg:text-left lg:text-lg lg:text-xl">Pendaftaran siswa sudah di buka
-                    Yuk <span class="text-base lg:text-2xl px-1 bg-emerald-800 text-white">Daftar Online</span> Sekarang !</h2>
+                    Yuk <span class="text-base lg:text-2xl px-1 bg-lime-800 text-white">Daftar Online</span> Sekarang !</h2>
             </div>
             <a href="/ppdb/pendaftaran" class="block w-4/5 mx-auto mt-4 bg-lime-700 text-white text-center py-2 rounded-full text-sm font-semibold lg:inline lg:px-4 lg:me-4 lg:text-md">Daftar Sekarang</a>
             <a href="/ppdb/flow-daftar" class="block w-4/5 mx-auto mt-4 text-emerald-800 text-center text-sm font-semibold lg:inline lg:text-md">Informasi pendaftaran</a>
