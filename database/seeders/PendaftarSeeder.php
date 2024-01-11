@@ -44,7 +44,7 @@ class PendaftarSeeder extends Seeder
                 $pendaftaran->ppdb_id = $idppdb;
                 $pendaftaran->kode = 'PPDB-' . $faker->numberBetween(1000000000, 9999999999);
                 $pendaftaran->status_pendaftaran = $faker->randomElement([1, 2]); // 1: Diterima, 2: Ditolak
-                $pendaftaran->status_pembayaran = $faker->randomElement([0, 1]); // 0: Belum Bayar, 1: Sudah Bayar
+                $pendaftaran->status_pembayaran = $faker->randomElement([0, 1, 2]);
                 $pendaftaran->jurusan_id1 = $faker->numberBetween(1, 5); // ID Jurusan
                 $pendaftaran->jurusan_id2 = $faker->numberBetween(1, 5); // ID Jurusan
                 $pendaftaran->referensi = $faker->optional()->word;
@@ -89,7 +89,7 @@ class PendaftarSeeder extends Seeder
                 $orangTua = new \App\Models\OrangTua();
                 $orangTua->jenis = "Ayah";
                 $orangTua->nama_lengkap = $faker->name;
-                $orangTua->pendidikan_terakhir = $faker->randomElement(['SD', 'SMP', 'SMA', 'D1', 'D2', 'D3', 'D4', 'S1', 'S2', 'S3']);
+                $orangTua->pendidikan_terakhir = $faker->randomElement(['sd', 'smp', 'sma', 's1', 's2', 's3']);
                 $orangTua->pekerjaan = $faker->randomElement(['PNS', 'Swasta', 'Wiraswasta', 'Petani', 'Peternak', 'Buruh', 'Wirausahawan', 'Lain-lain']);
                 $orangTua->agama = $faker->randomElement(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha']);
                 $orangTua->tanggungan = $faker->numberBetween(1, 5);

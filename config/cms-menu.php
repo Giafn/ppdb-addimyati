@@ -54,13 +54,13 @@ return [
 		'module' 	 => [],
 		'child'      => [
 			[
-				'code'		 => "ppdb",
-				'name'		 => "PPDB Setting",
-				'label'		 => "ppdbSetting",
+				'code'		 => "alurPendaftaran",
+				'name'		 => "Alur Pendaftaran",
+				'label'		 => "alurPendaftaran",
 				'icon'		 => "",
-				'route_name' => "cmsPpdbSetting",
+				'route_name' => "cmsAlurPendaftaran",
 				'module' 	 => [
-					'code' => 'ppdb',
+					'code' => 'alurPendaftaran',
 					'task' => []
 				]
 			],
@@ -76,16 +76,17 @@ return [
 				]
 			],
 			[
-				'code'		 => "informasiPpdb",
-				'name'		 => "Informasi PPDB",
-				'label'		 => "informasiPpdb",
+				'code'		 => "ppdb",
+				'name'		 => "PPDB Setting",
+				'label'		 => "ppdbSetting",
 				'icon'		 => "",
-				'route_name' => "cmsInformasiPpdb",
+				'route_name' => "cmsPpdbSetting",
 				'module' 	 => [
-					'code' => 'informasiPpdb',
+					'code' => 'ppdb',
 					'task' => []
 				]
 			],
+			
 		],
 	],
 	[

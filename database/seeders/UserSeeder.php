@@ -26,14 +26,5 @@ class UserSeeder extends Seeder
                 ],
             ]);
         }
-
-        DB::table('user_levels')->insert([
-            [
-                "id"            => "5",
-                "name"          => "Siswa",
-                "level"         => "1",
-                'created_at'    => date("Y-m-d H:i:s"),
-            ],
-        ]);
     }
 }

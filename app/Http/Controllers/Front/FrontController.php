@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\SendNotifEmailJob;
 use App\Models\Akademik;
 use App\Models\Alamat;
+use App\Models\AlurPendaftaran;
 use App\Models\CalonSiswa;
 use App\Models\OrangTua;
 use App\Models\Pendaftaran;
@@ -179,7 +180,8 @@ class FrontController extends Controller
 
     public function flowDaftar()
     {
-        return view('front.flow-ppdb');
+        $dataAlur = AlurPendaftaran::all();
+        return view('front.flow-ppdb', compact('dataAlur'));
     }
 
     public function subEmail(Request $request)

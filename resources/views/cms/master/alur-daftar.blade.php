@@ -1,5 +1,5 @@
 @extends('cms.layouts.dashboard-admin')
-@section('title', 'Program Studi | ')
+@section('title', 'Alur Pendaftaran | ')
 @section('content')
 <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
     <div class="w-full mb-1">
@@ -27,22 +27,14 @@
                             <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Setting</span>
+                            <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Alur Pendaftaran</span>
                         </div>
                     </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">List Program Studi</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Alur Pendaftaran</h1>
         </div>
         <div class="sm:flex">
-            <div class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
-                <form class="lg:pr-3" action="#" method="GET">
-                    <label for="search" class="sr-only">Search</label>
-                    <div class="relative mt-1 lg:w-64 xl:w-96">
-                        <input type="text" name="search" id="search" value="{{ app('request')->input('search') }}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari Jurusan">
-                    </div>
-                </form>
-            </div>
             <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
                 <button type="button" data-mana-modal-toggle="tambahModal" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +60,7 @@
                                 </div>
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Nama
+                                Alur
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 Deskripsi
@@ -89,9 +81,9 @@
                                 </div>
                             </td>
                             <td class="p-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900 dark:text-white">{{ $data->nama }}</div>
+                                <div class="text-sm text-gray-900 dark:text-white">{{ $data->nama_tahap }}</div>
                             </td>
-                            <td class="p-4 whitespace-nowrap">
+                            <td class="p-4 whitespace-wrap">
                                 <div class="text-sm text-gray-900 dark:text-white">{{ $data->deskripsi }}</div>
                             </td>
                             <td class="p-4 space-x-2 whitespace-nowrap">
@@ -115,7 +107,7 @@
                         @endforeach
                         @else
                         <tr class="">
-                            <td class="p-4 text-center text-gray-900 whitespace-nowrap dark:text-white" colspan="3">No Data</td>
+                            <td class="p-4 text-center text-gray-900 whitespace-nowrap dark:text-white" colspan="4">No Data</td>
                         </tr>
                         @endif
                     </tbody>
@@ -140,7 +132,7 @@
     </div>
     <div class="flex items-center space-x-3">
         <a href="{{ $paginationData['prev_page_url'] ?? '#' }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            <svg class="w-5 h-5 mr-1 -ml-1"" fill=" currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <svg class="w-5 h-5 mr-1 -ml-1" fill=" currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
             </svg>
             Previous
@@ -159,7 +151,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">
-                    Tambah Program Studi
+                    Tambah Step
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-mana-modal-toggle="tambahModal">
                     @includeif('components.icons.close')
@@ -170,12 +162,12 @@
                     <div class="">
                         {{ csrf_field() }}
                         <div class="mb-4">
-                            <label for="namaAdd" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Jurusan <span class="text-red-500">*</span></label>
-                            <input type="text" name="nama" id="namaAdd" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Jurusan" required>
+                            <label for="namaAdd" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama <span class="text-red-500">*</span></label>
+                            <input type="text" name="nama_tahap" id="namaAdd" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tahap" required>
                         </div>
                         <div class="mb-4">
                             <label for="deskripsiAdd" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi <span class="text-red-500">*</span></label>
-                            <input type="text" name="deskripsi" id="deskripsiAdd" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Deskripsi" required>
+                            <textarea type="text" name="deskripsi" id="deskripsiAdd" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Deskripsi" required></textarea>
                         </div>
                     </div>
                 </form>
@@ -188,7 +180,6 @@
     </div>
 </div>
 
-
 <div id="editModal" class="modal">
     <div class="modal-dialog modal-2xl">
         <!-- Modal content -->
@@ -196,7 +187,7 @@
             <!-- Modal header -->
             <div class="modal-header">
                 <h3 class="modal-title">
-                    Edit Program Studi
+                    Edit Step
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-mana-modal-toggle="editModal">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -211,12 +202,12 @@
                         {{ csrf_field() }}
                         <input type="hidden" name="id" id="editId">
                         <div class="mb-4">
-                            <label for="namaEdit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Jurusan <span class="text-red-500">*</span></label>
-                            <input type="text" name="nama" id="editNama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Jurusan" required>
+                            <label for="namaEdit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama <span class="text-red-500">*</span></label>
+                            <input type="text" name="nama_tahap" id="editNama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tahap" required>
                         </div>
                         <div class="mb-4">
                             <label for="deskripsiEdit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi <span class="text-red-500">*</span></label>
-                            <input type="text" name="deskripsi" id="editDeskripsi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Deskripsi" required>
+                            <textarea type="text" name="deskripsi" id="editDeskripsi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Deskripsi" required></textarea>
                         </div>
                     </div>
                 </form>
@@ -270,7 +261,7 @@
         loading(true)
         axios({
                 method: 'post',
-                url: '/cms/master/ppdb/program-studi',
+                url: '/cms/master/ppdb/alur-pendaftaran',
                 data: formDataObj
             })
             .then(function(response) {
@@ -301,12 +292,12 @@
 
         axios({
                 method: 'get',
-                url: '/cms/master/ppdb/program-studi/' + id,
+                url: '/cms/master/ppdb/alur-pendaftaran/' + id,
             })
             .then(function(response) {
                 if (response.data.status == "OK") {
                     document.getElementById("editId").value = response.data.results.id;
-                    document.getElementById("editNama").value = response.data.results.nama;
+                    document.getElementById("editNama").value = response.data.results.nama_tahap;
                     document.getElementById("editDeskripsi").value = response.data.results.deskripsi;
                     toggleModal('editModal');
 
@@ -325,7 +316,7 @@
         loading(true)
         axios({
                 method: 'post',
-                url: '/cms/master/ppdb/program-studi',
+                url: '/cms/master/ppdb/alur-pendaftaran',
                 data: formDataObj
             })
             .then(function(response) {
@@ -365,7 +356,7 @@
         loading(true)
         axios({
                 method: 'delete',
-                url: '/cms/master/ppdb/program-studi/' + id,
+                url: '/cms/master/ppdb/alur-pendaftaran/' + id,
                 data: {
                     _token: "{{ csrf_token() }}"
                 }

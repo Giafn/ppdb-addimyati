@@ -8,6 +8,7 @@ use App\Http\Controllers\Cms\UserLevelController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Cms\master\NominalAdministrasiController;
 use App\Http\Controllers\Cms\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Cms\InfoPPDBController;
 use App\Http\Controllers\Cms\master\JurusanController;
 use Illuminate\Support\Facades\Auth;
 
@@ -99,6 +100,11 @@ Route::middleware('auth')->group(function () {
                 Route::post('/program-studi', [JurusanController::class, 'storeOrUpdate']);
                 Route::get('/program-studi/{id}', [JurusanController::class, 'detail']);
                 Route::delete('/program-studi/{id}', [JurusanController::class, 'delete']);
+
+                Route::get('/alur-pendaftaran', [InfoPPDBController::class, 'index'])->name('cmsAlurPendaftaran');
+                Route::post('/alur-pendaftaran', [InfoPPDBController::class, 'storeOrUpdate']);
+                Route::get('/alur-pendaftaran/{id}', [InfoPPDBController::class, 'detail']);
+                Route::delete('/alur-pendaftaran/{id}', [InfoPPDBController::class, 'delete']);
             });
         });
 

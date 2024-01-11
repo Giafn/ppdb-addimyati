@@ -69,24 +69,17 @@
                     <input type="text" name="search" id="search" value="{{ app('request')->input('search') }}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari berdasarkan nama, nisn, dan email">
                 </div>
             </div>
-            <!-- <div class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700 me-2">
-                <label for="status_data" class="sr-only">Status Data</label>
-                <div class="relative mt-1 lg:w-64 xl:w-96">
-                    <select name="status_data" id="status_data" class="block w-full py-2.5 px-5 pr-10 text-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value="">Pilih Status Data</option>
-                        @foreach($fillSelectFilter['status_pendaftaran'] as $key => $status_data)
-                        <option value="{{ $key }}" {{ $key == request()->input('status_data') ? 'selected' : '' }}>{{ $status_data['text'] }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div> -->
             <div class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700 me-2">
                 <label for="status_pembayaran" class="sr-only">Status Pembayaran</label>
                 <div class="relative mt-1 lg:w-64 xl:w-96">
                     <select name="status_pembayaran" id="status_pembayaran" class="block w-full py-2.5 px-5 pr-10 text-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="" selected>Pilih Status Pembayaran</option>
                         @foreach($fillSelectFilter['status_pembayaran'] as $key => $status_pembayaran)
-                        <option value="{{ $key }}" {{ $key == request()->input('status_pembayaran') ? 'selected' : '' }}>{{ $status_pembayaran['text'] }}</option>
+                            @if($key == request()->input('status_pembayaran') && request()->input('status_pembayaran'))
+                                <option value="{{ $key }}" selected>{{ $status_pembayaran['text'] }}</option>
+                            @else
+                                <option value="{{ $key }}">{{ $status_pembayaran['text'] }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
