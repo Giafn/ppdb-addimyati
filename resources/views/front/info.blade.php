@@ -11,10 +11,6 @@
 @if ($dibuka)
 <div id="toast-container" class="fixed top-5 right-5 z-100"></div>
 <div class="px-9 py-5 w-full lg:h-screen">
-    <div class="lg:hidden">
-        <img src="/image/logo.png" class="h-12 mx-auto" alt="logo">
-        <h2 class="font-semibold text-sm text-emerald-800 text-center">SMK Terpadu Ad-Dimyati</h2>
-    </div>
     <div class="w-full fixed bottom-0 left-0 lg:static right-0 pb-10 px-4 lg:grid lg:grid-cols-2 lg:place-items-center lg:h-full">
         <div class="w-full lg:col-span-1">
             <img src="/image/illustrasi/ppdb_sudah_dibuka.svg" class="w-4/5 mx-auto lg:w-1/2" alt="logo" style="margin-bottom: 4vh;">
@@ -36,10 +32,6 @@
 </div>
 @else
 <div class="px-9 py-5 w-full lg:h-screen">
-    <div class="lg:hidden">
-        <img src="/image/logo.png" class="h-12 mx-auto" alt="logo">
-        <h2 class="font-semibold text-sm text-emerald-800 text-center">SMK Terpadu Ad-Dimyati</h2>
-    </div>
     <div class="w-full fixed bottom-0 left-0 lg:static right-0 pb-10 px-4 lg:grid lg:grid-cols-2 lg:place-items-center lg:h-full">
         <div class="w-full lg:col-span-1">
             <img src="/image/illustrasi/ppdb_belum_dibuka.svg" class="w-4/5 mx-auto lg:w-1/2" alt="logo" style="margin-bottom: 4vh;">

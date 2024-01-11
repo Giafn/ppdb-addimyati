@@ -658,7 +658,8 @@
     </div>
     </form>
     <div class="px-8 mb-5 mt-10">
-        <div class="formPage1 flex justify-end">
+        <div class="formPage1 flex justify-between">
+            <a href="/" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium">Kembali</a>
             <button type="button" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium" id="nextPage2">Selanjutnya</button>
         </div>
         <div class="formPage2 flex justify-between hidden">
@@ -686,7 +687,6 @@
 @push('script')
 <script src="/js/nik_parse.min.js"></script>
 <script>
-    // document ready
     $(document).ready(function() {
         const page = '{{ session('page') ?? 1 }}'
         const walicek = '{{ old('walicek') ?? 'off' }}';

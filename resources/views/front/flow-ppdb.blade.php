@@ -4,6 +4,7 @@
 
 @if(session('page'))
 @endif
+<br class="mt-5">
 <div class="lg:w-1/2 lg:mx-auto pt-5 px-4">
     <div class="w-full my-10">
         <div class="text-center">

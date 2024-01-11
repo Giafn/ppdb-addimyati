@@ -48,5 +48,21 @@ class AppServiceProvider extends ServiceProvider
             return str_replace(':attribute', $attribute, 'NIK tidak valid.');
         });
 
+        Validator::extend('alphanum', function ($attribute, $value, $parameters, $validator) {
+            return preg_match('/^[a-zA-Z0-9]+$/', $value);
+        });
+
+        Validator::replacer('alphanum', function ($message, $attribute, $rule, $parameters) {
+            return str_replace(':attribute', $attribute, 'Hanya boleh mengandung huruf dan angka.');
+        });
+
+        Validator::extend('alpha_space', function ($attribute, $value, $parameters, $validator) {
+            return preg_match('/^[a-zA-Z ]+$/', $value);
+        });
+
+        Validator::replacer('alpha_space', function ($message, $attribute, $rule, $parameters) {
+            return str_replace(':attribute', $attribute, 'Hanya boleh mengandung huruf dan spasi.');
+        });
     }
+
 }

@@ -24,6 +24,9 @@
     <div class="flex overflow-hidden bg-white h-full">
         <div id="main-content" class="relative w-full h-full overflow-y-auto">
             <main class="h-full">
+                @if (request()->url() != url('/ppdb/pendaftaran'))
+                    @include('front.layouts.nav')
+                @endif
                 @yield('content')
             </main>
         </div>
