@@ -8,6 +8,7 @@ use App\Http\Controllers\Cms\UserLevelController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Cms\master\NominalAdministrasiController;
 use App\Http\Controllers\Cms\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Cms\FaqController;
 use App\Http\Controllers\Cms\InfoPPDBController;
 use App\Http\Controllers\Cms\master\JurusanController;
 use Illuminate\Support\Facades\Auth;
@@ -105,6 +106,11 @@ Route::middleware('auth')->group(function () {
                 Route::post('/alur-pendaftaran', [InfoPPDBController::class, 'storeOrUpdate']);
                 Route::get('/alur-pendaftaran/{id}', [InfoPPDBController::class, 'detail']);
                 Route::delete('/alur-pendaftaran/{id}', [InfoPPDBController::class, 'delete']);
+
+                Route::get('/faq', [FaqController::class, 'index'])->name('cmsFaq');
+                Route::post('/faq', [FaqController::class, 'storeOrUpdate']);
+                Route::get('/faq/{id}', [FaqController::class, 'detail']);
+                Route::delete('/faq/{id}', [FaqController::class, 'delete']);
             });
         });
 

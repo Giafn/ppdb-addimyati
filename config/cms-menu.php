@@ -65,6 +65,17 @@ return [
 				]
 			],
 			[
+				'code'		 => "faq",
+				'name'		 => "FAQ",
+				'label'		 => "faq",
+				'icon'		 => "",
+				'route_name' => "cmsFaq",
+				'module' 	 => [
+					'code' => 'faq',
+					'task' => []
+				]
+			],
+			[
 				'code'		 => "programStudi",
 				'name'		 => "Program Studi",
 				'label'		 => "programStudi",

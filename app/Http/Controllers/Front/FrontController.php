@@ -9,6 +9,7 @@ use App\Models\Akademik;
 use App\Models\Alamat;
 use App\Models\AlurPendaftaran;
 use App\Models\CalonSiswa;
+use App\Models\Faq;
 use App\Models\OrangTua;
 use App\Models\Pendaftaran;
 use App\Models\ProgramKeahlian;
@@ -181,7 +182,8 @@ class FrontController extends Controller
     public function flowDaftar()
     {
         $dataAlur = AlurPendaftaran::all();
-        return view('front.flow-ppdb', compact('dataAlur'));
+        $faq = Faq::all();
+        return view('front.flow-ppdb', compact('dataAlur', 'faq'));
     }
 
     public function subEmail(Request $request)
