@@ -75,7 +75,7 @@
                     <select name="status_pembayaran" id="status_pembayaran" class="block w-full py-2.5 px-5 pr-10 text-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="" selected>Pilih Status Pembayaran</option>
                         @foreach($fillSelectFilter['status_pembayaran'] as $key => $status_pembayaran)
-                            @if($key == request()->input('status_pembayaran') && request()->input('status_pembayaran'))
+                            @if($key == request()->input('status_pembayaran') && request()->input('status_pembayaran') != null)
                                 <option value="{{ $key }}" selected>{{ $status_pembayaran['text'] }}</option>
                             @else
                                 <option value="{{ $key }}">{{ $status_pembayaran['text'] }}</option>

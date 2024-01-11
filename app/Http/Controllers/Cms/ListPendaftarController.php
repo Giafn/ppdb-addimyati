@@ -38,7 +38,7 @@ class ListPendaftarController extends Controller
         $tahunAjaran = $request->tahun_ajaran;
         $gelombang = $request->gelombang;
         $statusData = $request->status_data;
-        $statusPembayaran = $request->status_pembayaran;
+        $statusPembayaran = (string) $request->status_pembayaran;
 
         $ppdb = PpdbSettingController::getPPDBInfo();
         $tahunAjaranTerakhir = Ppdb::select('tahun_ajaran', 'end_date')->orderBy('end_date', 'desc')
@@ -71,7 +71,7 @@ class ListPendaftarController extends Controller
             ->when(!empty($statusData), function ($query) use ($statusData) {
                 $query->where('pendaftaran.status_pendaftaran', $statusData);
             })
-            ->when(!empty($statusPembayaran), function ($query) use ($statusPembayaran) {
+            ->when($statusPembayaran != null, function ($query) use ($statusPembayaran) {
                 $query->where('pendaftaran.status_pembayaran', $statusPembayaran);
             })
             ->orderBy('pendaftaran.id', 'desc')

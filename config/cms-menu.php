@@ -49,7 +49,7 @@ return [
 		'code'		 => 'master',
 		'name'		 => "Master",
 		'label'		 => "master",
-		'icon'		 => "cog",
+		'icon'		 => "data",
 		'route_name' => "",
 		'module' 	 => [],
 		'child'      => [
@@ -104,7 +104,7 @@ return [
 		'code'		 => 'listPendaftar',
 		'name'		 => "List Pendaftar",
 		'label'		 => "listPendaftar",
-		'icon'		 => "dashboard",
+		'icon'		 => "clip",
 		'route_name' => "cmsListPendaftar",
 		'module'	 => [
 			'code' => 'listPendaftar',
@@ -116,7 +116,7 @@ return [
 		'code'		 => 'pembayaran',
 		'name'		 => "Pembayaran",
 		'label'		 => "pembayaran",
-		'icon'		 => "dashboard",
+		'icon'		 => "pay",
 		'route_name' => "cmsPembayaran",
 		'module'	 => [
 			'code' => 'pembayaran',
