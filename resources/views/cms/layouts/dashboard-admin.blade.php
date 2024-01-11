@@ -20,19 +20,18 @@
 <body class="bg-gray-50 dark:bg-gray-800">
     @include('cms.includes.navbar-admin')
     <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-800">
+        <div class="fixed inset-0 z-30 hidden bg-gray-800/50 dark:bg-gray-800/90 md:hidden" id="sidebarBackdrop"></div>
         @include('cms.includes.sidebar-admin')
-        <div class="fixed inset-0 z-10 hidden bg-gray-800/50 dark:bg-gray-800/90" id="sidebarBackdrop"></div>
         <div id="main-content" class="relative w-full h-full overflow-y-auto lg:ml-64">
             <main>
                 @yield('content')
             </main>
             <p class="my-10 text-sm text-center text-gray-500">
-                {{-- <a href="https://flowbite.com/" class="hover:underline" target="_blank">Flowbite.com</a>. All rights reserved. --}}
                 made with <span class="text-red-500">&hearts;</span> by TeamThree with <a href="https://flowbite.com/" class="hover:underline" target="_blank">Flowbite</a>
             </p>
         </div>
     </div>
-    <div id="overflowLoading" class="fixed left-0 right-0 z-100 items-center justify-center overflow-x-hidden overflow-y-auto md:inset-0 h-modal sm:h-full flex bg-gray-900 bg-opacity-80 dark:bg-opacity-80 hidden">
+    <div id="overflowLoading" class="fixed left-0 right-0 z-50 items-center justify-center overflow-x-hidden overflow-y-auto md:inset-0 h-modal sm:h-full flex bg-gray-900 bg-opacity-80 dark:bg-opacity-80 hidden">
         <div role="status">
             <svg aria-hidden="true" class="inline w-10 h-10 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
@@ -124,6 +123,27 @@
         $(".nominalFormat").keyup(function() {
             $(this).val(formatRupiah($(this).val(), "Rp. "));
         });
+
+        var sidebar = document.getElementById('sidebar');
+        var sidebarBackdrop = document.getElementById('sidebarBackdrop');
+        var sidebarOpenBtn = document.getElementById('toggleSidebarMobileHamburger');
+
+        sidebarOpenBtn.addEventListener('click', function() {
+            sidebar.classList.remove('hidden');
+            sidebarBackdrop.classList.remove('hidden');
+            sidebarOpenBtn.classList.add('hidden');
+        });
+
+        sidebarBackdrop.addEventListener('click', function() {
+            closeSidebar();
+        });
+
+        function closeSidebar() {
+            sidebar.classList.add('hidden');
+            sidebarBackdrop.classList.add('hidden');
+            sidebarOpenBtn.classList.remove('hidden');
+        }
+
     </script>
     @yield('script')
 </body>
