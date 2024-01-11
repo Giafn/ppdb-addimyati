@@ -25,8 +25,8 @@
                 <span class="font-semibold text-sm text-emerald-800 text-center">SMK Terpadu Ad-Dimyati</span>
             </div>
             <div class="judul mx-8 lg:mb-6 lg:mx-0">
-                <h2 class="font-semibold text-sm text-emerald-800 text-center lg:text-left lg:text-lg lg:text-2xl">Alhamdulillah,</h2>
-                <h2 class="font-semibold text-sm text-emerald-800 text-center lg:text-left lg:text-lg lg:text-xl">Pendaftaran siswa sudah di buka
+                <h2 class="font-semibold text-sm text-emerald-800 text-center lg:text-left lg:text-2xl">Alhamdulillah,</h2>
+                <h2 class="font-semibold text-sm text-emerald-800 text-center lg:text-left lg:text-xl">Pendaftaran siswa sudah di buka
                     Yuk <span class="text-base lg:text-2xl px-1 bg-lime-800 text-white">Daftar Online</span> Sekarang !</h2>
             </div>
             <a href="/ppdb/pendaftaran" class="block w-4/5 mx-auto mt-4 bg-lime-700 text-white text-center py-2 rounded-full text-sm font-semibold lg:inline lg:px-4 lg:me-4 lg:text-md">Daftar Sekarang</a>
@@ -50,8 +50,8 @@
                 <span class="font-semibold text-sm text-emerald-800 text-center">SMK Terpadu Ad-Dimyati</span>
             </div>
             <div class="judul mx-8 lg:mb-6 lg:mx-0">
-                <h2 class="font-semibold text-sm text-emerald-800 text-center lg:text-left lg:text-lg lg:text-2xl">Mohon Maaf,</h2>
-                <h2 class="font-semibold text-sm text-emerald-800 text-center lg:text-left lg:text-lg lg:text-xl">Pendaftaran siswa belum di buka !</h2>
+                <h2 class="font-semibold text-sm text-emerald-800 text-center lg:text-left lg:text-2xl">Mohon Maaf,</h2>
+                <h2 class="font-semibold text-sm text-emerald-800 text-center lg:text-left lg:text-xl">Pendaftaran siswa belum di buka !</h2>
                 @if ($tanggal_buka)
                     <h2 class="font-semibold text-sm text-emerald-800 text-center lg:text-base lg:text-left">Pendaftaran siswa akan di buka pada tanggal <span class="text-base lg:text-lg underline decoration-2 underline-offset-4">{{ $tanggal_buka }}</span></h2>
                 @endif
