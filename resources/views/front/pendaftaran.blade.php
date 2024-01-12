@@ -656,6 +656,279 @@
             @endif
         </div>
     </div>
+    <div class="mb-3 px-8 formPage5 hidden">
+        <h1 class="text-lg font-bold text-emerald-800 mb-3 text-center">Validasi data</h1>
+        <div class="py-2 sm:px-4 sm:shadow-md">
+            <h2 class="text-base font-bold text-emerald-800 mb-3">Informasi Pribadi</h2>
+            <table class="table w-full">
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Nama Lengkap
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm" id="dataNama">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Nama Panggilan
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataNamaPanggilan">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        NIK
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataNik">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Tanggal Lahir
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataTglLahir">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Tempat Lahir
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataTempatLahir">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Jenis Kelamin
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataJenisKelamin">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Alamat
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataAlamat">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Agama
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataAgama">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        No Hp/Whatsapp
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataNoHp">
+                        : -
+                    </td>
+                </tr>
+            </table>
+            <h2 class="text-base font-bold text-emerald-800 mb-3 pt-3">Informasi Keluarga</h2>
+            <table class="table w-full">
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Anak Ke
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataAnakKe">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Jumlah Saudara kandung/tiri
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataJumlahSaudara">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Jumlah Saudara Sekolah/belum sekolah
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataJumlahSaudaraSekolah">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Nama Ayah
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataNamaAyah">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Pekerjaan Ayah
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataPekerjaanAyah">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Nama Ibu
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataNamaIbu">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Pekerjaan Ibu
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataPekerjaanIbu">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Agama ayah/ibu
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataAgamaAyahIbu">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Tanggungan keluarga
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataTanggunganKeluarga">
+                        : -
+                    </td>
+                </tr>
+            </table>
+            <h2 class="text-base font-bold text-emerald-800 mb-3 pt-3">Informasi Akademik</h2>
+            <table class="table w-full">
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Nisn
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataNisn">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Asal Sekolah
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataAsalSekolah">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Nomor STTB
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataNoSttb">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Tahun STTB
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataTahunSttb">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        pilihan program studi
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataProgramStudi">
+                        : -
+                    </td>
+                </tr>
+            </table>
+            <h2 class="text-base font-bold text-emerald-800 mb-3 pt-3">Informasi Lain</h2>
+            <table class="table w-full">
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Tinggi Badan
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataTinggiBadan">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Berat Badan
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataBeratBadan">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Golongan darah
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataGolonganDarah">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Penyakit Kronis
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataPenyakitKronis">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Cita Cita
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataCitaCita">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Hobi
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataHobi">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Prestasi
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataPrestasi">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        Keahlian
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataKeahlian">
+                        : -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-1/2 text-xs sm:text-sm align-top">
+                        ukuran seragam
+                    </td>
+                    <td class="max-w-1/2 text-xs sm:text-sm align-top" id="dataUkuranSeragam">
+                        : -
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
     </form>
     <div class="px-8 mb-5 mt-10">
         <div class="formPage1 flex justify-between">
@@ -672,6 +945,10 @@
         </div>
         <div class="formPage4 flex justify-between hidden">
             <button type="button" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium" id="backPage3">Kembali</button>
+            <button id="nextPage5" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium">Selanjutnya</button>
+        </div>
+        <div class="formPage5 flex justify-between hidden">
+            <button type="button" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium" id="backPage4">Kembali</button>
             <button id="subButton" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium">Submit</button>
         </div>
     </div>
@@ -734,6 +1011,9 @@
     $('#nextPage4').on('click', function() {
         nextPage(3);
     });
+    $('#nextPage5').on('click', function() {
+        nextPage(4);
+    });
     $('#backPage1').on('click', function() {
         backPage(2);
     });
@@ -743,9 +1023,11 @@
     $('#backPage3').on('click', function() {
         backPage(4);
     });
+    $('#backPage4').on('click', function() {
+        backPage(5);
+    });
 
     $('#subButton').on('click', function() {
-        // form submit
         $('#formPendaftaran').submit();
     });
 
@@ -765,8 +1047,8 @@
         $('.formPage2').addClass('hidden');
         $('.formPage3').addClass('hidden');
         $('.formPage4').addClass('hidden');
+        $('.formPage5').addClass('hidden');
 
-        // show page
         $('.formPage' + page).removeClass('hidden');
     }
 
@@ -778,13 +1060,42 @@
         }
     });
     
-    // fungsi hide show wali menu
     function waliMenu(view) {
         if (view == 'show') {
             $('.walifield').removeClass('hidden');
         } else {
             $('.walifield').addClass('hidden');
         }
+    }
+
+    function collectData() {
+        let dataform = $('#formPendaftaran').serializeArray();
+        let data = {};
+        $.each(dataform, function(i, field) {
+            data[field.name] = field.value;
+        });
+        return data;
+    }
+
+    function drawList() {
+        let data = collectData();
+        $('#dataNama').html(data.nama_lengkap ? ': ' + data.nama_lengkap : ': -');
+        $('#dataNamaPanggilan').html(data.nama_panggilan ? ': ' + data.nama_panggilan : ': -');
+        $('#dataNik').html(data.nik ? ': ' + data.nik : ': -');
+        $('#dataTglLahir').html(data.tanggal_lahir ? ': ' + data.tanggal_lahir : ': -');
+        $('#dataTempatLahir').html(data.tempat_lahir ? ': ' + data.tempat_lahir : ': -');
+        $('#dataJenisKelamin').html(data.jenis_kelamin ? ': ' + data.jenis_kelamin : ': -');
+        const alamat = data.jalan + ', ' + data.gang + ', ' + data.rt + '/' + data.rw + ', ' + data.no_rumah + ', ' + data.desa + ', ' + data.kecamatan + ', ' + data.kota + ', ' + data.provinsi + ', ' + data.kode_pos;
+        if (data.jalan || data.gang || data.rt || data.rw || data.no_rumah || data.desa || data.kecamatan || data.kota || data.provinsi || data.kode_pos) {
+            $('#dataAlamat').html(': ' + alamat);
+        } else {
+            $('#dataAlamat').html(': -');
+        }
+        $('#dataAgama').html(data.agama ? ': ' + data.agama : ': -');
+        $('#dataNoHp').html(data.no_hp ? ': ' + data.no_hp : ': -');
+        $('#dataAnakKe').html(data.anak_ke ? ': ' + data.anak_ke : ': -');
+        // $('#dataJumlahSaudara').html(data.jumlah_saudara ? ': ' + data.jumlah_saudara : ': -');
+
     }
 </script>
 @endpush
