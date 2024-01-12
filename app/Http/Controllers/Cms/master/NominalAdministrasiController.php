@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cms\master;
+namespace App\Http\Controllers\Cms\Master;
 
 use App\Http\Controllers\Controller;
 use App\Models\NominalPendaftaran;

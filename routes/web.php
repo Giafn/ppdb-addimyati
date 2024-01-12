@@ -3,14 +3,14 @@
 use App\Http\Controllers\Cms\ListPendaftarController;
 use App\Http\Controllers\Cms\master\PpdbSettingController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Cms\UserController;
-use App\Http\Controllers\Cms\UserLevelController;
 use App\Http\Controllers\Front\FrontController;
-use App\Http\Controllers\Cms\master\NominalAdministrasiController;
+use App\Http\Controllers\Cms\Master\NominalAdministrasiController;
 use App\Http\Controllers\Cms\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Cms\FaqController;
-use App\Http\Controllers\Cms\InfoPPDBController;
-use App\Http\Controllers\Cms\master\JurusanController;
+use App\Http\Controllers\Cms\Master\FaqController;
+use App\Http\Controllers\Cms\Master\InfoPPDBController;
+use App\Http\Controllers\Cms\Master\JurusanController;
+use App\Http\Controllers\Cms\System\UserController;
+use App\Http\Controllers\Cms\System\UserLevelController;
 use Illuminate\Support\Facades\Auth;
 
 /*
