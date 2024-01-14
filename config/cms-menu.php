@@ -122,29 +122,6 @@ return [
 			'code' => 'pembayaran',
 			'task' => []
 		],
-		'child'      => [
-			[
-				'code'		 => "semua",
-				'name'		 => "Semua",
-				'label'		 => "semua",
-				'icon'		 => "",
-				'route_name' => "cmsPembayaranSemua",
-				'module' 	 => [
-					'code' => 'pembayaranSemua',
-					'task' => []
-				]
-			],
-			[
-				'code'		 => "lunas",
-				'name'		 => "Lunas",
-				'label'		 => "lunas",
-				'icon'		 => "",
-				'route_name' => "cmsPembayaranLunas",
-				'module' 	 => [
-					'code' => 'pembayaranLunas',
-					'task' => []
-				]
-			],
-		],
+		'child'      => []
 	],
 ];

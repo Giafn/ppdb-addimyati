@@ -9,6 +9,7 @@ use App\Http\Controllers\Cms\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Cms\Master\FaqController;
 use App\Http\Controllers\Cms\Master\InfoPPDBController;
 use App\Http\Controllers\Cms\Master\JurusanController;
+use App\Http\Controllers\Cms\PembayaranController;
 use App\Http\Controllers\Cms\System\UserController;
 use App\Http\Controllers\Cms\System\UserLevelController;
 use Illuminate\Support\Facades\Auth;
@@ -125,6 +126,13 @@ Route::middleware('auth')->group(function () {
             Route::patch('/update/akademik/{id}', [ListPendaftarController::class, 'updateAkademik']);
             Route::patch('/update/ortu/{id}', [ListPendaftarController::class, 'updateOrangTua']);
             Route::patch('/update/wali/{id}', [ListPendaftarController::class, 'updateWali']);
+        });
+
+        Route::prefix('pembayaran')->group(function () {
+            Route::get('/', [PembayaranController::class, 'index'])->name('cmsPembayaran');
+            Route::get('/{id}', [PembayaranController::class, 'showInfoAndHistory']);
+            Route::post('/{id}', [PembayaranController::class, 'bayar']);
+            Route::post('/{id}/total', [PembayaranController::class, 'setHarga']);
         });
     });
 
