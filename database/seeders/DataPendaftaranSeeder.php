@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Http\Controllers\Cms\master\NominalAdministrasiController;
-use App\Http\Controllers\Cms\master\PpdbSettingController;
+use App\Http\Controllers\Cms\Master\NominalAdministrasiController;
+use App\Http\Controllers\Cms\Master\PpdbSettingController;
 use App\Models\Akademik;
 use App\Models\CalonSiswa;
 use App\Models\Pendaftaran;

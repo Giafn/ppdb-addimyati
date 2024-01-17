@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Cms;
 
-use App\Http\Controllers\Cms\master\NominalAdministrasiController;
-use App\Http\Controllers\Cms\master\PpdbSettingController;
+use App\Http\Controllers\Cms\Master\NominalAdministrasiController;
+use App\Http\Controllers\Cms\Master\PpdbSettingController;
 use App\Http\Controllers\Controller;
 use App\Models\Akademik;
 use App\Models\Alamat;

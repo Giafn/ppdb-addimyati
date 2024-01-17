@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Http\Controllers\Cms\master\PpdbSettingController;
+use App\Http\Controllers\Cms\Master\PpdbSettingController;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendNotifEmailJob;
 use App\Models\Akademik;

@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Cms\ListPendaftarController;
-use App\Http\Controllers\Cms\master\PpdbSettingController;
+use App\Http\Controllers\Cms\Master\PpdbSettingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Cms\Master\NominalAdministrasiController;
