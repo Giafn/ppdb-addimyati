@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Cms\Master\PpdbSettingController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\NikParse\Nik;
 use App\Jobs\SendNotifEmailJob;
 use App\Models\Akademik;
 use App\Models\Alamat;
@@ -231,7 +232,7 @@ class FrontController extends Controller
         $data = null;
         $validator = Validator::make($request->all(),[
             'nama_lengkap' => 'required|alpha_space',
-            'nik' => 'required|nik|unique:calon_siswa,nik|min:16|numeric',
+            'nik' => 'required|unique:calon_siswa,nik|min:16|numeric',
             'tanggal_lahir' => 'required|date',
             'tempat_lahir' => 'required|alpha_space|min:3',
             'jenis_kelamin' => 'required|alpha_space|in:l,p',
@@ -345,6 +346,17 @@ class FrontController extends Controller
                     break;
                 }
             }
+        }
+
+        $cekNik = new Nik($request->nik);
+        if (!$cekNik->isValid()) {
+            return [
+                "page" => "1",
+                "validator" => Validator::make([],[])
+                    ->after(function ($validator) {
+                        $validator->errors()->add('nik', 'NIK tidak valid.');
+                    })
+            ];
         }
 
         return $data;

@@ -311,8 +311,11 @@
                                 <option value="sma" @if (old('pendidikan_ayah') == 'sma') selected @endif>
                                     SMA
                                 </option>
+                                <option value="s3" @if (old('pendidikan_ayah') == 'd3') selected @endif>
+                                    D3
+                                </option>
                                 <option value="s1" @if (old('pendidikan_ayah') == 's1') selected @endif>
-                                    S1
+                                    S1 / D4
                                 </option>
                                 <option value="s2" @if (old('pendidikan_ayah') == 's2') selected @endif>
                                     S2
@@ -329,22 +332,25 @@
                             <select name="pendidikan_ibu" id="pendidikan_ibu"
                                 class="text-xs shadow-sm focus:ring-emerald-800 focus:border-emerald-800 block w-full sm:text-sm border-gray-300 rounded-md">
                                 <option value="">Pilih Pendidikan Ibu</option>
-                                <option value="sd" @if (old('pendidikan_ayah') == 'sd') selected @endif>
+                                <option value="sd" @if (old('pendidikan_ibu') == 'sd') selected @endif>
                                     SD
                                 </option>
-                                <option value="smp" @if (old('pendidikan_ayah') == 'smp') selected @endif>
+                                <option value="smp" @if (old('pendidikan_ibu') == 'smp') selected @endif>
                                     SMP
                                 </option>
-                                <option value="sma" @if (old('pendidikan_ayah') == 'sma') selected @endif>
+                                <option value="sma" @if (old('pendidikan_ibu') == 'sma') selected @endif>
                                     SMA
                                 </option>
-                                <option value="s1" @if (old('pendidikan_ayah') == 's1') selected @endif>
-                                    S1
+                                <option value="s3" @if (old('pendidikan_ibu') == 'd3') selected @endif>
+                                    D3
                                 </option>
-                                <option value="s2" @if (old('pendidikan_ayah') == 's2') selected @endif>
+                                <option value="s1" @if (old('pendidikan_ibu') == 's1') selected @endif>
+                                    S1 / D4
+                                </option>
+                                <option value="s2" @if (old('pendidikan_ibu') == 's2') selected @endif>
                                     S2
                                 </option>
-                                <option value="s3" @if (old('pendidikan_ayah') == 's3') selected @endif>
+                                <option value="s3" @if (old('pendidikan_ibu') == 's3') selected @endif>
                                     S3
                                 </option>
                             </select>
