@@ -4,7 +4,7 @@
 @endphp
 <nav class="bg-white border-gray-200 fixed w-full z-20 top-0 start-0 md:py-2 shadow">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href=/ppdb class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="/image/logo.png" class="h-8 mr-1" alt="Logo" />
             <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">SMKT Ad-Dimyati</span>
         </a>

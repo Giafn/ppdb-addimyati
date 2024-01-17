@@ -1082,7 +1082,7 @@
         </form>
         <div class="px-8 mb-5 mt-10">
             <div class="formPage1 flex justify-between">
-                <a href="/" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium">Kembali</a>
+                <a href=/ppdb class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium">Kembali</a>
                 <button type="button" class="bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium"
                     id="nextPage2">Selanjutnya</button>
             </div>
