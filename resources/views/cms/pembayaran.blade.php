@@ -30,23 +30,12 @@
                                 </svg>
                                 <a href="#"
                                     class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">List
-                                    Pendaftar</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center">
-                                <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">#</span>
+                                    Pembayaran</a>
                             </div>
                         </li>
                     </ol>
                 </nav>
-                <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">List Pendaftar</h1>
+                <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">List Pembayaran</h1>
             </div>
             <form action="#" method="GET">
                 <div class="sm-flex mb-2">
@@ -91,7 +80,7 @@
                             <input type="text" name="search" id="search"
                                 value="{{ app('request')->input('search') }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Cari berdasarkan nama, nisn, dan email">
+                                placeholder="Cari berdasarkan nama. dan nisn">
                         </div>
                     </div>
                     <div
@@ -287,7 +276,7 @@
                             <input type="hidden" id="infoId" name="id">
                             <input type="hidden" id="sisaBayar">
                             <div class="mb-4">
-                                <table class="w-full">
+                                <table class="w-full dark:text-white">
                                     <tr>
                                         <td>Nama Siswa</td>
                                         <td>:</td>

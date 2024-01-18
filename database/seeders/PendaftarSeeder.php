@@ -19,7 +19,7 @@ class PendaftarSeeder extends Seeder
     {
         $faker = Factory::create('id_ID');
 
-        for ($i = 0; $i < 999; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             try {
                 DB::beginTransaction();
                 $ppdbAktif = PpdbSettingController::getPPDBInfo()['ppdbOpen'];
@@ -48,6 +48,9 @@ class PendaftarSeeder extends Seeder
                 $pendaftaran->jurusan_id1 = $faker->numberBetween(1, 5); // ID Jurusan
                 $pendaftaran->jurusan_id2 = $faker->numberBetween(1, 5); // ID Jurusan
                 $pendaftaran->referensi = $faker->optional()->word;
+                $ppdbStart = $ppdbAktif->start_date;
+                $ppdbEnd = $ppdbAktif->end_date;
+                $pendaftaran->created_at = $faker->dateTimeBetween($ppdbStart, $ppdbEnd);
 
                 // Generate Akademik
                 $akademik = new \App\Models\Akademik();

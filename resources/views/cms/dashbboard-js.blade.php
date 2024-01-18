@@ -25,6 +25,9 @@
                         tension: 0.4 // Atur nilai tension sesuai kebutuhan (0.0 - 1.0)
                     }
                 },
+                interaction: {
+                    intersect: false,
+                },
             }
         };
         var myChart = new Chart(document.getElementById('pendaftarChart'), config);
