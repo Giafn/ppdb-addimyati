@@ -9,7 +9,7 @@
                 <div class="flex flex-col items-center justify-center">
                     <h1 class="text-sm font-bold text-white text-center">Formulir Pendaftaran Siswa Baru</h1>
                     <h1 class="text-base font-bold text-white text-center">SMK Terpadu Ad-Dimyati</h1>
-                    <h1 class="text-xs font-bold text-white text-center">Tahun Pelajaran 2021/2022</h1>
+                    <h1 class="text-xs font-bold text-white text-center">Tahun Pelajaran {{ $dataPpdb['tahun_ajaran'] }} gel {{ $dataPpdb['gelombang'] }}</h1>
                 </div>
             </div>
         </div>
