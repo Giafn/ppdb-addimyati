@@ -211,13 +211,13 @@ class FrontController extends Controller
             ], 422);
         }
 
-        $cekNik = new Nik($req->nik);
-        if (!$cekNik->isValid()) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'NIK tidak valid'
-            ], 422);
-        }
+        // $cekNik = new Nik($req->nik);
+        // if (!$cekNik->isValid()) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'NIK tidak valid'
+        //     ], 422);
+        // }
 
         $data = Pendaftaran::join('calon_siswa', 'pendaftaran.calon_siswa_id', '=', 'calon_siswa.id')
             ->join('akademik', 'calon_siswa.akademik_id', '=', 'akademik.id')
