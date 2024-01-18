@@ -1,7 +1,6 @@
 @extends('front.layouts.app')
 @section('title', 'PPDB Ad-Dimyati | ')
 @section('content')
-
     @if (session('page'))
     @endif
     <div class="lg:w-1/2 lg:mx-auto">
