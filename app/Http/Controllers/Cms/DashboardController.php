@@ -53,6 +53,9 @@ class DashboardController extends Controller
             ->when(!$tahunAjaran, function ($query) use ($tahunSelect) {
                 return $query->where('tahun_ajaran', $tahunSelect);
             })
+            ->when(!$gelombang, function ($query) use ($ppdb) {
+                return $query->where('gelombang', $ppdb["ppdbOpen"]->gelombang);
+            })
             ->groupBy('date')
             ->orderBy('date', 'asc')
             ->get();
@@ -74,6 +77,9 @@ class DashboardController extends Controller
             })
             ->when(!$tahunAjaran, function ($query) use ($tahunSelect) {
                 return $query->where('tahun_ajaran', $tahunSelect);
+            })
+            ->when(!$gelombang, function ($query) use ($ppdb) {
+                return $query->where('gelombang', $ppdb["ppdbOpen"]->gelombang);
             })
             ->groupBy('jurusan')
             ->orderBy('jurusan', 'asc')
@@ -104,6 +110,9 @@ class DashboardController extends Controller
             ->when(!$tahunAjaran, function ($query) use ($tahunSelect) {
                 return $query->where('tahun_ajaran', $tahunSelect);
             })
+            ->when(!$gelombang, function ($query) use ($ppdb) {
+                return $query->where('gelombang', $ppdb["ppdbOpen"]->gelombang);
+            })
             ->count();
 
         // jumlah pendaftar per status_pembayaran 0 = belum bayar 1 = belum lunas 2 = lunas
@@ -118,16 +127,18 @@ class DashboardController extends Controller
             ->when(!$tahunAjaran, function ($query) use ($tahunSelect) {
                 return $query->where('tahun_ajaran', $tahunSelect);
             })
+            ->when(!$gelombang, function ($query) use ($ppdb) {
+                return $query->where('gelombang', $ppdb["ppdbOpen"]->gelombang);
+            })
             ->groupBy('status_pembayaran')
             ->orderBy('status_pembayaran', 'asc')
             ->get();
-        $totalPendaftarPerStatus = $totalPendaftarPerStatus->map(function ($item) use ($totalPendaftar) {
+        $totalPendaftarPerStatus = $totalPendaftarPerStatus->map(function ($item) use ($totalPendaftarGelombangIni) {
             $item->status_pembayaran = $item->status_pembayaran == 0 ? "Belum Bayar" : ($item->status_pembayaran == 1 ? "Belum Lunas" : "Lunas");
-            $item->persen_total = round(($item->total / $totalPendaftar) * 100, 0);
+            $item->persen_total = round(($item->total / $totalPendaftarGelombangIni) * 100, 1);
             return $item;
         });
         $totalPendaftarPerStatus = $totalPendaftarPerStatus->toArray();
-
 
         $dataLineChart = [
             "labels" => $rekapPendaftarPerday->pluck('date')->toArray(),

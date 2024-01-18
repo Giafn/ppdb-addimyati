@@ -5,27 +5,6 @@
     $(document).ready(function() {
         getData();
     });
-    // var dataPendaftar = {
-    //     labels: ['Hari 1', 'Hari 2', 'Hari 3', 'Hari 4', 'Hari 5'],
-    //     datasets: [{
-    //         label: 'Jumlah Pendaftar',
-    //         data: [10, 20, 15, 25, 30],
-    //         borderColor: 'rgba(75, 192, 192, 1)',
-    //         borderWidth: 2,
-    //         fill: false
-    //     }]
-    // };
-    // drawLineChart(dataPendaftar);
-
-    // var dataJurusan = {
-    //   labels: ['Jurusan A', 'Jurusan B', 'Jurusan C', 'Jurusan D'],
-    //   datasets: [{
-    //     data: [30, 20, 15, 35],
-    //     backgroundColor: ['rgba(255, 99, 132, 0.7)', 'rgba(54, 162, 235, 0.7)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.7)'],
-    //     hoverBackgroundColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
-    //   }]
-    // };
-    // drawDoughnutChart(dataJurusan);
 
     function drawLineChart(data) {
         var config = {
@@ -99,7 +78,7 @@
                     }
                 }
 
-                $("#gelombangNow").html(response.results.gelombangNow);
+                $("#gelombangNow").html(gelombang ? gelombang : response.results.gelombangNow);
                 $(".periode").html(response.results.tahunAjaranNow + " gelombang " + response.results.gelombangNow);
                 
                 $("#tahun_ajaran").val(tahun_ajaran ? tahun_ajaran : response.results.tahunAjaranNow)
