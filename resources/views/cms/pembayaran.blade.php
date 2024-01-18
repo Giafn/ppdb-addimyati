@@ -295,13 +295,13 @@
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Total Yang
                                         Harus Dibayarkan <span class="text-red-500">*</span></label>
 
-                                    <p id="totalBayarText">
+                                    <p id="totalBayarText" class="dark:text-white">
                                     </p>
                                 </div>
                                 <div class="mb-4">
                                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sisa
                                         tunggakan</label>
-                                    <p id="sisaTunggakanText">
+                                    <p id="sisaTunggakanText" class="dark:text-white">
                                     </p>
                                 </div>
                                 <div class="mb-4" id="nominalBayarContainer">
@@ -515,6 +515,7 @@
 
         function drawDetail(data, reload = false) {
             data = data.results;
+            $('#totalBayar').val('');
             $('#infoId').val(data.id);
             $('#infoNamaSiswa').html(data.nama);
             $('#infoStatusPembayaran').html(data.status_pembayaran);
