@@ -52,7 +52,8 @@ Route::get('/ppdb/pendaftaran', [FrontController::class, 'pendaftaran']);
 Route::get('/ppdb/flow-daftar', [FrontController::class, 'flowDaftar']);
 Route::post('/ppdb/pendaftaran', [FrontController::class, 'storePendaftaran']);
 Route::post('/ppdb/pendaftaran/sub-email', [FrontController::class, 'subEmail']);
-
+Route::get('/ppdb/cek-data', [FrontController::class, 'indexCekData']);
+Route::post('/ppdb/cek-data', [FrontController::class, 'cekData']);
 Route::middleware('auth')->group(function () {
     
     // route grup prefix cms

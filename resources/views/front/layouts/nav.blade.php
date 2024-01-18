@@ -3,7 +3,7 @@
     $inactiveClass = 'block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-lime-700';
 @endphp
 <nav class="bg-white border-gray-200 fixed w-full z-20 top-0 start-0 md:py-2 shadow">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-1 px-3">
         <a href=/ppdb class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="/image/logo.png" class="h-8 mr-1" alt="Logo" />
             <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">SMKT Ad-Dimyati</span>
@@ -35,11 +35,12 @@
                         class="{{ request()->url() == url('/ppdb/flow-daftar') ? $activeClass : $inactiveClass }}">
                         Informasi</a>
                 </li>
-                {{-- <li>
-                    <a href="#"
-                        class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-lime-700">Cek data</a>
-                </li>
                 <li>
+                    <a href="/ppdb/cek-data"
+                        class="{{ request()->url() == url('/ppdb/cek-data') ? $activeClass : $inactiveClass }}">
+                        Cek Data</a>
+                </li>
+                {{-- <li>
                     <a href="#"
                         class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-lime-700 ">Contact</a>
                 </li> --}}

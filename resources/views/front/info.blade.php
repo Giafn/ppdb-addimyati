@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-@section('title', 'PPDB Ad-Dimyati | ')
+@section('title', 'Pendaftaran | ')
 @section('content')
 @php
     $dibuka = false;

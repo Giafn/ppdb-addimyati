@@ -16,6 +16,7 @@ use App\Models\Pendaftaran;
 use App\Models\ProgramKeahlian;
 use App\Models\SubsEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -182,9 +183,65 @@ class FrontController extends Controller
 
     public function flowDaftar()
     {
+        $ppdb = PpdbSettingController::getPPDBInfo();
+        $ppdbAktif = $ppdb['ppdbOpen'] ? $ppdb['ppdbOpen']->toArray() : null;
+
         $dataAlur = AlurPendaftaran::all();
         $faq = Faq::all();
-        return view('front.flow-ppdb', compact('dataAlur', 'faq'));
+        return view('front.flow-ppdb', compact('dataAlur', 'faq', 'ppdbAktif'));
+    }
+
+    public function indexCekData()
+    {
+        return view('front.cek-data');
+    }
+
+    public function cekData(Request $req)
+    {
+        $validator = Validator::make($req->all(),[
+            'nik' => 'required|min:16|numeric',
+            'tanggal_lahir' => 'required|date',
+            'nisn' => 'required|min:10|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $validator->errors()->first()
+            ], 422);
+        }
+
+        $cekNik = new Nik($req->nik);
+        if (!$cekNik->isValid()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'NIK tidak valid'
+            ], 422);
+        }
+
+        $data = Pendaftaran::join('calon_siswa', 'pendaftaran.calon_siswa_id', '=', 'calon_siswa.id')
+            ->join('akademik', 'calon_siswa.akademik_id', '=', 'akademik.id')
+            ->join('program_keahlian', 'pendaftaran.jurusan_id1', '=', 'program_keahlian.id')
+            ->where('calon_siswa.nik', $req->nik)
+            ->where('akademik.nisn', $req->nisn)
+            ->where('calon_siswa.tanggal_lahir', $req->tanggal_lahir)
+            ->select('pendaftaran.id As id','pendaftaran.kode','program_keahlian.nama As jurusan', 'pendaftaran.referensi', 'pendaftaran.created_at As tanggal_daftar', 'calon_siswa.nama_lengkap', 'akademik.asal_sekolah')
+            ->first();
+        if (!$data) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data tidak ditemukan'
+            ], 422);
+        }
+
+        unset($data->id);
+
+        $data->id_hash = Crypt::encryptString($data->id);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $data
+        ]);
     }
 
     public function subEmail(Request $request)

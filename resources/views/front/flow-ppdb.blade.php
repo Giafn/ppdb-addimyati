@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-@section('title', 'PPDB Ad-Dimyati | ')
+@section('title', 'Informasi | ')
 @section('content')
 
 @if(session('page'))
@@ -8,7 +8,7 @@
     <div class="w-full my-10">
         <div class="text-center">
             <h1 class="text-xl font-bold text-emerald-800 text-center">Alur Pendaftaran <br> SMK Ad-Dimyati</h1>
-            <p class="text-sm font-semibold text-emerald-800 text-center">2021/2022</p>
+            <p class="text-sm font-semibold text-emerald-800 text-center">{{ $ppdbAktif['tahun_ajaran'] }} gel {{ $ppdbAktif['gelombang'] }}</p>
         </div>
     </div>
     <div class="container mx-auto">
