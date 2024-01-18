@@ -87,7 +87,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-span-2">
+        {{-- <div class="col-span-2">
             <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <h3 class="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
                     General Access
@@ -113,7 +113,7 @@
                     @endforeach
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 @endsection
