@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Cms\Master\NominalAdministrasiController;
 use App\Http\Controllers\Cms\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Cms\DashboardController;
 use App\Http\Controllers\Cms\Master\FaqController;
 use App\Http\Controllers\Cms\Master\InfoPPDBController;
 use App\Http\Controllers\Cms\Master\JurusanController;
@@ -53,12 +54,11 @@ Route::post('/ppdb/pendaftaran', [FrontController::class, 'storePendaftaran']);
 Route::post('/ppdb/pendaftaran/sub-email', [FrontController::class, 'subEmail']);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/cms/dashboard', function () {
-        return view('cms.dashboard');
-    })->name('cmsDashboard');
-
+    
     // route grup prefix cms
     Route::prefix('cms')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('cmsDashboard');
+        Route::get('/dashboard/data', [DashboardController::class, 'data'])->name('cmsDashboard.data');
         // --setting--
         // route grup prefix user
         Route::prefix('user')->group(function () {
