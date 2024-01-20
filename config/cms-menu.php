@@ -87,6 +87,17 @@ return [
 				]
 			],
 			[
+				'code'		 => "administrasi",
+				'name'		 => "Administrasi",
+				'label'		 => "administrasi",
+				'icon'		 => "",
+				'route_name' => "cmsNominalAdministrasi",
+				'module' 	 => [
+					'code' => 'administrasi',
+					'task' => []
+				]
+			],
+			[
 				'code'		 => "ppdb",
 				'name'		 => "PPDB Setting",
 				'label'		 => "ppdbSetting",

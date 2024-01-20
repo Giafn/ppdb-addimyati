@@ -14,6 +14,7 @@ use App\Http\Controllers\Cms\PembayaranController;
 use App\Http\Controllers\Cms\System\UserController;
 use App\Http\Controllers\Cms\System\UserLevelController;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,10 @@ Route::get('/', function () {
     } else {
         return redirect()->route('ppdb');
     }
+});
+
+Route::get('/test-export', function () {
+    return Excel::download(new \App\Exports\ExportPPDB, 'calon-siswa.xlsx');
 });
 
 Route::middleware('guest')->group(function () {
