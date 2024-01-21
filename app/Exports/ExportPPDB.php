@@ -13,6 +13,7 @@ class ExportPPDB implements WithMultipleSheets
 
         $sheets[] = new Sheets\SheetNamaSiswa;
         $sheets[] = new Sheets\SheetAsalSekolah;
+        $sheets[] = new Sheets\SheetDataSiswa;
 
         return $sheets;
     }

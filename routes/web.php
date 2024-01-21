@@ -39,7 +39,9 @@ Route::get('/', function () {
 Route::get('/test-export', function () {
     return Excel::download(new \App\Exports\ExportPPDB, 'calon-siswa.xlsx');
 });
-
+Route::get('/test-view', function () {
+    return view('export.data-siswa');
+});
 Route::middleware('guest')->group(function () {
     Route::get('/login', function () {
         return redirect()->route('login');
