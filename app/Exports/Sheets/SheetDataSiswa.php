@@ -45,6 +45,7 @@ class SheetDataSiswa implements FromView, ShouldAutoSize, WithTitle
                 'ibu.pekerjaan as pekerjaan_ibu',
                 'wali.pekerjaan as pekerjaan_wali',
                 'alamat.gang as alamat_gg',
+                'alamat.jalan as alamat_jln',
                 'alamat.rt as alamat_rt',
                 'alamat.rw as alamat_rw',
                 'alamat.desa as alamat_desa',
