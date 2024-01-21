@@ -261,7 +261,7 @@
         loading(true)
         axios({
                 method: 'post',
-                url: '/cms/master/ppdb/faq',
+                url: '/cms/informasi/faq',
                 data: formDataObj
             })
             .then(function(response) {
@@ -292,7 +292,7 @@
 
         axios({
                 method: 'get',
-                url: '/cms/master/ppdb/faq/' + id,
+                url: '/cms/informasi/faq/' + id,
             })
             .then(function(response) {
                 if (response.data.status == "OK") {
@@ -316,7 +316,7 @@
         loading(true)
         axios({
                 method: 'post',
-                url: '/cms/master/ppdb/faq',
+                url: '/cms/informasi/faq',
                 data: formDataObj
             })
             .then(function(response) {
@@ -356,7 +356,7 @@
         loading(true)
         axios({
                 method: 'delete',
-                url: '/cms/master/ppdb/faq/' + id,
+                url: '/cms/informasi/faq/' + id,
                 data: {
                     _token: "{{ csrf_token() }}"
                 }

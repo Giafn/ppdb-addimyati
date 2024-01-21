@@ -66,7 +66,11 @@ class KeringananController extends Controller
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Terjadi kesalahan');
+            return response()->json([
+                'status' => 'ERROR',
+                'message' => 'Terjadi kesalahan',
+                'error' => $th->getMessage(),
+            ], 500);
         }
 
         return response()->json([

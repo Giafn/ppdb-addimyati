@@ -261,7 +261,7 @@
         loading(true)
         axios({
                 method: 'post',
-                url: '/cms/master/ppdb/alur-pendaftaran',
+                url: '/cms/informasi/alur-pendaftaran',
                 data: formDataObj
             })
             .then(function(response) {
@@ -292,7 +292,7 @@
 
         axios({
                 method: 'get',
-                url: '/cms/master/ppdb/alur-pendaftaran/' + id,
+                url: '/cms/informasi/alur-pendaftaran/' + id,
             })
             .then(function(response) {
                 if (response.data.status == "OK") {
@@ -316,7 +316,7 @@
         loading(true)
         axios({
                 method: 'post',
-                url: '/cms/master/ppdb/alur-pendaftaran',
+                url: '/cms/informasi/alur-pendaftaran',
                 data: formDataObj
             })
             .then(function(response) {
@@ -356,7 +356,7 @@
         loading(true)
         axios({
                 method: 'delete',
-                url: '/cms/master/ppdb/alur-pendaftaran/' + id,
+                url: '/cms/informasi/alur-pendaftaran/' + id,
                 data: {
                     _token: "{{ csrf_token() }}"
                 }

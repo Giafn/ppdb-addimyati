@@ -251,7 +251,7 @@
         loading(true)
         axios({
                 method: 'post',
-                url: '/cms/master/ppdb/keringanan',
+                url: '/cms/administrasi/keringanan',
                 data: data
             })
             .then(function(response) {
@@ -282,7 +282,7 @@
 
         axios({
                 method: 'get',
-                url: '/cms/master/ppdb/keringanan/' + id,
+                url: '/cms/administrasi/keringanan/' + id,
             })
             .then(function(response) {
                 if (response.data.status == "OK") {
@@ -320,7 +320,7 @@
         loading(true)
         axios({
                 method: 'post',
-                url: '/cms/master/ppdb/keringanan',
+                url: '/cms/administrasi/keringanan',
                 data: data
             })
             .then(function(response) {
@@ -360,7 +360,7 @@
         loading(true)
         axios({
                 method: 'delete',
-                url: '/cms/master/ppdb/keringanan/' + id,
+                url: '/cms/administrasi/keringanan/' + id,
                 data: {
                     _token: "{{ csrf_token() }}"
                 }

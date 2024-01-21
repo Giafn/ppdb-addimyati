@@ -282,7 +282,7 @@
         loading(true)
         axios({
                 method: 'post',
-                url: '/cms/master/ppdb/administrasi',
+                url: '/cms/administrasi/normal',
                 data: formDataObj
             })
             .then(function(response) {
@@ -313,7 +313,7 @@
 
         axios({
                 method: 'get',
-                url: '/cms/master/ppdb/administrasi/' + id,
+                url: '/cms/administrasi/normal/' + id,
             })
             .then(function(response) {
                 if (response.data.status == "OK") {
@@ -339,7 +339,7 @@
         loading(true)
         axios({
                 method: 'put',
-                url: '/cms/master/ppdb/administrasi/' + formData.get('id'),
+                url: '/cms/administrasi/normal/' + formData.get('id'),
                 data: formDataObj
             })
             .then(function(response) {
@@ -379,7 +379,7 @@
         loading(true)
         axios({
                 method: 'delete',
-                url: '/cms/master/ppdb/administrasi/' + id,
+                url: '/cms/administrasi/normal/' + id,
                 data: {
                     _token: "{{ csrf_token() }}"
                 }

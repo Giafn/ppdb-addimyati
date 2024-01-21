@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Cms\Master;
+namespace App\Http\Controllers\Cms\Informasi;
 
 use App\Http\Controllers\Controller;
-use App\Models\AlurPendaftaran;
+use App\Models\Faq;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class InfoPPDBController extends Controller
+class FaqController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['cms.access:alurPendaftaran,hak-akses']);
+        $this->middleware(['cms.access:faq,hak-akses']);
     }
 
     public function index(Request $request)
@@ -20,7 +20,7 @@ class InfoPPDBController extends Controller
             'serach' => 'nullable',
         ]);
 
-        $listData  = AlurPendaftaran::orderBy('id', 'asc')
+        $listData  = Faq::orderBy('id', 'asc')
             ->paginate(30);
 
         $listData->appends($request->input());
@@ -38,12 +38,12 @@ class InfoPPDBController extends Controller
         ];
 
 
-        return view('cms.master.alur-daftar', compact('listData', 'paginationData'));
+        return view('cms.master.faq', compact('listData', 'paginationData'));
     }
 
     public function detail(Request $request, $id)
     {
-        $data = AlurPendaftaran::find($id);
+        $data = Faq::find($id);
 
         if (!$data) {
             return response()->json([
@@ -60,9 +60,9 @@ class InfoPPDBController extends Controller
     public function storeOrUpdate(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama_tahap' => 'required|string',
-            'deskripsi'  => 'required|string',
-            "id"         => "nullable|exists:alur_pendaftaran,id"
+            'pertanyaan' => 'required|string',
+            'jawaban'  => 'required|string',
+            "id"         => "nullable|exists:faq,id"
         ]);
 
         if ($validator->fails()) {
@@ -73,10 +73,10 @@ class InfoPPDBController extends Controller
         
         try {
             if ($request->id) {
-                $data = AlurPendaftaran::find($request->id);
+                $data = Faq::find($request->id);
                 $data->update($request->all());
             } else {
-                $data = AlurPendaftaran::create($request->all());
+                $data = Faq::create($request->all());
             }
         } catch (\Exception $e) {
             return response()->json([
@@ -92,7 +92,7 @@ class InfoPPDBController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $data = AlurPendaftaran::find($id);
+        $data = Faq::find($id);
 
         if (!$data) {
             return response()->json([

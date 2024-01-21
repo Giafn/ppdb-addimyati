@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Cms\Master;
+namespace App\Http\Controllers\Cms\Informasi;
 
 use App\Http\Controllers\Controller;
-use App\Models\Faq;
+use App\Models\AlurPendaftaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class FaqController extends Controller
+class InfoPPDBController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['cms.access:faq,hak-akses']);
+        $this->middleware(['cms.access:alurPendaftaran,hak-akses']);
     }
 
     public function index(Request $request)
@@ -20,7 +20,7 @@ class FaqController extends Controller
             'serach' => 'nullable',
         ]);
 
-        $listData  = Faq::orderBy('id', 'asc')
+        $listData  = AlurPendaftaran::orderBy('id', 'asc')
             ->paginate(30);
 
         $listData->appends($request->input());
@@ -38,12 +38,12 @@ class FaqController extends Controller
         ];
 
 
-        return view('cms.master.faq', compact('listData', 'paginationData'));
+        return view('cms.master.alur-daftar', compact('listData', 'paginationData'));
     }
 
     public function detail(Request $request, $id)
     {
-        $data = Faq::find($id);
+        $data = AlurPendaftaran::find($id);
 
         if (!$data) {
             return response()->json([
@@ -60,8 +60,8 @@ class FaqController extends Controller
     public function storeOrUpdate(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'pertanyaan' => 'required|string',
-            'jawaban'  => 'required|string',
+            'nama_tahap' => 'required|string',
+            'deskripsi'  => 'required|string',
             "id"         => "nullable|exists:alur_pendaftaran,id"
         ]);
 
@@ -73,10 +73,10 @@ class FaqController extends Controller
         
         try {
             if ($request->id) {
-                $data = Faq::find($request->id);
+                $data = AlurPendaftaran::find($request->id);
                 $data->update($request->all());
             } else {
-                $data = Faq::create($request->all());
+                $data = AlurPendaftaran::create($request->all());
             }
         } catch (\Exception $e) {
             return response()->json([
@@ -92,7 +92,7 @@ class FaqController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $data = Faq::find($id);
+        $data = AlurPendaftaran::find($id);
 
         if (!$data) {
             return response()->json([

@@ -1,20 +1,20 @@
 <?php
 
-use App\Http\Controllers\Cms\Administrasi\KeringananController;
-use App\Http\Controllers\Cms\ListPendaftarController;
-use App\Http\Controllers\Cms\Master\PpdbSettingController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Front\FrontController;
-use App\Http\Controllers\Cms\Administrasi\NominalAdministrasiController;
-use App\Http\Controllers\Cms\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Cms\DashboardController;
-use App\Http\Controllers\Cms\Master\FaqController;
-use App\Http\Controllers\Cms\Master\InfoPPDBController;
-use App\Http\Controllers\Cms\Master\JurusanController;
+use App\Http\Controllers\Cms\ListPendaftarController;
 use App\Http\Controllers\Cms\PembayaranController;
+use App\Http\Controllers\Cms\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Cms\Administrasi\KeringananController;
+use App\Http\Controllers\Cms\Administrasi\NominalAdministrasiController;
+use App\Http\Controllers\Cms\Master\PpdbSettingController;
+use App\Http\Controllers\Cms\Master\JurusanController;
+use App\Http\Controllers\Cms\Informasi\FaqController;
+use App\Http\Controllers\Cms\Informasi\InfoPPDBController;
 use App\Http\Controllers\Cms\System\UserController;
 use App\Http\Controllers\Cms\System\UserLevelController;
-use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 /*
@@ -39,9 +39,7 @@ Route::get('/', function () {
 Route::get('/test-export', function () {
     return Excel::download(new \App\Exports\ExportPPDB, 'calon-siswa.xlsx');
 });
-Route::get('/test-view', function () {
-    return view('export.data-siswa');
-});
+
 Route::middleware('guest')->group(function () {
     Route::get('/login', function () {
         return redirect()->route('login');
@@ -89,6 +87,18 @@ Route::middleware('auth')->group(function () {
             Route::post('/{id}/setting', [UserLevelController::class, 'updateSetting']);
         });
 
+        Route::prefix('informasi')->group(function () {
+            Route::get('/alur-pendaftaran', [InfoPPDBController::class, 'index'])->name('cmsAlurPendaftaran');
+            Route::post('/alur-pendaftaran', [InfoPPDBController::class, 'storeOrUpdate']);
+            Route::get('/alur-pendaftaran/{id}', [InfoPPDBController::class, 'detail']);
+            Route::delete('/alur-pendaftaran/{id}', [InfoPPDBController::class, 'delete']);
+
+            Route::get('/faq', [FaqController::class, 'index'])->name('cmsFaq');
+            Route::post('/faq', [FaqController::class, 'storeOrUpdate']);
+            Route::get('/faq/{id}', [FaqController::class, 'detail']);
+            Route::delete('/faq/{id}', [FaqController::class, 'delete']);
+        });
+
 
         // --master--
         // route grup prefix master
@@ -101,32 +111,24 @@ Route::middleware('auth')->group(function () {
                 Route::put('/setting/{id}', [PpdbSettingController::class, 'update']);
                 Route::delete('/setting/{id}', [PpdbSettingController::class, 'delete']);
 
-                Route::get('/administrasi', [NominalAdministrasiController::class, 'index'])->name('cmsNominalAdministrasi');
-                Route::post('/administrasi', [NominalAdministrasiController::class, 'store']);
-                Route::get('/administrasi/{id}', [NominalAdministrasiController::class, 'detail']);
-                Route::put('/administrasi/{id}', [NominalAdministrasiController::class, 'update']);
-                Route::delete('/administrasi/{id}', [NominalAdministrasiController::class, 'delete']);
+                Route::get('/program-studi', [JurusanController::class, 'index'])->name('cmsProgramStudi');
+                Route::post('/program-studi', [JurusanController::class, 'storeOrUpdate']);
+                Route::get('/program-studi/{id}', [JurusanController::class, 'detail']);
+                Route::delete('/program-studi/{id}', [JurusanController::class, 'delete']);
+            });
+        });
+
+        Route::prefix('administrasi')->group(function () {
+                Route::get('/normal', [NominalAdministrasiController::class, 'index'])->name('cmsNominalAdministrasi');
+                Route::post('/normal', [NominalAdministrasiController::class, 'store']);
+                Route::get('/normal/{id}', [NominalAdministrasiController::class, 'detail']);
+                Route::put('/normal/{id}', [NominalAdministrasiController::class, 'update']);
+                Route::delete('/normal/{id}', [NominalAdministrasiController::class, 'delete']);
 
                 Route::get('/keringanan', [KeringananController::class, 'index'])->name('cmsKeringanan');
                 Route::post('/keringanan', [KeringananController::class, 'upsert']);
                 Route::get('/keringanan/{id}', [KeringananController::class, 'detail']);
                 Route::delete('/keringanan/{id}', [KeringananController::class, 'delete']);
-
-                Route::get('/program-studi', [JurusanController::class, 'index'])->name('cmsProgramStudi');
-                Route::post('/program-studi', [JurusanController::class, 'storeOrUpdate']);
-                Route::get('/program-studi/{id}', [JurusanController::class, 'detail']);
-                Route::delete('/program-studi/{id}', [JurusanController::class, 'delete']);
-
-                Route::get('/alur-pendaftaran', [InfoPPDBController::class, 'index'])->name('cmsAlurPendaftaran');
-                Route::post('/alur-pendaftaran', [InfoPPDBController::class, 'storeOrUpdate']);
-                Route::get('/alur-pendaftaran/{id}', [InfoPPDBController::class, 'detail']);
-                Route::delete('/alur-pendaftaran/{id}', [InfoPPDBController::class, 'delete']);
-
-                Route::get('/faq', [FaqController::class, 'index'])->name('cmsFaq');
-                Route::post('/faq', [FaqController::class, 'storeOrUpdate']);
-                Route::get('/faq/{id}', [FaqController::class, 'detail']);
-                Route::delete('/faq/{id}', [FaqController::class, 'delete']);
-            });
         });
 
         // --list pendaftar--
