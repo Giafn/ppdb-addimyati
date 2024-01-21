@@ -123,7 +123,7 @@ class ListPendaftarController extends Controller
 
         $jurusan = ProgramKeahlian::select('id', 'nama')->get();
 
-        return view('cms.master.list-pendaftar', compact('listData', 'paginationData', 'listStatusPembayaran', 'listStatusData', 'fillSelectFilter', 'jurusan'));
+        return view('cms.list-pendaftar', compact('listData', 'paginationData', 'listStatusPembayaran', 'listStatusData', 'fillSelectFilter', 'jurusan'));
     }
 
     public function daftarManual(Request $request)

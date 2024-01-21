@@ -38,7 +38,7 @@ class InfoPPDBController extends Controller
         ];
 
 
-        return view('cms.master.alur-daftar', compact('listData', 'paginationData'));
+        return view('cms.informasi.alur-daftar', compact('listData', 'paginationData'));
     }
 
     public function detail(Request $request, $id)

@@ -49,7 +49,7 @@ return [
 		'code'		 => 'informasi',
 		'name'		 => "Informasi",
 		'label'		 => "informasi",
-		'icon'		 => "cog",
+		'icon'		 => "info",
 		'route_name' => "",
 		'module' 	 => [],
 		'child'      => [
@@ -114,7 +114,7 @@ return [
 		'code'		 => 'administrasi',
 		'name'		 => "Administrasi",
 		'label'		 => "administrasi",
-		'icon'		 => "data",
+		'icon'		 => "administrasi",
 		'route_name' => "",
 		'module' 	 => [],
 		'child'      => [

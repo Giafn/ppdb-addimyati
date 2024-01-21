@@ -38,7 +38,7 @@ class FaqController extends Controller
         ];
 
 
-        return view('cms.master.faq', compact('listData', 'paginationData'));
+        return view('cms.informasi.faq', compact('listData', 'paginationData'));
     }
 
     public function detail(Request $request, $id)

@@ -43,7 +43,7 @@ class NominalAdministrasiController extends Controller
             'next_page_url' => $listData->nextPageUrl(),
         ];
 
-        return view('cms.master.nominal-administrasi', compact('listData', 'paginationData'));
+        return view('cms.administrasi.nominal-administrasi', compact('listData', 'paginationData'));
     }
 
     public function store(Request $request)

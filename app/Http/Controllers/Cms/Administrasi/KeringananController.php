@@ -24,7 +24,7 @@ class KeringananController extends Controller
 
         $listItem = NominalPendaftaran::select('id', 'nama', 'nominal')->get();
 
-        return view('cms.master.keringanan', compact('listData', 'listItem'));
+        return view('cms.administrasi.keringanan', compact('listData', 'listItem'));
     }
 
     public function upsert(Request $request)
