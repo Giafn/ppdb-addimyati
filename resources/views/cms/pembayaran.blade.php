@@ -326,16 +326,26 @@
                             </div>
 
                             <div id="notHaveId">
-                                <label for="totalBayar"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harap Masukan
-                                    Total Yang Harus di bayarkan terlebih dahulu<span class="text-red-500">*</span></label>
-                                <input type="text" name="total" id="totalBayar"
-                                    class="currencyInput shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Masukan Total yang harus di bayarkan" required>
-                                <button type="button" id="storeTotalBayarBtn"
-                                    class="mt-2 btn btn-primary btn-sm inline-flex items-center">
-                                    Simpan
-                                </button>
+                                <form id="setTotalBayar">
+                                    <div class="mb-4">
+                                        <label for="jenisPembayaran"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
+                                            Pembayaran<span class="text-red-500">*</span></label>
+                                        <select name="jenis_pembayaran" id="jenisPembayaran"
+                                            class="block w-full py-2.5 px-5 pr-10 text-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option value="">Pilih Jenis Pembayaran</option>
+                                            <option value="0">Normal (Rp. {{ number_format($hargaNormal, 0, ',', '.') }})</option>
+                                            @foreach ($listKeringanan as $keringanan)
+                                                <option value="{{ $keringanan->id }}">
+                                                    {{ $keringanan->nama }} (Rp. {{ number_format($keringanan->total, 0, ',', '.') }})</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <button type="submit" id="storeTotalBayarBtn"
+                                        class="mt-2 btn btn-primary btn-sm inline-flex items-center">
+                                        Simpan
+                                    </button>
+                                </form>
                             </div>
                         </div>
                         <div class="col-span-2 max-h-96 overflow-y-auto">
@@ -478,30 +488,23 @@
         });
 
         // store total bayar
-        $('#storeTotalBayarBtn').on('click', function() {
-            if (!confirm('Yakin simpan total bayar, total bayar tidak dapat di ubah kembali, harap mengisi dengan benar')) {
+        $('#setTotalBayar').on('submit', function(e) {
+            e.preventDefault();
+            if (!confirm('Yakin simpan, aksi ini tidak dapat di batalkan')) {
                 return false;
             }
             let id = $('#infoId').val();
-            let total_bayar = $('#totalBayar').val();
-            if (!total_bayar) {
-                alert('total bayar tidak boleh kosong');
+            let jenis_pembayaran = $('#jenisPembayaran').val();
+            if (!jenis_pembayaran) {
+                alert('jenis pembayaran tidak boleh kosong');
                 return false;
             }
-            total_bayar = total_bayar.split('.').join("");
-            if (total_bayar < 0) {
-                alert('total bayar tidak boleh kurang dari 0');
-                return false;
-            }
-            if (total_bayar < 100000) {
-                alert('total bayar tidak boleh kurang dari 100.000');
-                return false;
-            }
+
             axios({
                     method: 'post',
                     url: '/cms/pembayaran/' + id + '/total',
                     data: {
-                        total_bayar: total_bayar
+                        jenis_pembayaran: jenis_pembayaran
                     }
                 })
                 .then(function(response) {
@@ -515,7 +518,7 @@
 
         function drawDetail(data, reload = false) {
             data = data.results;
-            $('#totalBayar').val('');
+            $('#jenisPembayaran').val('');
             $('#infoId').val(data.id);
             $('#infoNamaSiswa').html(data.nama);
             $('#infoStatusPembayaran').html(data.status_pembayaran);

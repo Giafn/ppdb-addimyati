@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Cms\Master\PpdbSettingController;
 use App\Http\Controllers\Controller;
+use App\Models\Keringanan;
+use App\Models\NominalPendaftaran;
 use App\Models\PembayaranHistory;
 use App\Models\Pendaftaran;
 use App\Models\Ppdb;
@@ -109,7 +111,11 @@ class PembayaranController extends Controller
 
         $jurusan = ProgramKeahlian::select('id', 'nama')->get();
 
-        return view('cms.pembayaran', compact('listData', 'paginationData', 'listStatusPembayaran', 'fillSelectFilter', 'jurusan'));
+        $listKeringanan = Keringanan::select('id', 'nama', 'total')->get();
+        // harga normal sum nominal
+        $hargaNormal = NominalPendaftaran::sum('nominal');
+
+        return view('cms.pembayaran', compact('listData', 'paginationData', 'listStatusPembayaran', 'fillSelectFilter', 'jurusan', 'listKeringanan', 'hargaNormal'));
     }
 
     public function showInfoAndHistory($id)
@@ -165,7 +171,7 @@ class PembayaranController extends Controller
     public function setHarga(Request $req, $id)
     {
         $validator = Validator::make($req->all(), [
-            "total_bayar" => "numeric|required|min:100000"
+            "jenis_pembayaran" => "numeric|required",
         ]);
 
         if ($validator->fails()) {
@@ -183,21 +189,36 @@ class PembayaranController extends Controller
                 'errors' => []
             ], 404);
         }
-
-        $pembayaran = SiswaPembayaran::where('siswa_id', $pendaftaran->calon_siswa_id)->first();
-        if ($pembayaran) {
-            return response()->json([
-                'status' => "ERROR",
-                'message' => "Data sudah ada",
-                'errors' => []
-            ], 422);
-        }
+        
         try {
-            SiswaPembayaran::create([
-                "siswa_id" => $pendaftaran->calon_siswa_id,
-                "total" => $req->total_bayar,
-                "sisa" => $req->total_bayar
-            ]);
+            DB::beginTransaction();
+            $pembayaran = SiswaPembayaran::where('siswa_id', $pendaftaran->calon_siswa_id)->first();
+            if(!$pembayaran) {
+                $pembayaran = new SiswaPembayaran();
+                $pembayaran->siswa_id = $pendaftaran->calon_siswa_id;
+            }
+
+            $keringananId = $req->jenis_pembayaran == 0 ? null : $req->jenis_pembayaran;
+            $total = 0;
+            if ($keringananId != null) {
+                $keringanan = Keringanan::where('id', $keringananId)->first();
+                if(!$keringanan) {
+                    return response()->json([
+                        'status' => "ERROR",
+                        'message' => "Data tidak ditemukan",
+                        'errors' => []
+                    ], 404);
+                }
+
+                $total = $keringanan->total;
+            } else {
+                $total = NominalPendaftaran::sum('nominal');
+            }
+
+            $pembayaran->total = $total;
+            $pembayaran->sisa = $total;
+            $pembayaran->keringanan_id = $keringananId;
+            $pembayaran->save();
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();

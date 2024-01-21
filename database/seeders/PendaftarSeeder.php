@@ -44,7 +44,7 @@ class PendaftarSeeder extends Seeder
                 $pendaftaran->ppdb_id = $idppdb;
                 $pendaftaran->kode = 'PPDB-' . $faker->numberBetween(1000000000, 9999999999);
                 $pendaftaran->status_pendaftaran = $faker->randomElement([1, 2]); // 1: Diterima, 2: Ditolak
-                $pendaftaran->status_pembayaran = $faker->randomElement([0, 1, 2]);
+                $pendaftaran->status_pembayaran ='0';
                 $pendaftaran->jurusan_id1 = $faker->numberBetween(1, 5); // ID Jurusan
                 $pendaftaran->jurusan_id2 = $faker->numberBetween(1, 5); // ID Jurusan
                 $pendaftaran->referensi = $faker->optional()->word;

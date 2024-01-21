@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\Cms\Administrasi\KeringananController;
 use App\Http\Controllers\Cms\ListPendaftarController;
 use App\Http\Controllers\Cms\Master\PpdbSettingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Front\FrontController;
-use App\Http\Controllers\Cms\Master\NominalAdministrasiController;
+use App\Http\Controllers\Cms\Administrasi\NominalAdministrasiController;
 use App\Http\Controllers\Cms\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Cms\DashboardController;
 use App\Http\Controllers\Cms\Master\FaqController;
@@ -103,6 +104,11 @@ Route::middleware('auth')->group(function () {
                 Route::get('/administrasi/{id}', [NominalAdministrasiController::class, 'detail']);
                 Route::put('/administrasi/{id}', [NominalAdministrasiController::class, 'update']);
                 Route::delete('/administrasi/{id}', [NominalAdministrasiController::class, 'delete']);
+
+                Route::get('/keringanan', [KeringananController::class, 'index'])->name('cmsKeringanan');
+                Route::post('/keringanan', [KeringananController::class, 'upsert']);
+                Route::get('/keringanan/{id}', [KeringananController::class, 'detail']);
+                Route::delete('/keringanan/{id}', [KeringananController::class, 'delete']);
 
                 Route::get('/program-studi', [JurusanController::class, 'index'])->name('cmsProgramStudi');
                 Route::post('/program-studi', [JurusanController::class, 'storeOrUpdate']);

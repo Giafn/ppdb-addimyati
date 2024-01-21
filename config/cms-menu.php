@@ -87,17 +87,6 @@ return [
 				]
 			],
 			[
-				'code'		 => "administrasi",
-				'name'		 => "Administrasi",
-				'label'		 => "administrasi",
-				'icon'		 => "",
-				'route_name' => "cmsNominalAdministrasi",
-				'module' 	 => [
-					'code' => 'administrasi',
-					'task' => []
-				]
-			],
-			[
 				'code'		 => "ppdb",
 				'name'		 => "PPDB Setting",
 				'label'		 => "ppdbSetting",
@@ -105,6 +94,39 @@ return [
 				'route_name' => "cmsPpdbSetting",
 				'module' 	 => [
 					'code' => 'ppdb',
+					'task' => []
+				]
+			],
+			
+		],
+	],
+	[
+		'code'		 => 'administrasi',
+		'name'		 => "Administrasi",
+		'label'		 => "administrasi",
+		'icon'		 => "data",
+		'route_name' => "",
+		'module' 	 => [],
+		'child'      => [
+			[
+				'code'		 => "administrasi-normal",
+				'name'		 => "Administrasi Normal",
+				'label'		 => "administrasiNormal",
+				'icon'		 => "",
+				'route_name' => "cmsNominalAdministrasi",
+				'module' 	 => [
+					'code' => 'administrasiNormal',
+					'task' => []
+				]
+			],
+			[
+				'code'		 => "keringanan",
+				'name'		 => "Keringanan",
+				'label'		 => "keringanan",
+				'icon'		 => "",
+				'route_name' => "cmsKeringanan",
+				'module' 	 => [
+					'code' => 'keringanan',
 					'task' => []
 				]
 			],

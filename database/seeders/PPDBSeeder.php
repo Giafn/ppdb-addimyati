@@ -16,9 +16,9 @@ class PPDBSeeder extends Seeder
         DB::table('ppdb')->insert([
             [
                 'gelombang' => '1',
-                'tahun_ajaran' => '2022/2023',
-                'start_date' => '2021-01-01',
-                'end_date' => '2025-01-31',
+                'tahun_ajaran' => '2023/2024',
+                'start_date' => '2023-12-01',
+                'end_date' => '2024-10-02',
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
             ]

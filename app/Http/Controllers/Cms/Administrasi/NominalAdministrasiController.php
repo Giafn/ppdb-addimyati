@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cms\Master;
+namespace App\Http\Controllers\Cms\Administrasi;
 
 use App\Http\Controllers\Controller;
 use App\Models\NominalPendaftaran;
@@ -11,7 +11,7 @@ class NominalAdministrasiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['cms.access:nominalAdministrasi,hak-akses']);
+        $this->middleware(['cms.access:administrasiNormal,hak-akses']);
     }
 
     public function index(Request $request)

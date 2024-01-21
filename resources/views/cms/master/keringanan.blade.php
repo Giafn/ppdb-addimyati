@@ -1,5 +1,5 @@
 @extends('cms.layouts.dashboard-admin')
-@section('title', 'Administrasi | ')
+@section('title', 'Keringanan | ')
 @section('content')
 <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
     <div class="w-full mb-1">
@@ -19,22 +19,14 @@
                             <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <a href="#" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Nominal Administrasi</a>
+                            <a href="#" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Keringanan</a>
                         </div>
                     </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Pengaturan nominal masing masing item Administrasi</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Pengaturan Keringanan pembayaran</h1>
         </div>
         <div class="sm:flex">
-            <div class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
-                <form class="lg:pr-3" action="#" method="GET">
-                    <label for="search" class="sr-only">Search</label>
-                    <div class="relative mt-1 lg:w-64 xl:w-96">
-                        <input type="text" name="search" id="search" value="{{ app('request')->input('search') }}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari berdasarkan nama">
-                    </div>
-                </form>
-            </div>
             <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
                 <button type="button" data-mana-modal-toggle="tambahModal" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -63,10 +55,10 @@
                                 Nama
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Nominal Normal
+                                Total Bayar
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Keterangan
+                                Detail
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 Actions
@@ -74,8 +66,7 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                        @if($paginationData['total'] > 0)
-                        @foreach($listData as $data)
+                        @forelse($listData as $data)
                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                             <td class="w-4 p-4">
                                 <div class="flex items-center">
@@ -87,10 +78,16 @@
                                 <div class="text-sm text-gray-900 dark:text-white">{{ $data->nama }}</div>
                             </td>
                             <td class="p-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900 dark:text-white">Rp. {{ number_format($data->nominal, 0, ',', '.') }}</div>
+                                <div class="text-sm text-gray-900 dark:text-white">Rp. {{ number_format($data->total, 0, ',', '.') }}</div>
                             </td>
                             <td class="p-4">
-                                <div class="text-sm text-gray-900 dark:text-white">{{ $data->keterangan }}</div>
+                                <div class="text-sm text-gray-900 dark:text-white">
+                                    <ul>
+                                        @foreach($data->detailKeringanan as $detail)
+                                        <li>{{ $detail->item->nama }} (Rp. {{ number_format($detail->nominal, 0, ',', '.') }})</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </td>
                             <td class="p-4 space-x-2 whitespace-nowrap">
                                 <div>
@@ -110,90 +107,62 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
-                        @else
-                        <tr class="">
-                            <td class="p-4 text-center text-gray-900 whitespace-nowrap dark:text-white" colspan="7">No Data</td>
+                        @empty
+                        <tr>
+                            <td colspan="5" class="p-4 text-center">
+                                <div class="flex flex-col items-center justify-center">
+                                    <svg class="w-16 h-16 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 9a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1zm1 3a1 1 0 100 2h2a1 1 0 100-2H9z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="mt-2 text-sm text-gray-500 dark:text-gray-400">Data tidak tersedia</span>
+                                </div>
+                            </td>
                         </tr>
-                        @endif
+                        @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
-    <div class="flex items-center mb-4 sm:mb-0">
-        <a href="{{ $paginationData['prev_page_url'] ?? '#' }}" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-            </svg>
-        </a>
-        <a href="{{ $paginationData['next_page_url'] ?? '#' }}" class="inline-flex justify-center p-1 mr-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-            </svg>
-        </a>
-        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">{{ $paginationData['first']+1 }}-{{ $paginationData['last'] }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{ $paginationData['total'] }}</span></span>
-    </div>
-    <div class="flex items-center space-x-3">
-        <a href="{{ $paginationData['prev_page_url'] ?? '#' }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            <svg class="w-5 h-5 mr-1 -ml-1"" fill=" currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-            </svg>
-            Previous
-        </a>
-        <a href="{{ $paginationData['next_page_url'] ?? '#' }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Next
-            <svg class="w-5 h-5 ml-1 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-            </svg>
-        </a>
-    </div>
-</div>
 
+<form id="formAdd">
 <div id="tambahModal" tabindex="-1" aria-hidden="true" class="modal">
     <div class="modal-dialog modal-2xl">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">
-                    Tambah Item
-                </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-mana-modal-toggle="tambahModal">
-                    @includeif('components.icons.close')
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="formAdd">
+                <div class="modal-header">
+                    <h3 class="modal-title">
+                        Tambah Keringanan
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-mana-modal-toggle="tambahModal">
+                        @includeif('components.icons.close')
+                    </button>
+                </div>
+                <div class="modal-body">
                     <div class="">
                         {{ csrf_field() }}
-                        {{-- nama --}}
-                        <div class="mb-4">
-                            <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Item <span class="text-red-500">*</span></label>
-                            <input type="text" name="nama" id="nama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="nama item" required>
+                        <div class="mb-2">
+                            <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Keringanan <span class="text-red-500">*</span></label>
+                            <input type="text" name="nama" id="nama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="nama" required>
                         </div>
-                        {{-- nominal --}}
-                        <div class="mb-4">
-                            <label for="nominal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nominal Normal<span class="text-red-500">*</span></label>
-                            <input type="text" name="nominal" id="nominal" class="nominalFormat shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nominal" value required>
+                        @foreach($listItem as $item)
+                        <div class="mb-2">
+                            <label for="item-{{ $item->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $item->nama }} <span class="text-red-500">*</span></label>
+                            <input type="text" name="item[{{ $item->id }}]" id="item-{{ $item->id }}" class="nominalFormat shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rp. {{ number_format($item->nominal, 0, ',', '.') }}" required>
                         </div>
-                        {{-- keterangan --}}
-                        <div class="mb-4">
-                            <label for="keterangan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keterangan <span class="text-red-500">*</span></label>
-                            <textarea name="keterangan" id="keterangan" rows="3" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 resize-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Keterangan" required></textarea>
-                        </div>
+                        @endforeach
                     </div>
-                </form>
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" onclick="add()">Simpan</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Simpan</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 
+<form id="formEdit">
 <div id="editModal" class="modal">
     <div class="modal-dialog modal-2xl">
         <!-- Modal content -->
@@ -201,7 +170,7 @@
             <!-- Modal header -->
             <div class="modal-header">
                 <h3 class="modal-title">
-                    Edit Item
+                    Edit Keringanan
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-mana-modal-toggle="editModal">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -211,35 +180,29 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form id="formEdit">
                     <div class="">
                         {{ csrf_field() }}
                         <input type="hidden" name="id" id="editId">
-                        {{-- nama --}}
-                        <div class="mb-4">
-                            <label for="editNama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Item <span class="text-red-500">*</span></label>
-                            <input type="text" name="nama" id="editNama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="nama item" required>
+                        <div class="mb-2">
+                            <label for="editNama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Keringanan <span class="text-red-500">*</span></label>
+                            <input type="text" name="nama" id="editNama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="nama" required>
                         </div>
-                        {{-- nominal --}}
-                        <div class="mb-4">
-                            <label for="editNominal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nominal Normal<span class="text-red-500">*</span></label>
-                            <input type="text" name="nominal" id="editNominal" class="nominalFormat shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nominal" required>
+                        @foreach($listItem as $item)
+                        <div class="mb-2">
+                            <label for="editItem-{{ $item->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $item->nama }} <span class="text-red-500">*</span></label>
+                            <input type="text" name="item[{{ $item->id }}]" id="editItem-{{ $item->id }}" class="nominalFormat shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rp. {{ number_format($item->nominal, 0, ',', '.') }}" required>
                         </div>
-                        {{-- keterangan --}}
-                        <div class="mb-4">
-                            <label for="editKeterangan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keterangan <span class="text-red-500">*</span></label>
-                            <textarea name="keterangan" id="editKeterangan" rows="3" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 resize-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Keterangan" required></textarea>
-                        </div>
+                        @endforeach
                     </div>
-                </form>
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" onclick="update()">Simpan</button>
+                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Simpan</button>
             </div>
         </div>
     </div>
 </div>
+</form>
 
 <div class="modal" id="deleteModal">
     <div class="modal-dialog modal-popup">
@@ -272,18 +235,24 @@
 @endsection
 @section('script')
 <script>
-    function add() {
-        var form = document.forms["formAdd"];
-
-        var formData = new FormData(form);
-        var formDataObj = new Object;
-        formData.forEach((value, key) => (formDataObj[key] = value));
-
+    $('#formAdd').submit(function(e) {
+        e.preventDefault();
+        let data = {
+            "nama" : $('#nama').val(),
+            "data" : [
+                @foreach($listItem as $item)
+                {
+                    "id" : {{ $item->id }},
+                    "nominal" : $('#item-{{ $item->id }}').val()
+                },
+                @endforeach
+            ]
+        }
         loading(true)
         axios({
                 method: 'post',
-                url: '/cms/master/ppdb/administrasi',
-                data: formDataObj
+                url: '/cms/master/ppdb/keringanan',
+                data: data
             })
             .then(function(response) {
                 if (response.data.status == "OK") {
@@ -306,22 +275,25 @@
                     alert("Unknown Error")
                 }
             });
-    }
+    });
 
     function edit(id) {
         loading(true);
 
         axios({
                 method: 'get',
-                url: '/cms/master/ppdb/administrasi/' + id,
+                url: '/cms/master/ppdb/keringanan/' + id,
             })
             .then(function(response) {
                 if (response.data.status == "OK") {
-                    document.getElementById("editId").value = response.data.results.id;
-                    document.getElementById("editNama").value = response.data.results.nama;
-                    document.getElementById("editNominal").value = "Rp. "+response.data.results.nominal;
-                    document.getElementById("editKeterangan").value = response.data.results.keterangan;
-
+                    let data = response.data.results;
+                    $('#editId').val(data.id);
+                    $('#editNama').val(data.nama);
+                    let item = data.detail_keringanan;
+                    for (var key in item) {
+                        $('#editItem-' + item[key].item_id).val(item[key].nominal);
+                        $('#editItem-' + item[key].item_id).trigger('keyup');
+                    }
                     toggleModal('editModal');
 
                     loading(false)
@@ -329,18 +301,27 @@
             });
     }
 
-    function update() {
-        var form = document.forms["formEdit"];
+    $('#formEdit').submit(function(e) {
+        e.preventDefault();
 
-        var formData = new FormData(form);
-        var formDataObj = new Object;
-        formData.forEach((value, key) => (formDataObj[key] = value));
+        let data = {
+            "id"   : $('#editId').val(),
+            "nama" : $('#editNama').val(),
+            "data" : [
+                @foreach($listItem as $item)
+                {
+                    "id" : {{ $item->id }},
+                    "nominal" : $('#editItem-{{ $item->id }}').val()
+                },
+                @endforeach
+            ]
+        }
 
         loading(true)
         axios({
-                method: 'put',
-                url: '/cms/master/ppdb/administrasi/' + formData.get('id'),
-                data: formDataObj
+                method: 'post',
+                url: '/cms/master/ppdb/keringanan',
+                data: data
             })
             .then(function(response) {
                 if (response.data.status == "OK") {
@@ -363,7 +344,7 @@
                     alert("Unknown Error")
                 }
             });
-    }
+    });
 
     function deleteModal(id) {
         document.getElementById("buttonDelete").setAttribute('data-id', id);
@@ -379,7 +360,7 @@
         loading(true)
         axios({
                 method: 'delete',
-                url: '/cms/master/ppdb/administrasi/' + id,
+                url: '/cms/master/ppdb/keringanan/' + id,
                 data: {
                     _token: "{{ csrf_token() }}"
                 }
