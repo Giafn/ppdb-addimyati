@@ -593,7 +593,8 @@
                                             <option value="sd">SD</option>
                                             <option value="smp">SMP</option>
                                             <option value="sma">SMA</option>
-                                            <option value="s1">S1</option>
+                                            <option value="d3">D3</option>
+                                            <option value="s1">D4/S1</option>
                                             <option value="s2">S2</option>
                                             <option value="s3">S3</option>
                                         </select>
@@ -612,7 +613,8 @@
                                             <option value="sd">SD</option>
                                             <option value="smp">SMP</option>
                                             <option value="sma">SMA</option>
-                                            <option value="s1">S1</option>
+                                            <option value="d3">D3</option>
+                                            <option value="s1">D4/S1</option>
                                             <option value="s2">S2</option>
                                             <option value="s3">S3</option>
                                         </select>
@@ -643,7 +645,8 @@
                                             <option value="sd">SD</option>
                                             <option value="smp">SMP</option>
                                             <option value="sma">SMA</option>
-                                            <option value="s1">S1</option>
+                                            <option value="d3">D3</option>
+                                            <option value="s1">D4/S1</option>
                                             <option value="s2">S2</option>
                                             <option value="s3">S3</option>
                                         </select>

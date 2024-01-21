@@ -46,10 +46,10 @@ return [
 		],
 	],
 	[
-		'code'		 => 'master',
-		'name'		 => "Master",
-		'label'		 => "master",
-		'icon'		 => "data",
+		'code'		 => 'informasi',
+		'name'		 => "Informasi",
+		'label'		 => "informasi",
+		'icon'		 => "cog",
 		'route_name' => "",
 		'module' 	 => [],
 		'child'      => [
@@ -75,6 +75,16 @@ return [
 					'task' => []
 				]
 			],
+		],
+	],
+	[
+		'code'		 => 'master',
+		'name'		 => "Master",
+		'label'		 => "master",
+		'icon'		 => "data",
+		'route_name' => "",
+		'module' 	 => [],
+		'child'      => [
 			[
 				'code'		 => "programStudi",
 				'name'		 => "Program Studi",

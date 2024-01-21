@@ -455,8 +455,11 @@
                                 <option value="sma" @if (old('pendidikan_wali') == 'sma') selected @endif>
                                     SMA
                                 </option>
+                                <option value="s3" @if (old('pendidikan_wali') == 'd3') selected @endif>
+                                    D3
+                                </option>
                                 <option value="s1" @if (old('pendidikan_wali') == 's1') selected @endif>
-                                    S1
+                                    D4/S1
                                 </option>
                                 <option value="s2" @if (old('pendidikan_wali') == 's2') selected @endif>
                                     S2

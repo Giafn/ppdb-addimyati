@@ -123,7 +123,7 @@ class PembayaranController extends Controller
         $query = Pendaftaran::join('calon_siswa', 'pendaftaran.calon_siswa_id', '=', 'calon_siswa.id')
             ->join('ppdb', 'pendaftaran.ppdb_id', '=', 'ppdb.id')
             ->leftJoin('siswa_pembayaran', 'pendaftaran.calon_siswa_id', '=', 'siswa_pembayaran.siswa_id')
-            ->select('pendaftaran.id', 'pendaftaran.kode AS daftar_kode', 'calon_siswa.nama_lengkap AS nama_siswa', 'pendaftaran.status_pendaftaran', 'pendaftaran.status_pembayaran', 'pendaftaran.created_at', 'siswa_pembayaran.total', 'siswa_pembayaran.sisa', 'siswa_pembayaran.id AS id_pembayaran')
+            ->select('pendaftaran.id', 'pendaftaran.kode AS daftar_kode', 'calon_siswa.nama_lengkap AS nama_siswa', 'pendaftaran.status_pendaftaran', 'pendaftaran.status_pembayaran', 'pendaftaran.created_at', 'siswa_pembayaran.total', 'siswa_pembayaran.sisa', 'siswa_pembayaran.id AS id_pembayaran', 'siswa_pembayaran.keringanan_id')
             ->where('pendaftaran.id', $id)
             ->first();
         
@@ -151,7 +151,8 @@ class PembayaranController extends Controller
             "status_pembayaran" => $query->status_pembayaran == 0 ? "Belum Bayar" : ($query->status_pembayaran == 1 ? "Belum Lunas" : "Lunas"),
             "total_pembayaran" => $query->total,
             "sisa_pembayaran" => $query->sisa,
-            "history_pembayaran" => $historyPembayaran
+            "history_pembayaran" => $historyPembayaran,
+            "keringanan" => $query->keringanan_id
         ];
         
         return [
@@ -163,7 +164,8 @@ class PembayaranController extends Controller
                 "status_pembayaran" => $data["status_pembayaran"],
                 "total_pembayaran" => $data["total_pembayaran"],
                 "sisa_pembayaran" => $data["sisa_pembayaran"],
-                "history_pembayaran" => $data["history_pembayaran"]
+                "history_pembayaran" => $data["history_pembayaran"],
+                "keringanan" => $data["keringanan"]
             ]
         ];
     }
@@ -198,6 +200,13 @@ class PembayaranController extends Controller
                 $pembayaran->siswa_id = $pendaftaran->calon_siswa_id;
             }
 
+            // cek if have history
+            $historyPembayaran = PembayaranHistory::where('pembayaran_id', $pembayaran->id)->get();
+            $payed = 0;
+            if ($historyPembayaran) {
+                $payed = $historyPembayaran->sum('jumlah');
+            }
+
             $keringananId = $req->jenis_pembayaran == 0 ? null : $req->jenis_pembayaran;
             $total = 0;
             if ($keringananId != null) {
@@ -216,7 +225,7 @@ class PembayaranController extends Controller
             }
 
             $pembayaran->total = $total;
-            $pembayaran->sisa = $total;
+            $pembayaran->sisa = $total - $payed;
             $pembayaran->keringanan_id = $keringananId;
             $pembayaran->save();
             DB::commit();
@@ -243,7 +252,7 @@ class PembayaranController extends Controller
                 'status' => "ERROR",
                 'message' => "Data tidak valid",
                 'errors' => $validator->errors()
-            ], 422);
+            ], 200);
         }
         $pendaftaran = Pendaftaran::where('pendaftaran.id', $id)->first();
         if(!$pendaftaran) {
@@ -251,7 +260,7 @@ class PembayaranController extends Controller
                 'status' => "ERROR",
                 'message' => "Data tidak ditemukan",
                 'errors' => []
-            ], 404);
+            ], 200);
         }
         $pembayaran = SiswaPembayaran::where('siswa_id', $pendaftaran->calon_siswa_id)->first();
         if(!$pembayaran) {
@@ -259,7 +268,7 @@ class PembayaranController extends Controller
                 'status' => "ERROR",
                 'message' => "Data tidak ditemukan",
                 'errors' => []
-            ], 404);
+            ], 200);
         }
         
         if ($pendaftaran->status_pembayaran == 2) {
@@ -267,14 +276,14 @@ class PembayaranController extends Controller
                 'status' => "ERROR",
                 'message' => "Sudah lunas",
                 'errors' => []
-            ], 422);
+            ], 200);
         }
         if ($req->nominal_bayar > $pembayaran->sisa) {
             return response()->json([
                 'status' => "ERROR",
                 'message' => "Nominal pembayaran melebihi sisa pembayaran",
                 'errors' => []
-            ], 422);
+            ], 200);
         }
         $historyPembayaran = new PembayaranHistory();
         try {
