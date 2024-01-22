@@ -142,6 +142,7 @@ Route::middleware('auth')->group(function () {
             Route::patch('/update/akademik/{id}', [ListPendaftarController::class, 'updateAkademik']);
             Route::patch('/update/ortu/{id}', [ListPendaftarController::class, 'updateOrangTua']);
             Route::patch('/update/wali/{id}', [ListPendaftarController::class, 'updateWali']);
+            Route::get('/export/excel', [ListPendaftarController::class, 'export']);
         });
 
         Route::prefix('pembayaran')->group(function () {

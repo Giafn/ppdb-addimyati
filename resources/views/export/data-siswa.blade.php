@@ -1,7 +1,7 @@
 <html>
     <table class="tftable" style="font-size: 16px; color: #333333; width: 60%; border-width: 1px; border: 1px solid #000; border-collapse: collapse; font-family: arial, sans-serif;">
         <tr style="background-color: #ffffff;" bgcolor="#ffffff">
-          <th style="font-size: 16px; background-color: #FEC000; text-align: center;" bgcolor="#FEC000" align="center" colspan="21">PENDAFTARAN PPDB</th>
+          <th style="font-size: 16px; background-color: #FEC000; text-align: center;" bgcolor="#FEC000" align="center" colspan="21">PENDAFTARAN PPDB {{ $data['tahun_ajaran'] }}</th>
         </tr>
         <tr style="background-color: #ffffff;" bgcolor="#ffffff">
             <th style="font-size: 16px; background-color: #FEC000; text-align: center;" bgcolor="#FEC000" align="center" colspan="21">SMK TERPADU ADDIMYATI</th>
@@ -30,12 +30,12 @@
           <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">IBU</td>
           <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">WALI</td>
           <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">JALAN/GG</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">RT/Rw</td>
+          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">RT/RW</td>
           <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">KEL/DESA</td>
           <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">KECAMATAN</td>
           <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">KAB/KOTA</td>
         </tr>
-        @foreach($data as $key => $value)
+        @foreach($data['data'] as $key => $value)
             <tr style="background-color: #ffffff;" bgcolor="#ffffff">
                 <th style="font-size: 16px; background-color: #FEC000; text-align: center;" bgcolor="#FEC000" align="center" colspan="21">Gelombang {{ $key }}</th>
             </tr>

@@ -77,7 +77,7 @@
                             <div class="p-2 max-w-sm mx-auto bg-white rounded-xl shadow-md">
                               <div class="flex items-center space-x-4">
                                 <div class="flex-shrink-0">
-                                  <img class="h-12 w-12 rounded-full shadow" src="https://t3.ftcdn.net/jpg/01/65/63/94/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg" alt="">
+                                  <img class="h-12 w-12 rounded-full shadow" src="/image/people.jpg" alt="">
                                 </div>
                                 <div>
                                   <div class="text-base font-medium text-black">${data.data.nama_lengkap} (${data.data.jurusan})</div>

@@ -12,10 +12,22 @@ use Maatwebsite\Excel\Concerns\WithTitle;
 
 class SheetDataSiswa implements FromView, ShouldAutoSize, WithTitle
 {
+    // constructor untuk menerima data dari controller
+    private $data;
+
+    public function __construct($data = ['tahun_ajaran' => null, 'gelombang' => null ])
+    {
+        $this->data = $data;
+    }
+
     public function view(): View
     {
-        $tahunAjaran = PpdbSettingController::getPPDBInfo()['ppdbOpen']->tahun_ajaran;
-        $data =  Pendaftaran::join('calon_siswa', 'pendaftaran.calon_siswa_id', '=', 'calon_siswa.id')
+        $data = $this->data;
+        $selectedTahunAjaran = $data['tahun_ajaran'];
+        $tahunAjaran = $selectedTahunAjaran ?? PpdbSettingController::getPPDBInfo()['ppdbOpen']->tahun_ajaran;
+        $gelombang = $data['gelombang'];
+
+        $dataQ =  Pendaftaran::join('calon_siswa', 'pendaftaran.calon_siswa_id', '=', 'calon_siswa.id')
             ->join('akademik', 'calon_siswa.akademik_id', '=', 'akademik.id')
             ->leftJoin('orang_tua_wali as ayah', function($join) {
                 $join->on('calon_siswa.id', '=', 'ayah.calon_siswa_id')
@@ -57,11 +69,17 @@ class SheetDataSiswa implements FromView, ShouldAutoSize, WithTitle
                 'ppdb.gelombang as gelombang'
             )
             ->where('ppdb.tahun_ajaran', $tahunAjaran)
+            ->when($gelombang, function($query, $gelombang) {
+                return $query->where('ppdb.gelombang', $gelombang);
+            })
             ->orderBy('jenis_kelamin', 'asc')
             ->get()->groupBy('gelombang');
 
+        $dataE['tahun_ajaran'] = $tahunAjaran;
+        $dataE['data'] = $dataQ;
+
         return view('export.data-siswa', [
-            'data' => $data
+            'data' => $dataE,
         ]);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Cms;
 
+use App\Exports\Sheets\SheetDataSiswa;
 use App\Http\Controllers\Cms\Master\NominalAdministrasiController;
 use App\Http\Controllers\Cms\Master\PpdbSettingController;
 use App\Http\Controllers\Controller;
@@ -16,6 +17,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ListPendaftarController extends Controller
 {
@@ -572,4 +574,24 @@ class ListPendaftarController extends Controller
         ]);
     }
 
+    public function export(Request $request)
+    {
+        $request->validate([
+            "tahun_ajaran" => "nullable",
+            "gelombang" => "nullable",
+        ]);
+
+        $tahunAjaran = $request->tahun_ajaran;
+        $gelombang = $request->gelombang;
+        
+        $data = [
+            "tahun_ajaran" => $tahunAjaran,
+            "gelombang" => $gelombang
+        ];
+        $namaFile = "DataSiswa" . ($tahunAjaran ? "-(" . $tahunAjaran . ")" : "") . ($gelombang ? "-gel-" . $gelombang : "") . ".xlsx";
+        
+        $namaFile = str_replace('/', '-', $namaFile);
+
+        return Excel::download(new SheetDataSiswa($data), $namaFile);
+    }
 }

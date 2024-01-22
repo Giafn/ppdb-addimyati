@@ -12,17 +12,28 @@ use Maatwebsite\Excel\Concerns\WithTitle;
 
 class SheetAsalSekolah implements FromCollection, WithHeadings, ShouldAutoSize, WithTitle
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
+    private $data;
+
+    public function __construct($data = ['tahun_ajaran' => null, 'gelombang' => null ])
+    {
+        $this->data = $data;
+    }
+
     public function collection()
     {
-        $tahunAjaran = PpdbSettingController::getPPDBInfo()['ppdbOpen']->tahun_ajaran;
+        $data = $this->data;
+        $selectedTahunAjaran = $data['tahun_ajaran'];
+        $tahunAjaran = $selectedTahunAjaran ?? PpdbSettingController::getPPDBInfo()['ppdbOpen']->tahun_ajaran;
+        $gelombang = $data['gelombang'];
+
         $data = Pendaftaran::join('calon_siswa', 'pendaftaran.calon_siswa_id', '=', 'calon_siswa.id')
             ->join('akademik', 'calon_siswa.akademik_id', '=', 'akademik.id')
             ->join('ppdb', 'pendaftaran.ppdb_id', '=', 'ppdb.id')
             ->select('calon_siswa.nama_lengkap', 'calon_siswa.jenis_kelamin', 'akademik.asal_sekolah')
             ->where('ppdb.tahun_ajaran', $tahunAjaran)
+            ->when($gelombang, function($query, $gelombang) {
+                return $query->where('ppdb.gelombang', $gelombang);
+            })
             ->orderBy('jenis_kelamin', 'asc')
             ->get();
 
