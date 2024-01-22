@@ -14,53 +14,54 @@ class NominalAdministrasiSeeder extends Seeder
     {
         $nominalAdministrasi = [
             [
-                'gelombang' => 1, // GEL 1
-                'nama' => 'Administrasi Pendaftaran',
-                'nominal' => 10000,
+                'gelombang' => 1,
+                'nama' => 'Pendaftaran',
+                'nominal' => 100000,
                 'keterangan' => 'Biaya administrasi pendaftaran',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'gelombang' => 1, // GEL 1
-                'nama' => 'Uang Pangkal',
-                'nominal' => 1000000,
-                'keterangan' => 'Biaya uang pangkal',
+                'gelombang' => 1,
+                'nama' => 'Biaya Pengembangan',
+                'nominal' => 500000,
+                'keterangan' => 'Biaya pengembangan sekolah',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'gelombang' => 2, // GEL 2
-                'nama' => 'Administrasi Pendaftaran',
-                'nominal' => 10000,
-                'keterangan' => 'Biaya administrasi pendaftaran',
+                'gelombang' => 1,
+                'nama' => 'Seragam',
+                'nominal' => 1500000,
+                'keterangan' => 'Biaya seragam',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'gelombang' => 2, // GEL 2
-                'nama' => 'Uang Pangkal',
-                'nominal' => 1000000,
-                'keterangan' => 'Biaya uang pangkal',
+                'gelombang' => 1,
+                'nama' => 'SPP',
+                'nominal' => 100000,
+                'keterangan' => 'Biaya SPP',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'gelombang' => 3, // GEL 3
-                'nama' => 'Administrasi Pendaftaran',
-                'nominal' => 10000,
-                'keterangan' => 'Biaya administrasi pendaftaran',
+                'gelombang' => 1,
+                'nama' => 'ID Card',
+                'nominal' => 100000,
+                'keterangan' => '',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'gelombang' => 3, // GEL 3
-                'nama' => 'Uang Pangkal',
-                'nominal' => 1000000,
-                'keterangan' => 'Biaya uang pangkal',
+                'gelombang' => 1,
+                'nama' => 'Fasilitas Air Minum',
+                'nominal' => 50000,
+                'keterangan' => '',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
+            
         ];
 
         \DB::table('nominal_pendaftaran')->insert($nominalAdministrasi);

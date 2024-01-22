@@ -1,5 +1,5 @@
 @extends('cms.layouts.dashboard-admin')
-@section('title', 'PPDB Setting | ')
+@section('title', 'Administrasi | ')
 @section('content')
 <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
     <div class="w-full mb-1">
@@ -20,14 +20,6 @@
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                             </svg>
                             <a href="#" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Nominal Administrasi</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                            </svg>
-                            <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Setting</span>
                         </div>
                     </li>
                 </ol>
@@ -71,7 +63,7 @@
                                 Nama
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Nominal
+                                Nominal Normal
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 Keterangan
@@ -83,18 +75,7 @@
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                         @if($paginationData['total'] > 0)
-                        @php
-                            $tempGelombang = 0;
-                        @endphp
                         @foreach($listData as $data)
-                        @if($tempGelombang != $data->gelombang)
-                            @php
-                                $tempGelombang = $data->gelombang;
-                            @endphp
-                            <tr class="bg-gray-50 dark:bg-gray-500">
-                                <td class="p-4 text-sm text-gray-900 dark:text-white" colspan="6">Gelombang {{ $data->gelombang }}</td>
-                            </tr>
-                        @endif
                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                             <td class="w-4 p-4">
                                 <div class="flex items-center">
@@ -186,11 +167,6 @@
                 <form id="formAdd">
                     <div class="">
                         {{ csrf_field() }}
-                        {{-- gelombang --}}
-                        <div class="mb-4">
-                            <label for="gelombang" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gelombang <span class="text-red-500">*</span></label>
-                            <input type="number" name="gelombang" id="gelombang" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Gelombang" required>
-                        </div>
                         {{-- nama --}}
                         <div class="mb-4">
                             <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Item <span class="text-red-500">*</span></label>
@@ -198,7 +174,7 @@
                         </div>
                         {{-- nominal --}}
                         <div class="mb-4">
-                            <label for="nominal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nominal <span class="text-red-500">*</span></label>
+                            <label for="nominal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nominal Normal<span class="text-red-500">*</span></label>
                             <input type="text" name="nominal" id="nominal" class="nominalFormat shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nominal" value required>
                         </div>
                         {{-- keterangan --}}
@@ -239,12 +215,6 @@
                     <div class="">
                         {{ csrf_field() }}
                         <input type="hidden" name="id" id="editId">
-                        
-                        {{-- gelombang --}}
-                        <div class="mb-4">
-                            <label for="editGelombang" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gelombang <span class="text-red-500">*</span></label>
-                            <input type="number" name="gelombang" id="editGelombang" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Gelombang" required>
-                        </div>
                         {{-- nama --}}
                         <div class="mb-4">
                             <label for="editNama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Item <span class="text-red-500">*</span></label>
@@ -252,7 +222,7 @@
                         </div>
                         {{-- nominal --}}
                         <div class="mb-4">
-                            <label for="editNominal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nominal <span class="text-red-500">*</span></label>
+                            <label for="editNominal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nominal Normal<span class="text-red-500">*</span></label>
                             <input type="text" name="nominal" id="editNominal" class="nominalFormat shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nominal" required>
                         </div>
                         {{-- keterangan --}}
@@ -312,7 +282,7 @@
         loading(true)
         axios({
                 method: 'post',
-                url: '/cms/master/ppdb/administrasi',
+                url: '/cms/administrasi/normal',
                 data: formDataObj
             })
             .then(function(response) {
@@ -343,14 +313,11 @@
 
         axios({
                 method: 'get',
-                url: '/cms/master/ppdb/administrasi/' + id,
-                responseType: 'stream'
+                url: '/cms/administrasi/normal/' + id,
             })
             .then(function(response) {
-                console.log(response.data.results);
                 if (response.data.status == "OK") {
                     document.getElementById("editId").value = response.data.results.id;
-                    document.getElementById("editGelombang").value = response.data.results.gelombang;
                     document.getElementById("editNama").value = response.data.results.nama;
                     document.getElementById("editNominal").value = "Rp. "+response.data.results.nominal;
                     document.getElementById("editKeterangan").value = response.data.results.keterangan;
@@ -372,7 +339,7 @@
         loading(true)
         axios({
                 method: 'put',
-                url: '/cms/master/ppdb/administrasi/' + formData.get('id'),
+                url: '/cms/administrasi/normal/' + formData.get('id'),
                 data: formDataObj
             })
             .then(function(response) {
@@ -412,7 +379,7 @@
         loading(true)
         axios({
                 method: 'delete',
-                url: '/cms/master/ppdb/administrasi/' + id,
+                url: '/cms/administrasi/normal/' + id,
                 data: {
                     _token: "{{ csrf_token() }}"
                 }

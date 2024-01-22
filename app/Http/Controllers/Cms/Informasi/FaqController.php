@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cms\Master;
+namespace App\Http\Controllers\Cms\Informasi;
 
 use App\Http\Controllers\Controller;
 use App\Models\Faq;
@@ -38,7 +38,7 @@ class FaqController extends Controller
         ];
 
 
-        return view('cms.master.faq', compact('listData', 'paginationData'));
+        return view('cms.informasi.faq', compact('listData', 'paginationData'));
     }
 
     public function detail(Request $request, $id)
@@ -62,7 +62,7 @@ class FaqController extends Controller
         $validator = Validator::make($request->all(), [
             'pertanyaan' => 'required|string',
             'jawaban'  => 'required|string',
-            "id"         => "nullable|exists:alur_pendaftaran,id"
+            "id"         => "nullable|exists:faq,id"
         ]);
 
         if ($validator->fails()) {

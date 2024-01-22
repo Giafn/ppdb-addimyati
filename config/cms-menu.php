@@ -46,10 +46,10 @@ return [
 		],
 	],
 	[
-		'code'		 => 'master',
-		'name'		 => "Master",
-		'label'		 => "master",
-		'icon'		 => "data",
+		'code'		 => 'informasi',
+		'name'		 => "Informasi",
+		'label'		 => "informasi",
+		'icon'		 => "info",
 		'route_name' => "",
 		'module' 	 => [],
 		'child'      => [
@@ -75,6 +75,16 @@ return [
 					'task' => []
 				]
 			],
+		],
+	],
+	[
+		'code'		 => 'master',
+		'name'		 => "Master",
+		'label'		 => "master",
+		'icon'		 => "data",
+		'route_name' => "",
+		'module' 	 => [],
+		'child'      => [
 			[
 				'code'		 => "programStudi",
 				'name'		 => "Program Studi",
@@ -94,6 +104,39 @@ return [
 				'route_name' => "cmsPpdbSetting",
 				'module' 	 => [
 					'code' => 'ppdb',
+					'task' => []
+				]
+			],
+			
+		],
+	],
+	[
+		'code'		 => 'administrasi',
+		'name'		 => "Administrasi",
+		'label'		 => "administrasi",
+		'icon'		 => "administrasi",
+		'route_name' => "",
+		'module' 	 => [],
+		'child'      => [
+			[
+				'code'		 => "administrasi-normal",
+				'name'		 => "Administrasi Normal",
+				'label'		 => "administrasiNormal",
+				'icon'		 => "",
+				'route_name' => "cmsNominalAdministrasi",
+				'module' 	 => [
+					'code' => 'administrasiNormal',
+					'task' => []
+				]
+			],
+			[
+				'code'		 => "keringanan",
+				'name'		 => "Keringanan",
+				'label'		 => "keringanan",
+				'icon'		 => "",
+				'route_name' => "cmsKeringanan",
+				'module' 	 => [
+					'code' => 'keringanan',
 					'task' => []
 				]
 			],

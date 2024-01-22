@@ -128,7 +128,7 @@
                                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
                                         </svg>
-                                        Setting
+                                        Hak Akses
                                     </a>
                                     <button type="button" onclick="edit({{ $data->id }})" class="btn btn-warning btn-sm inline-flex items-center">
                                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -207,19 +207,6 @@
                             <label for="addName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name <span class="text-red-500">*</span></label>
                             <input type="text" name="name" id="addName" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name User Level" required>
                         </div>
-                        <div class="mb-4">
-                            <label for="addParentUserLevel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parent User Level</label>
-                            <select id="addParentUserLevel" name="parent_user_level_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value="" selected>Choose a parent user level</option>
-                                @foreach($listUserLevel as $key => $group)
-                                <optgroup label="Level {{ $key }}">
-                                    @foreach($group as $userlevel)
-                                    <option value="{{ $userlevel->id }}">{{ $userlevel->name }}</option>
-                                    @endforeach
-                                </optgroup>
-                                @endforeach
-                            </select>
-                        </div>
                     </div>
                 </form>
             </div>
@@ -256,19 +243,6 @@
                         <div class="mb-4">
                             <label for="editName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name <span class="text-red-500">*</span></label>
                             <input type="text" name="name" id="editName" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name User Level" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="editParentUserLevel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parent User Level</label>
-                            <select id="editParentUserLevel" name="parent_user_level_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value="" selected>Choose a parent user level</option>
-                                @foreach($listUserLevel as $key => $group)
-                                <optgroup label="Level {{ $key }}">
-                                    @foreach($group as $userlevel)
-                                    <option value="{{ $userlevel->id }}">{{ $userlevel->name }}</option>
-                                    @endforeach
-                                </optgroup>
-                                @endforeach
-                            </select>
                         </div>
                     </div>
                 </form>

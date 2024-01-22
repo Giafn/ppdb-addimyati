@@ -225,8 +225,9 @@ class FrontController extends Controller
             ->where('calon_siswa.nik', $req->nik)
             ->where('akademik.nisn', $req->nisn)
             ->where('calon_siswa.tanggal_lahir', $req->tanggal_lahir)
-            ->select('pendaftaran.id As id','pendaftaran.kode','program_keahlian.nama As jurusan', 'pendaftaran.referensi', 'pendaftaran.created_at As tanggal_daftar', 'calon_siswa.nama_lengkap', 'akademik.asal_sekolah')
+            ->select('pendaftaran.kode','program_keahlian.nama As jurusan', 'pendaftaran.referensi', 'pendaftaran.created_at As tanggal_daftar', 'calon_siswa.nama_lengkap', 'akademik.asal_sekolah', 'calon_siswa.jenis_kelamin', 'calon_siswa.tempat_lahir', 'calon_siswa.tanggal_lahir', 'calon_siswa.agama')
             ->first();
+
         if (!$data) {
             return response()->json([
                 'status' => 'error',
@@ -234,9 +235,9 @@ class FrontController extends Controller
             ], 422);
         }
 
-        unset($data->id);
+        $data->tanggal_lahir_formated = date('d F Y', strtotime($data->tanggal_lahir));
 
-        $data->id_hash = Crypt::encryptString($data->id);
+        unset($data->tanggal_lahir);
 
         return response()->json([
             'status' => 'success',

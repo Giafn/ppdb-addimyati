@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cms\Master;
+namespace App\Http\Controllers\Cms\Administrasi;
 
 use App\Http\Controllers\Controller;
 use App\Models\NominalPendaftaran;
@@ -11,7 +11,7 @@ class NominalAdministrasiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['cms.access:nominalAdministrasi,hak-akses']);
+        $this->middleware(['cms.access:administrasiNormal,hak-akses']);
     }
 
     public function index(Request $request)
@@ -43,13 +43,12 @@ class NominalAdministrasiController extends Controller
             'next_page_url' => $listData->nextPageUrl(),
         ];
 
-        return view('cms.master.nominal-administrasi', compact('listData', 'paginationData'));
+        return view('cms.administrasi.nominal-administrasi', compact('listData', 'paginationData'));
     }
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'gelombang'       => 'required|numeric',
             'nama'      => 'required|string',
             'nominal'   => 'required',
             'keterangan' => 'required|string'
@@ -67,7 +66,7 @@ class NominalAdministrasiController extends Controller
 
         try {
             $nominalAdministrasi = new NominalPendaftaran();
-            $nominalAdministrasi->gelombang = $request->gelombang;
+            $nominalAdministrasi->gelombang = '1';
             $nominalAdministrasi->nama = $request->nama;
             $nominalAdministrasi->nominal = $request->nominal;
             $nominalAdministrasi->keterangan = $request->keterangan;
@@ -92,8 +91,6 @@ class NominalAdministrasiController extends Controller
                 'message' => "Data tidak ditemukan"
             ], 404);
         }
-
-        // format nominal
         $nominalAdministrasi->nominal = number_format($nominalAdministrasi->nominal, 0, ',', '.');
 
         return response()->json([
@@ -105,7 +102,6 @@ class NominalAdministrasiController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'gelombang'       => 'required|numeric',
             'nama'      => 'required|string',
             'nominal'   => 'required',
             'keterangan' => 'required|string'
@@ -123,7 +119,7 @@ class NominalAdministrasiController extends Controller
 
         try {
             $nominalAdministrasi = NominalPendaftaran::find($id);
-            $nominalAdministrasi->gelombang = $request->gelombang;
+            $nominalAdministrasi->gelombang = '1';
             $nominalAdministrasi->nama = $request->nama;
             $nominalAdministrasi->nominal = $request->nominal;
             $nominalAdministrasi->keterangan = $request->keterangan;
