@@ -111,9 +111,6 @@
                         <tr>
                             <td colspan="5" class="p-4 text-center">
                                 <div class="flex flex-col items-center justify-center">
-                                    <svg class="w-16 h-16 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 9a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1zm1 3a1 1 0 100 2h2a1 1 0 100-2H9z" clip-rule="evenodd"></path>
-                                    </svg>
                                     <span class="mt-2 text-sm text-gray-500 dark:text-gray-400">Data tidak tersedia</span>
                                 </div>
                             </td>
