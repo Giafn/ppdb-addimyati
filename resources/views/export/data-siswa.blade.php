@@ -6,38 +6,38 @@
         <tr style="background-color: #ffffff;" bgcolor="#ffffff">
             <th style="font-size: 16px; background-color: #FEC000; text-align: center;" bgcolor="#FEC000" align="center" colspan="21">SMK TERPADU ADDIMYATI</th>
         </tr>
-        <tr style="background-color: #ffffff;" bgcolor="#ffffff">
-          <td style="font-size: 16px; border-width: 1px; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" rowspan="2">No</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" rowspan="2">NAMA LENGKAP</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" rowspan="2">JK</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" rowspan="2">ANAK KE</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" colspan="3">NAMA ORANG TUA</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" colspan="3">PENDIDIKAN ORANG TUA</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" colspan="3">PEKERJAAN ORANG TUA</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" colspan="5">ALAMAT</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" rowspan="2">ASAL SEKOLAH</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" rowspan="2">NO WA</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" rowspan="2">NISN</td>
-        </tr>
-        <tr style="background-color: #ffffff;" bgcolor="#ffffff">
-          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">AYAH</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">IBU</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">WALI</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">AYAH</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">IBU</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">WALI</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">AYAH</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">IBU</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">WALI</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">JALAN/GG</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">RT/RW</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">KEL/DESA</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">KECAMATAN</td>
-          <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">KAB/KOTA</td>
-        </tr>
         @foreach($data['data'] as $key => $value)
             <tr style="background-color: #ffffff;" bgcolor="#ffffff">
-                <th style="font-size: 16px; background-color: #FEC000; text-align: center;" bgcolor="#FEC000" align="center" colspan="21">Gelombang {{ $key }}</th>
+                <th style="font-size: 16px; background-color: #92D050; text-align: center;" bgcolor="#92D050" align="center" colspan="21">Gelombang {{ $key }}</th>
+            </tr>
+            <tr style="background-color: #ffffff;" bgcolor="#ffffff">
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" rowspan="2">No</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" rowspan="2">NAMA LENGKAP</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" rowspan="2">JK</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" rowspan="2">ANAK KE</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" colspan="3">NAMA ORANG TUA</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" colspan="3">PENDIDIKAN ORANG TUA</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" colspan="3">PEKERJAAN ORANG TUA</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" colspan="5">ALAMAT</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" rowspan="2">ASAL SEKOLAH</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" rowspan="2">NO WA</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" rowspan="2">NISN</td>
+            </tr>
+            <tr style="background-color: #ffffff;" bgcolor="#ffffff">
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">AYAH</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">IBU</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">WALI</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">AYAH</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">IBU</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">WALI</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">AYAH</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">IBU</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">WALI</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">JALAN/GG</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">RT/RW</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">KEL/DESA</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">KECAMATAN</td>
+              <td style="font-size: 16px; border-width: 1px; background-color: #c7c7c7; padding: 5px; border-style: solid; border: 1px solid #000; text-align: center;">KAB/KOTA</td>
             </tr>
             @foreach($value as $key2 => $value)
                 <tr style="background-color: #ffffff;" bgcolor="#ffffff">

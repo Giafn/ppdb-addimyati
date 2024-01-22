@@ -37,7 +37,11 @@ Route::get('/', function () {
 });
 
 Route::get('/test-export', function () {
-    return Excel::download(new \App\Exports\ExportPPDB, 'calon-siswa.xlsx');
+    return Excel::download(new \App\Exports\Sheets\SheetDataPembayaran, 'test.xlsx');
+});
+
+Route::get('/test-view', function () {
+    return view('export.data-pembayaran');
 });
 
 Route::middleware('guest')->group(function () {
@@ -60,8 +64,7 @@ Route::post('/ppdb/pendaftaran', [FrontController::class, 'storePendaftaran']);
 Route::post('/ppdb/pendaftaran/sub-email', [FrontController::class, 'subEmail']);
 Route::get('/ppdb/cek-data', [FrontController::class, 'indexCekData']);
 Route::post('/ppdb/cek-data', [FrontController::class, 'cekData']);
-Route::middleware('auth')->group(function () {
-    
+Route::middleware('auth')->group(function () {  
     // route grup prefix cms
     Route::prefix('cms')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('cmsDashboard');

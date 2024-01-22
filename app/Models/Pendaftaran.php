@@ -11,4 +11,14 @@ class Pendaftaran extends Model
 
     protected $table = 'pendaftaran';
     protected $guarded = [];
+
+    public function calonSiswa()
+    {
+        return $this->belongsTo(CalonSiswa::class, 'calon_siswa_id');
+    }
+
+    public function ppdb()
+    {
+        return $this->belongsTo(Ppdb::class, 'ppdb_id');
+    }
 }

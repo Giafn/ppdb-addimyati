@@ -11,4 +11,9 @@ class CalonSiswa extends Model
 
     protected $table = 'calon_siswa';
     protected $guarded = [];
+
+    public function siswaPembayaran()
+    {
+        return $this->hasOne(SiswaPembayaran::class, 'siswa_id');
+    }
 }
