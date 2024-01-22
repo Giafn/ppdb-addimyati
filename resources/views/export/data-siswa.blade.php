@@ -61,7 +61,7 @@
                 <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; text-align: center; border: 1px solid #000;">{{ ucwords($value->alamat_kab_kota) }}</td>
                 <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; text-align: center; border: 1px solid #000;">{{ ucwords($value->asal_sekolah) }}</td>
                 <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; text-align: center; border: 1px solid #000;">{{ $value->nomor_wa }}</td>
-                <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; text-align: center; border: 1px solid #000;">{{ (int) $value->nisn }}</td>
+                <td style="font-size: 16px; border-width: 1px; padding: 5px; border-style: solid; text-align: center; border: 1px solid #000;">{{ (string) $value->nisn }}</td>
                 </tr>
             @endforeach
         @endforeach

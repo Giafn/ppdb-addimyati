@@ -5,6 +5,8 @@ namespace App\Exports\Sheets;
 use App\Http\Controllers\Cms\Master\PpdbSettingController;
 use App\Models\CalonSiswa;
 use App\Models\Pendaftaran;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -86,5 +88,12 @@ class SheetDataSiswa implements FromView, ShouldAutoSize, WithTitle
     public function title(): string
     {
         return 'Data Siswa';
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'U' => NumberFormat::FORMAT_NUMBER,
+        ];
     }
 }

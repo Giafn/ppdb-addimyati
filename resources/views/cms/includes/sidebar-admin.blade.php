@@ -19,10 +19,17 @@
                     @foreach (ManaCms::listMenu() as $menu)
                     <li>
                         @if (count($menu->childs) == 0)
-                        <a href="{{ $menu->url }}" class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 {{ $menu->active == 'active' ? 'bg-gray-100 dark:bg-gray-700' : '' }}">
-                            @includeif('components.icons.'.$menu->icon)
-                            <span class="ml-3" sidebar-toggle-item>{{ $menu->name }}</span>
-                        </a>
+                            @if($menu->name != 'Laporan')
+                            <a href="{{ $menu->url }}" class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 {{ $menu->active == 'active' ? 'bg-gray-100 dark:bg-gray-700' : '' }}">
+                                @includeif('components.icons.'.$menu->icon)
+                                <span class="ml-3" sidebar-toggle-item>{{ $menu->name }}</span>
+                            </a>
+                            @else
+                            <button data-modal-target="modal-export" data-modal-toggle="modal-export" class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700" type="button">
+                                @includeif('components.icons.'.$menu->icon)
+                                <span class="ml-3" sidebar-toggle-item>{{ $menu->name }}</span>
+                            </button>
+                            @endif
                         @else
                         <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" aria-controls="dropdown-{{ $menu->label }}" data-collapse-toggle="dropdown-{{ $menu->label }}">
                             @includeif('components.icons.'.$menu->icon)
@@ -49,3 +56,5 @@
         </div>
     </div>
 </aside>
+  
+  

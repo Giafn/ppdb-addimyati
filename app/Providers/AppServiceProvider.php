@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Ppdb;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 

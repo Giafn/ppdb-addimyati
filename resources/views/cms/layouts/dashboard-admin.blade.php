@@ -40,6 +40,7 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
+    @include('cms.layouts.modal-export')
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
@@ -144,6 +145,9 @@
             sidebarOpenBtn.classList.remove('hidden');
         }
 
+    </script>
+    <script>
+        
     </script>
     @yield('script')
 </body>

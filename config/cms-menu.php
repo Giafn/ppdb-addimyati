@@ -167,4 +167,16 @@ return [
 		],
 		'child'      => []
 	],
+	[
+		'code'		 => 'laporan',
+		'name'		 => "Laporan",
+		'label'		 => "laporan",
+		'icon'		 => "report",
+		'route_name' => "cmsLaporan",
+		'module' 	 => [
+			'code' => 'laporan',
+			'task' => []
+		],
+		'child'      => [],
+	],
 ];
