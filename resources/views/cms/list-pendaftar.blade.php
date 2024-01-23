@@ -78,11 +78,10 @@
             </div>
             </form>
             <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
-                {{-- export --}}
-                <a href="/cms/list-pendaftar/export/excel?{{ http_build_query(request()->input()) }}" target="_blank" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 sm:w-auto dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                <button type="button"  data-modal-target="modal-export" data-modal-toggle="modal-export" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 sm:w-auto dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                     <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM216 232V334.1l31-31c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-72 72c-9.4 9.4-24.6 9.4-33.9 0l-72-72c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l31 31V232c0-13.3 10.7-24 24-24s24 10.7 24 24z"/></svg>
                     Export
-                </a>
+                </button>
                 <button type="button" data-mana-modal-toggle="tambahModal" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
@@ -1136,6 +1135,21 @@
                 }
             });
         loading(false)
+    }
+</script>
+<script>
+    // onclick #cardDataLengkap
+    $('#cardDataLengkap').click(function() {
+        exportExcel('lengkap');
+    });
+
+    function exportExcel(type) {
+        var tahun_ajaran = $("#tahun_ajaran").val();
+        var gelombang = $("#gelombang").val();
+        var is_all = $("#withSiswaBelumBayar").is(":checked") ? 1 : 0;
+
+        window.location.href = "/cms/export/" + type + "?tahun_ajaran=" + tahun_ajaran + "&gelombang=" + gelombang + "&is_all=" + is_all;
+
     }
 </script>
 @endsection

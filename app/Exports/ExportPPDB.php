@@ -9,7 +9,7 @@ class ExportPPDB implements WithMultipleSheets
 {
     private $data;
 
-    public function __construct($data = ['tahun_ajaran' => null, 'gelombang' => null ])
+    public function __construct($data = ['tahun_ajaran' => null, 'gelombang' => null , 'is_all' => false])
     {
         $this->data = $data;
     }
@@ -18,9 +18,11 @@ class ExportPPDB implements WithMultipleSheets
     {
         $sheets = [];
 
+        $sheets[] = new Sheets\SheetDataSiswa($this->data);
+        $sheets[] = new Sheets\SheetDataPembayaran($this->data);
         $sheets[] = new Sheets\SheetNamaSiswa($this->data);
         $sheets[] = new Sheets\SheetAsalSekolah($this->data);
-        $sheets[] = new Sheets\SheetDataSiswa($this->data);
+        $sheets[] = new Sheets\SheetUkuranSeragam($this->data);
 
         return $sheets;
     }

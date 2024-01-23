@@ -17,7 +17,7 @@ class SheetDataSiswa implements FromView, ShouldAutoSize, WithTitle
     // constructor untuk menerima data dari controller
     private $data;
 
-    public function __construct($data = ['tahun_ajaran' => null, 'gelombang' => null ])
+    public function __construct($data = ['tahun_ajaran' => null, 'gelombang' => null , 'is_all' => false])
     {
         $this->data = $data;
     }
@@ -28,6 +28,7 @@ class SheetDataSiswa implements FromView, ShouldAutoSize, WithTitle
         $selectedTahunAjaran = $data['tahun_ajaran'];
         $tahunAjaran = $selectedTahunAjaran ?? PpdbSettingController::getPPDBInfo()['ppdbOpen']->tahun_ajaran;
         $gelombang = $data['gelombang'];
+        $isAll = $data['is_all'];
 
         $dataQ =  Pendaftaran::join('calon_siswa', 'pendaftaran.calon_siswa_id', '=', 'calon_siswa.id')
             ->join('akademik', 'calon_siswa.akademik_id', '=', 'akademik.id')
@@ -74,6 +75,10 @@ class SheetDataSiswa implements FromView, ShouldAutoSize, WithTitle
             ->when($gelombang, function($query, $gelombang) {
                 return $query->where('ppdb.gelombang', $gelombang);
             })
+            ->when($isAll == false, function($query) {
+                return $query->where('pendaftaran.status_pembayaran', '!=', 0);
+            })
+            ->orderBy('nama_lengkap', 'asc')
             ->orderBy('jenis_kelamin', 'asc')
             ->get()->groupBy('gelombang');
 

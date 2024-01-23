@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithTitle;
 
-class SheetAsalSekolah implements FromView, ShouldAutoSize, WithTitle
+class SheetUkuranSeragam implements FromView, ShouldAutoSize, WithTitle
 {
     private $data;
 
@@ -28,9 +28,8 @@ class SheetAsalSekolah implements FromView, ShouldAutoSize, WithTitle
         $isAll = $data['is_all'];
 
         $data = Pendaftaran::join('calon_siswa', 'pendaftaran.calon_siswa_id', '=', 'calon_siswa.id')
-            ->join('akademik', 'calon_siswa.akademik_id', '=', 'akademik.id')
             ->join('ppdb', 'pendaftaran.ppdb_id', '=', 'ppdb.id')
-            ->select('calon_siswa.nama_lengkap', 'calon_siswa.jenis_kelamin', 'akademik.asal_sekolah')
+            ->select('calon_siswa.nama_lengkap', 'calon_siswa.jenis_kelamin', 'calon_siswa.ukuran_seragam')
             ->where('ppdb.tahun_ajaran', $tahunAjaran)
             ->when($gelombang, function($query, $gelombang) {
                 return $query->where('ppdb.gelombang', $gelombang);
@@ -48,17 +47,17 @@ class SheetAsalSekolah implements FromView, ShouldAutoSize, WithTitle
                 'no' => $key + 1,
                 'nama' => $value->nama_lengkap,
                 'jenis_kelamin' => strtoupper($value->jenis_kelamin),
-                'asal_sekolah' => $value->asal_sekolah
+                'ukuran_seragam' => strtoupper($value->ukuran_seragam)
             ];
         }
 
-        return view('export.data-asal-sekolah', [
+        return view('export.data-ukuran-seragam', [
             'data' => $dataExport,
         ]);
     }
 
     public function title(): string
     {
-        return 'Asal Sekolah';
+        return 'Ukuran Seragam';
     }
 }

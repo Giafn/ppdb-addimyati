@@ -37,11 +37,11 @@ Route::get('/', function () {
 });
 
 Route::get('/test-export', function () {
-    return Excel::download(new \App\Exports\Sheets\SheetDataPembayaran, 'test.xlsx');
+    return Excel::download(new \App\Exports\ExportPPDB(['tahun_ajaran' => null, 'gelombang' => null , 'is_all' => false]), 'test.xlsx');
 });
 
 Route::get('/test-view', function () {
-    return view('export.data-pembayaran');
+    return view('export.data-asal-sekolah');
 });
 
 Route::middleware('guest')->group(function () {
@@ -150,6 +150,13 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('pembayaran')->group(function () {
             Route::get('/', [PembayaranController::class, 'index'])->name('cmsPembayaran');
+            Route::get('/{id}', [PembayaranController::class, 'showInfoAndHistory']);
+            Route::post('/{id}', [PembayaranController::class, 'bayar']);
+            Route::post('/{id}/total', [PembayaranController::class, 'setHarga']);
+        });
+
+        Route::prefix('export')->group(function () {
+            Route::post('/lengkap', [PembayaranController::class, 'index'])->name('cmsPembayaran');
             Route::get('/{id}', [PembayaranController::class, 'showInfoAndHistory']);
             Route::post('/{id}', [PembayaranController::class, 'bayar']);
             Route::post('/{id}/total', [PembayaranController::class, 'setHarga']);

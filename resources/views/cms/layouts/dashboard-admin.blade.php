@@ -40,7 +40,9 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-    @include('cms.layouts.modal-export')
+    @if (ManaCms::checkAccess('laporan', 'hak-akses'))
+        @include('cms.layouts.modal-export')
+    @endif
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');

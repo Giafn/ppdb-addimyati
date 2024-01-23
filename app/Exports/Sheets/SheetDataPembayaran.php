@@ -17,7 +17,7 @@ class SheetDataPembayaran implements FromView, ShouldAutoSize, WithTitle
     // constructor untuk menerima data dari controller
     private $data;
 
-    public function __construct($data = ['tahun_ajaran' => null, 'gelombang' => null ])
+    public function __construct($data = ['tahun_ajaran' => null, 'gelombang' => null , 'is_all' => false])
     {
         $this->data = $data;
     }
@@ -28,6 +28,7 @@ class SheetDataPembayaran implements FromView, ShouldAutoSize, WithTitle
         $selectedTahunAjaran = $data['tahun_ajaran'];
         $tahunAjaran = $selectedTahunAjaran ?? PpdbSettingController::getPPDBInfo()['ppdbOpen']->tahun_ajaran;
         $gelombang = $data['gelombang'];
+        $isAll = $data['is_all'];
 
         $dataQ =  Pendaftaran::with(
                 'calonSiswa:id,nama_lengkap,jenis_kelamin', 
@@ -38,7 +39,9 @@ class SheetDataPembayaran implements FromView, ShouldAutoSize, WithTitle
                 'calonSiswa.siswaPembayaran.keringanan.detailKeringanan',
                 )
             ->join('ppdb', 'pendaftaran.ppdb_id', '=', 'ppdb.id')
-            ->where('pendaftaran.status_pembayaran', '!=', 0)
+            ->when($isAll == false, function($query) {
+                return $query->where('pendaftaran.status_pembayaran', '!=', 0);
+            })
             ->where('ppdb.tahun_ajaran', $tahunAjaran)
             ->when($gelombang, function($query, $gelombang) {
                 return $query->where('ppdb.gelombang', $gelombang);
@@ -101,6 +104,6 @@ class SheetDataPembayaran implements FromView, ShouldAutoSize, WithTitle
 
     public function title(): string
     {
-        return 'Data Siswa';
+        return 'Data Pembayaran Siswa';
     }
 }
