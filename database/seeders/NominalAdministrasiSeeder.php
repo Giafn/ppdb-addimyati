@@ -24,7 +24,7 @@ class NominalAdministrasiSeeder extends Seeder
             [
                 'gelombang' => 1,
                 'nama' => 'Biaya Pengembangan',
-                'nominal' => 500000,
+                'nominal' => 2000000,
                 'keterangan' => 'Biaya pengembangan sekolah',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -40,7 +40,7 @@ class NominalAdministrasiSeeder extends Seeder
             [
                 'gelombang' => 1,
                 'nama' => 'SPP',
-                'nominal' => 100000,
+                'nominal' => 300000,
                 'keterangan' => 'Biaya SPP',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -48,7 +48,7 @@ class NominalAdministrasiSeeder extends Seeder
             [
                 'gelombang' => 1,
                 'nama' => 'ID Card',
-                'nominal' => 100000,
+                'nominal' => 75000,
                 'keterangan' => '',
                 'created_at' => now(),
                 'updated_at' => now(),
