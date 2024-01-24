@@ -10,6 +10,7 @@ use App\Exports\Sheets\SheetDataSiswa;
 use App\Exports\Sheets\SheetNamaSiswa;
 use App\Exports\Sheets\SheetUkuranSeragam;
 use App\Http\Controllers\Controller;
+use App\Models\Ppdb;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -22,6 +23,10 @@ class ExportController extends Controller
 
     public function dataSiswa(Request $request)
     {
+        if ($this->cekPpdb() == false) {
+            return redirect()->back()->with('error', 'Data PPDB tidak ditemukan');
+        }
+
         $request->validate([
             "tahun_ajaran" => "nullable",
             "gelombang" => "nullable",
@@ -45,6 +50,9 @@ class ExportController extends Controller
 
     public function dataPembayaran(Request $request)
     {
+       if ($this->cekPpdb() == false) {
+            return redirect()->back()->with('error', 'Data PPDB tidak ditemukan');
+        }
         $request->validate([
             "tahun_ajaran" => "nullable",
             "gelombang" => "nullable",
@@ -68,6 +76,9 @@ class ExportController extends Controller
 
     public function dataNamaSiswa(Request $request)
     {
+       if ($this->cekPpdb() == false) {
+            return redirect()->back()->with('error', 'Data PPDB tidak ditemukan');
+        }
         $request->validate([
             "tahun_ajaran" => "nullable",
             "gelombang" => "nullable",
@@ -91,6 +102,9 @@ class ExportController extends Controller
 
     public function dataAsalSekolah(Request $request)
     {
+       if ($this->cekPpdb() == false) {
+            return redirect()->back()->with('error', 'Data PPDB tidak ditemukan');
+        }
         $request->validate([
             "tahun_ajaran" => "nullable",
             "gelombang" => "nullable",
@@ -114,6 +128,9 @@ class ExportController extends Controller
 
     public function dataUkuranSeragam(Request $request)
     {
+       if ($this->cekPpdb() == false) {
+            return redirect()->back()->with('error', 'Data PPDB tidak ditemukan');
+        }
         $request->validate([
             "tahun_ajaran" => "nullable",
             "gelombang" => "nullable",
@@ -137,6 +154,9 @@ class ExportController extends Controller
 
     public function dataAll(Request $request)
     {
+       if ($this->cekPpdb() == false) {
+            return redirect()->back()->with('error', 'Data PPDB tidak ditemukan');
+        }
         $request->validate([
             "tahun_ajaran" => "nullable",
             "gelombang" => "nullable",
@@ -160,6 +180,9 @@ class ExportController extends Controller
 
     public function dataJurusan(Request $request)
     {
+       if ($this->cekPpdb() == false) {
+            return redirect()->back()->with('error', 'Data PPDB tidak ditemukan');
+        }
         $request->validate([
             "tahun_ajaran" => "nullable",
             "gelombang" => "nullable",
@@ -177,5 +200,14 @@ class ExportController extends Controller
         $namaFile = str_replace('/', '-', $namaFile);
 
         return Excel::download(new ExportJurusan($data), $namaFile);
+    }
+
+    private function cekPpdb()
+    {
+        $ppdb = Ppdb::all();
+        if ($ppdb->count() == 0) {
+            return false;
+        }
+        return true;
     }
 }
