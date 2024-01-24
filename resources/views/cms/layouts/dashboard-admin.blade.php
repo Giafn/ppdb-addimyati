@@ -17,9 +17,9 @@
     <link rel="stylesheet" href="/css/app.css">
 </head>
 
-<body class="bg-gray-50 dark:bg-gray-800">
+<body class="bg-white dark:bg-gray-800">
     @include('cms.includes.navbar-admin')
-    <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-800">
+    <div class="flex pt-16 overflow-hidden bg-white dark:bg-gray-800">
         <div class="fixed inset-0 z-30 hidden bg-gray-800/50 dark:bg-gray-800/90 md:hidden" id="sidebarBackdrop"></div>
         @include('cms.includes.sidebar-admin')
         <div id="main-content" class="relative w-full h-full overflow-y-auto lg:ml-64">
@@ -40,9 +40,6 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-    @if (ManaCms::checkAccess('laporan', 'hak-akses'))
-        @include('cms.layouts.modal-export')
-    @endif
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');

@@ -325,7 +325,7 @@ class FrontController extends Controller
             'no_sttb' => 'required|string|unique:akademik,nomor_seri_sttb|min:15|max:25',
             'tahun_sttb' => 'required|numeric|min:1000|max:9999',
             'program_studi' => 'required|numeric',
-            'program_studi_pilihan_2' => 'nullable|numeric',
+            'program_studi_pilihan_2' => 'nullable|numeric|different:program_studi',
             'tinggi_badan' => 'nullable|numeric',
             'berat_badan' => 'nullable|numeric',
             'golongan_darah' => 'nullable|string|max:1',

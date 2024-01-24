@@ -7,7 +7,7 @@
             <th style="font-size: 14px; text-align: center;" align="center" colspan="4"><b>SMK TERPADU ADDIMYATI</b></th>
         </tr>
         <tr style="background-color: #ffffff;" bgcolor="#ffffff">
-          <th style="font-size: 14px; text-align: center;" align="center" colspan="4"><b>TAHUN AJARAN 2021</b></th>
+          <th style="font-size: 14px; text-align: center;" align="center" colspan="4"><b>TAHUN AJARAN {{ $tahunAjaran }}</b></th>
         </tr>
         <tr style="background-color: #ffffff;" bgcolor="#ffffff">
           <th style="font-size: 14px; text-align: center;" align="center" colspan="4"></th>

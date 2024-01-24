@@ -373,6 +373,7 @@ class ListPendaftarController extends Controller
             $calonSiswa->penyakit_kronis = $req->penyakit_kronis;
             $calonSiswa->prestasi = $req->prestasi;
             $calonSiswa->keahlian = $req->keahlian;
+            $calonSiswa->program_keahlian_id = $req->pilihan_jurusan;
             $calonSiswa->save();
 
             $alamat->provinsi = $req->provinsi;
@@ -572,26 +573,5 @@ class ListPendaftarController extends Controller
         return response()->json([
             'status' => "OK"
         ]);
-    }
-
-    public function export(Request $request)
-    {
-        $request->validate([
-            "tahun_ajaran" => "nullable",
-            "gelombang" => "nullable",
-        ]);
-
-        $tahunAjaran = $request->tahun_ajaran;
-        $gelombang = $request->gelombang;
-        
-        $data = [
-            "tahun_ajaran" => $tahunAjaran,
-            "gelombang" => $gelombang
-        ];
-        $namaFile = "DataSiswa" . ($tahunAjaran ? "-(" . $tahunAjaran . ")" : "") . ($gelombang ? "-gel-" . $gelombang : "") . ".xlsx";
-        
-        $namaFile = str_replace('/', '-', $namaFile);
-
-        return Excel::download(new SheetDataSiswa($data), $namaFile);
     }
 }

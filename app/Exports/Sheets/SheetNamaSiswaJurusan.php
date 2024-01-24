@@ -10,11 +10,11 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithTitle;
 
-class SheetAsalSekolah implements FromView, ShouldAutoSize, WithTitle
+class SheetNamaSiswaJurusan implements FromView, ShouldAutoSize, WithTitle
 {
     private $data;
 
-    public function __construct($data = ['tahun_ajaran' => null, 'gelombang' => null , 'is_all' => false])
+    public function __construct($data = ['tahun_ajaran' => null, 'gelombang' => null , 'jurusan' => '', 'jurusan_nama' => ''])
     {
         $this->data = $data;
     }
@@ -25,41 +25,37 @@ class SheetAsalSekolah implements FromView, ShouldAutoSize, WithTitle
         $selectedTahunAjaran = $data['tahun_ajaran'];
         $tahunAjaran = $selectedTahunAjaran ?? PpdbSettingController::getPPDBInfo()['ppdbOpen']->tahun_ajaran;
         $gelombang = $data['gelombang'];
-        $isAll = $data['is_all'];
+        $jurusan = $data['jurusan'];
 
         $data = Pendaftaran::join('calon_siswa', 'pendaftaran.calon_siswa_id', '=', 'calon_siswa.id')
-            ->join('akademik', 'calon_siswa.akademik_id', '=', 'akademik.id')
             ->join('ppdb', 'pendaftaran.ppdb_id', '=', 'ppdb.id')
-            ->select('calon_siswa.nama_lengkap', 'calon_siswa.jenis_kelamin', 'akademik.asal_sekolah')
+            ->select('calon_siswa.nama_lengkap', 'calon_siswa.jenis_kelamin')
             ->where('ppdb.tahun_ajaran', $tahunAjaran)
             ->when($gelombang, function($query, $gelombang) {
                 return $query->where('ppdb.gelombang', $gelombang);
             })
-            ->when($isAll == false, function($query) {
-                return $query->where('pendaftaran.status_pembayaran', '!=', 0);
-            })
+            ->where('pendaftaran.status_pembayaran', '!=', 0)
+            ->where('calon_siswa.program_keahlian_id', $jurusan)
             ->orderBy('nama_lengkap', 'asc')
-            ->orderBy('jenis_kelamin', 'asc')
             ->get();
 
-        $dataExport = [];
         foreach ($data as $key => $value) {
-            $dataExport[] = [
+            $data[$key] = [
                 'no' => $key + 1,
                 'nama' => $value->nama_lengkap,
                 'jenis_kelamin' => strtoupper($value->jenis_kelamin),
-                'asal_sekolah' => $value->asal_sekolah
             ];
         }
 
-        return view('export.data-asal-sekolah', [
-            'data' => $dataExport,
+        return view('export.data-jurusan', [
+            'data' => $data,
+            'namaJurusan' => $this->data['jurusan_nama'],
             'tahunAjaran' => $tahunAjaran,
         ]);
     }
 
     public function title(): string
     {
-        return 'Asal Sekolah';
+        return $this->data['jurusan_nama'];
     }
 }

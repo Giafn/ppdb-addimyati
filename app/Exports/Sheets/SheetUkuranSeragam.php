@@ -53,6 +53,7 @@ class SheetUkuranSeragam implements FromView, ShouldAutoSize, WithTitle
 
         return view('export.data-ukuran-seragam', [
             'data' => $dataExport,
+            'tahunAjaran' => $tahunAjaran,
         ]);
     }
 

@@ -14,6 +14,7 @@ use App\Http\Controllers\Cms\Master\PpdbSettingController;
 use App\Http\Controllers\Cms\Master\JurusanController;
 use App\Http\Controllers\Cms\Informasi\FaqController;
 use App\Http\Controllers\Cms\Informasi\InfoPPDBController;
+use App\Http\Controllers\Cms\PilihanProgramStudi;
 use App\Http\Controllers\Cms\System\UserController;
 use App\Http\Controllers\Cms\System\UserLevelController;
 use Maatwebsite\Excel\Facades\Excel;
@@ -37,13 +38,13 @@ Route::get('/', function () {
     }
 });
 
-Route::get('/test-export', function () {
-    return Excel::download(new \App\Exports\ExportPPDB(['tahun_ajaran' => null, 'gelombang' => null , 'is_all' => false]), 'test.xlsx');
-});
+// Route::get('/test-export', function () {
+//     return Excel::download(new \App\Exports\ExportJurusan(['tahun_ajaran' => null, 'gelombang' => null]), 'test.xlsx');
+// });
 
-Route::get('/test-view', function () {
-    return view('export.data-asal-sekolah');
-});
+// Route::get('/test-view', function () {
+//     return view('export.data-asal-sekolah');
+// });
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', function () {
@@ -146,7 +147,11 @@ Route::middleware('auth')->group(function () {
             Route::patch('/update/akademik/{id}', [ListPendaftarController::class, 'updateAkademik']);
             Route::patch('/update/ortu/{id}', [ListPendaftarController::class, 'updateOrangTua']);
             Route::patch('/update/wali/{id}', [ListPendaftarController::class, 'updateWali']);
-            Route::get('/export/excel', [ListPendaftarController::class, 'export']);
+        });
+
+        Route::prefix('pilihan-program-studi')->group(function () {
+            Route::get('/', [PilihanProgramStudi::class, 'index'])->name('cmsPilihanJurusan');
+            Route::post('/{id}', [PilihanProgramStudi::class, 'ubahJurusan']);
         });
 
         Route::prefix('pembayaran')->group(function () {
@@ -163,6 +168,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/nama-siswa', [ExportController::class, 'dataNamaSiswa']);
             Route::get('/asal-sekolah', [ExportController::class, 'dataAsalSekolah']);
             Route::get('/ukuran-seragam', [ExportController::class, 'dataUkuranSeragam']);
+            Route::get('/jurusan', [ExportController::class, 'dataJurusan']);
         });
     });
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Cms;
 
+use App\Exports\ExportJurusan;
 use App\Exports\ExportPPDB;
 use App\Exports\Sheets\SheetAsalSekolah;
 use App\Exports\Sheets\SheetDataPembayaran;
@@ -155,5 +156,26 @@ class ExportController extends Controller
         $namaFile = str_replace('/', '-', $namaFile);
 
         return Excel::download(new ExportPPDB($data), $namaFile);
+    }
+
+    public function dataJurusan(Request $request)
+    {
+        $request->validate([
+            "tahun_ajaran" => "nullable",
+            "gelombang" => "nullable",
+        ]);
+
+        $tahunAjaran = $request->tahun_ajaran;
+        $gelombang = $request->gelombang;
+        
+        $data = [
+            "tahun_ajaran" => $tahunAjaran,
+            "gelombang" => $gelombang,
+        ];
+        $namaFile = "DataSiswaPerJurusan" . ($tahunAjaran ? "-(" . $tahunAjaran . ")" : "") . ($gelombang ? "-gel-" . $gelombang : "") . ".xlsx";
+        
+        $namaFile = str_replace('/', '-', $namaFile);
+
+        return Excel::download(new ExportJurusan($data), $namaFile);
     }
 }

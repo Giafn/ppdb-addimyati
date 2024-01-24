@@ -147,7 +147,7 @@ return [
 		'code'		 => 'listPendaftar',
 		'name'		 => "List Pendaftar",
 		'label'		 => "listPendaftar",
-		'icon'		 => "clip",
+		'icon'		 => "clip-list",
 		'route_name' => "cmsListPendaftar",
 		'module'	 => [
 			'code' => 'listPendaftar',
@@ -166,6 +166,18 @@ return [
 			'task' => []
 		],
 		'child'      => []
+	],
+	[
+		'code'		 => 'pilihanJurusan',
+		'name'		 => "List Pendaftar Fixs",
+		'label'		 => "pilihanJurusan",
+		'icon'		 => "clip",
+		'route_name' => "cmsPilihanJurusan",
+		'module'	 => [
+			'code' => 'pilihanJurusan',
+			'task' => []
+		],
+		'child'      => [],
 	],
 	[
 		'code'		 => 'laporan',

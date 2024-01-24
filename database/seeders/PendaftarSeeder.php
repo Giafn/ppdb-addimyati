@@ -19,7 +19,7 @@ class PendaftarSeeder extends Seeder
     {
         $faker = Factory::create('id_ID');
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 35; $i++) {
             try {
                 DB::beginTransaction();
                 $ppdbAktif = PpdbSettingController::getPPDBInfo()['ppdbOpen'];
@@ -45,8 +45,9 @@ class PendaftarSeeder extends Seeder
                 $pendaftaran->kode = 'PPDB-' . $faker->numberBetween(1000000000, 9999999999);
                 $pendaftaran->status_pendaftaran = $faker->randomElement([1, 2]); // 1: Diterima, 2: Ditolak
                 $pendaftaran->status_pembayaran ='0';
-                $pendaftaran->jurusan_id1 = $faker->numberBetween(1, 5); // ID Jurusan
-                $pendaftaran->jurusan_id2 = $faker->numberBetween(1, 5); // ID Jurusan
+                $jurusanPilihan = $faker->randomElement([1, 3]);
+                $pendaftaran->jurusan_id1 = $jurusanPilihan; // ID Jurusan
+                $pendaftaran->jurusan_id2 = $faker->numberBetween(1, 3); // ID Jurusan
                 $pendaftaran->referensi = $faker->optional()->word;
                 $ppdbStart = $ppdbAktif->start_date;
                 $ppdbEnd = $ppdbAktif->end_date;
@@ -86,7 +87,7 @@ class PendaftarSeeder extends Seeder
                 $calonSiswa->jml_saudara_tiri = $faker->numberBetween(1, 5);
                 $calonSiswa->jml_saudara_sekolah = $faker->numberBetween(1, 5);
                 $calonSiswa->jml_saudara_no_sekolah = $faker->numberBetween(1, 5);
-                $calonSiswa->program_keahlian_id = $faker->numberBetween(1, 3);
+                $calonSiswa->program_keahlian_id = $jurusanPilihan;
                 $calonSiswa->save();
 
                 $orangTua = new \App\Models\OrangTua();

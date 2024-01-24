@@ -10,7 +10,7 @@
                     <li class="inline-flex items-center">
                         <a href="#" class="inline-flex items-center text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-white">
                             <svg class="w-5 h-5 mr-2.5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                                <path d="M192 0c-41.8 0-77.4 26.7-90.5 64H64C28.7 64 0 92.7 0 128V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H282.5C269.4 26.7 233.8 0 192 0zm0 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM305 273L177 401c-9.4 9.4-24.6 9.4-33.9 0L79 337c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L271 239c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/>
+                                <path d="M192 0c-41.8 0-77.4 26.7-90.5 64H64C28.7 64 0 92.7 0 128V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H282.5C269.4 26.7 233.8 0 192 0zm0 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM72 272a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm104-16H304c8.8 0 16 7.2 16 16s-7.2 16-16 16H176c-8.8 0-16-7.2-16-16s7.2-16 16-16zM72 368a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm88 0c0-8.8 7.2-16 16-16H304c8.8 0 16 7.2 16 16s-7.2 16-16 16H176c-8.8 0-16-7.2-16-16z"/>
                             </svg>
                             List Pendaftar
                         </a>
@@ -39,7 +39,7 @@
                     <label for="gelombang" class="sr-only">Gelombang</label>
                     <div class="relative mt-1 lg:w-64 xl:w-96">
                         <select name="gelombang" id="gelombang" class="block w-full py-2.5 px-5 pr-10 text-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="">Pilih Gelombang</option>
+                            <option value="">Semua Gelombang</option>
                             @foreach($fillSelectFilter['list_gelombang'] as $gelombang)
                             <option value="{{ $gelombang }}" {{ $gelombang == request()->input('gelombang') ? 'selected' : '' }}>{{ $gelombang }}</option>
                             @endforeach
@@ -78,10 +78,12 @@
             </div>
             </form>
             <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
-                <button type="button"  data-modal-target="modal-export" data-modal-toggle="modal-export" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 sm:w-auto dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                @if (ManaCms::checkAccess('laporan', 'hak-akses'))
+                <button type="button"  data-modal-target="modal-export-data-pendaftar" data-modal-toggle="modal-export-data-pendaftar" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 sm:w-auto dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                     <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM216 232V334.1l31-31c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-72 72c-9.4 9.4-24.6 9.4-33.9 0l-72-72c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l31 31V232c0-13.3 10.7-24 24-24s24 10.7 24 24z"/></svg>
-                    Export
+                    Export Data
                 </button>
+                @endif
                 <button type="button" data-mana-modal-toggle="tambahModal" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
@@ -731,6 +733,68 @@
         </div>
     </div>
 </div>
+
+@if (ManaCms::checkAccess('laporan', 'hak-akses'))
+<div id="modal-export-data-pendaftar" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    Export Laporan
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm h-8 w-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="modal-export-data-pendaftar">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <div class="p-4 md:p-5">
+                <p class="text-gray-500 dark:text-gray-400 mb-1">pilih laporan yang ingin di export:</p>
+                <input type="checkbox" id="withSiswaBelumBayar" required>
+                <label for="withSiswaBelumBayar" class="text-gray-500 dark:text-gray-400 text-xs">Sertakan Siswa belum bayar</label>
+                <ul class="space-y-4 mb-4 mt-4">
+                    <li>
+                        <div id="cardDataCalonSiswa" class="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-500 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500">                           
+                            <div class="block">
+                                <div class="w-full text-lg font-semibold">Data Calon Siswa</div>
+                            </div>
+                            @includeif('components.icons.report')
+                        </div>
+                    </li>
+                    <li>
+                        <div id="cardDataNamaSiswa" class="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-500 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500">
+                            <div class="block">
+                                <div class="w-full text-lg font-semibold">Data Nama Siswa</div>
+                            </div>
+                            @includeif('components.icons.report')
+                        </div>
+                    </li>
+                    <li>
+                        <div id="cardDataAsalSekolah" class="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-500 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500">
+                            <div class="block">
+                                <div class="w-full text-lg font-semibold">Data Asal Sekolah</div>
+                            </div>
+                            @includeif('components.icons.report')
+                        </div>
+                    </li>
+                    <li>
+                        <div id="cardDataUkuranSeragam" class="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-500 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500">
+                            <div class="block">
+                                <div class="w-full text-lg font-semibold">Data Ukuran Seragam</div>
+                            </div>
+                            @includeif('components.icons.report')
+                        </div>
+                    </li>
+                </ul>
+                <small class="text-gray-500 dark:text-gray-400">
+                    *jika anda mencentang "Sertakan Siswa belum bayar" maka data siswa yang belum bayar akan ditampilkan di laporan
+                </small>
+            </div>
+        </div>
+    </div>
+</div> 
+@endif
 @endsection
 @section('script')
 <script>
@@ -1139,17 +1203,8 @@
 </script>
 @if (ManaCms::checkAccess('laporan', 'hak-akses'))
 <script>
-    // onclick #cardDataLengkap
-    $('#cardDataLengkap').click(function() {
-        exportExcel('lengkap');
-    });
-
     $('#cardDataCalonSiswa').click(function() {
         exportExcel('calon-siswa');
-    });
-
-    $('#cardDataPembayaran').click(function() {
-        exportExcel('pembayaran');
     });
 
     $('#cardDataNamaSiswa').click(function() {

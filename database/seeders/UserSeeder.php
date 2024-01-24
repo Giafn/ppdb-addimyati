@@ -18,8 +18,8 @@ class UserSeeder extends Seeder
             DB::table('users')->insert([
                 [
                     "name"          => "Admin",
-                    "email"         => "admin@gmail.com",
-                    "password"      => bcrypt('1'),
+                    "email"         => "administrator@gmail.com",
+                    "password"      => bcrypt('koalajepang123'),
 					"user_level_id" => null,
 					"flag_active"   => 1,
 					'created_at'    => date("Y-m-d H:i:s"),

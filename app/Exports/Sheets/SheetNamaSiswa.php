@@ -76,6 +76,7 @@ class SheetNamaSiswa implements FromView, ShouldAutoSize, WithTitle
 
         return view('export.data-nama-siswa', [
             'data' => $dataExport,
+            'tahunAjaran' => $tahunAjaran,
         ]);
     }
 
