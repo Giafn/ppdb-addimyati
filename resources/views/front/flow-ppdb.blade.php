@@ -8,7 +8,9 @@
     <div class="w-full my-10">
         <div class="text-center">
             <h1 class="text-xl font-bold text-emerald-800 text-center">Alur Pendaftaran <br> SMK Ad-Dimyati</h1>
+            @if ($ppdbAktif)
             <p class="text-sm font-semibold text-emerald-800 text-center">{{ $ppdbAktif['tahun_ajaran'] }} gel {{ $ppdbAktif['gelombang'] }}</p>
+            @endif
         </div>
     </div>
     <div class="container mx-auto">
