@@ -48,7 +48,7 @@
                     <h2 class="font-semibold text-sm text-emerald-800 text-center lg:text-base lg:text-left">Pendaftaran siswa akan di buka pada tanggal <span class="text-base lg:text-lg underline decoration-2 underline-offset-4">{{ $tanggal_buka }}</span></h2>
                 @endif
             </div>
-            <div class="mx-6 lg:mx-0">
+            {{-- <div class="mx-6 lg:mx-0">
                 <p class="text-sm text-emerald-800 text-center lg:text-left mb-3" id="pesanNotif">
                     dapatkan notifikasi penerimaan  siswa melalui email
                 </p>
@@ -56,14 +56,14 @@
                     <input type="email" name="email" id="email" class="w-full border border-emerald-800 rounded-lg mr-2 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800 focus:border-transparent lg:w-96" placeholder="Masukkan email anda">
                     <a id="submitEmail" class="hover:cursor-pointer bg-lime-700 text-white rounded-lg px-4 py-2 text-sm font-medium">Kirim</a>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
 @endif
 @endsection
 
-@push('script')
+{{-- @push('script')
 <script>
     $(document).ready(function() {
         $('#submitEmail').click(function() {
@@ -98,4 +98,4 @@
         });
     });
 </script>
-@endpush
+@endpush --}}
