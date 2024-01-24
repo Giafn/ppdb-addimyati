@@ -22,7 +22,6 @@
           <td style="font-size: 12px; border-width: 1px; background-color: #FFFF00; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" >Nama Lengkap</td>
           <td style="font-size: 12px; border-width: 1px; background-color: #FFFF00; padding: 7px 5px; border-style: solid; border: 1px solid #000; text-align: center;" >Jenis Kelamin</td>
         </tr>
-        {{-- @dd($data['laki_laki']) --}}
         @php
             $maxLoop = count($data['laki_laki']) > count($data['perempuan']) ? count($data['laki_laki']) : count($data['perempuan']);
         @endphp

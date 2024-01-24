@@ -55,7 +55,10 @@ class SheetNamaSiswa implements FromView, ShouldAutoSize, WithTitle
             ->orderBy('nama_lengkap', 'asc')
             ->get();
 
-        $dataExport = [];
+        $dataExport = [
+            'laki_laki' => [],
+            'perempuan' => [],
+        ];
         foreach ($dataLaki as $key => $value) {
             $dataExport['laki_laki'][$key] = [
                 'no' => $key + 1,
