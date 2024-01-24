@@ -33,14 +33,17 @@ class DashboardController extends Controller
         ]);
 
         $tahunAjaran = $request->tahun_ajaran;
-        $gelombang = $request->gelombang;
+        $gelombang = $request->gelombang ?? null;
 
         $ppdb = PpdbSettingController::getPPDBInfo();
-        $tahunAjaranTerakhir = Ppdb::select('tahun_ajaran', 'end_date')->orderBy('end_date', 'desc')
+        $tahunAjaranTerakhir = Ppdb::select('tahun_ajaran', 'end_date', 'gelombang')->orderBy('end_date', 'desc')
             ->whereDate('end_date', '<=', date("Y-m-d"))
             ->first();
+        
+        $gelombangTerakhir = $tahunAjaranTerakhir ? $tahunAjaranTerakhir->gelombang : null;
         $tahunAjaranTerakhir = $tahunAjaranTerakhir ? $tahunAjaranTerakhir->tahun_ajaran : null;
         $tahunSelect = $ppdb["ppdbOpen"] ? $ppdb["ppdbOpen"]->tahun_ajaran : $tahunAjaranTerakhir;
+        $gelombang = $gelombang ?? $gelombangTerakhir;
 
         $rekapPendaftarPerday = Pendaftaran::join('ppdb', 'ppdb.id', '=', 'pendaftaran.ppdb_id')
             ->selectRaw('DATE(pendaftaran.created_at) as date, count(*) as total')
@@ -67,7 +70,8 @@ class DashboardController extends Controller
 
         // pendaftar per jurusan
         $rekapPendaftarPerJurusan = Pendaftaran::join('ppdb', 'ppdb.id', '=', 'pendaftaran.ppdb_id')
-            ->join('program_keahlian', 'program_keahlian.id', '=', 'pendaftaran.jurusan_id1')
+            ->join('calon_siswa', 'calon_siswa.id', '=', 'pendaftaran.calon_siswa_id')
+            ->join('program_keahlian', 'program_keahlian.id', '=', 'calon_siswa.program_keahlian_id')
             ->selectRaw('program_keahlian.nama as jurusan, count(*) as total')
             ->when($tahunAjaran, function ($query, $tahunAjaran) {
                 return $query->where('tahun_ajaran', $tahunAjaran);
@@ -176,8 +180,8 @@ class DashboardController extends Controller
                     "totalPendaftar" => $totalPendaftar,
                     "totalPendaftarGelombangIni" => $totalPendaftarGelombangIni,
                     "totalPendaftarPerStatus" => $totalPendaftarPerStatus,
-                    "gelombangNow" => $ppdb["ppdbOpen"] ? $ppdb["ppdbOpen"]->gelombang : "",
-                    "tahunAjaranNow" => $ppdb["ppdbOpen"] ? $ppdb["ppdbOpen"]->tahun_ajaran : ""
+                    "gelombangNow" => $ppdb["ppdbOpen"] ? $ppdb["ppdbOpen"]->gelombang : $gelombangTerakhir,
+                    "tahunAjaranNow" => $ppdb["ppdbOpen"] ? $ppdb["ppdbOpen"]->tahun_ajaran : $tahunAjaranTerakhir,
                 ]
         ];
         
