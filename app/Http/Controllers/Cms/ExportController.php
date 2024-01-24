@@ -11,6 +11,7 @@ use App\Exports\Sheets\SheetNamaSiswa;
 use App\Exports\Sheets\SheetUkuranSeragam;
 use App\Http\Controllers\Controller;
 use App\Models\Ppdb;
+use App\Models\ProgramKeahlian;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -198,7 +199,10 @@ class ExportController extends Controller
         $namaFile = "DataSiswaPerJurusan" . ($tahunAjaran ? "-(" . $tahunAjaran . ")" : "") . ($gelombang ? "-gel-" . $gelombang : "") . ".xlsx";
         
         $namaFile = str_replace('/', '-', $namaFile);
-
+        $jurusanCount = ProgramKeahlian::count();
+        if ($jurusanCount == 0) {
+            return redirect()->back()->with('error', 'Data jurusan tidak ditemukan');
+        }
         return Excel::download(new ExportJurusan($data), $namaFile);
     }
 
