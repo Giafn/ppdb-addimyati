@@ -10,9 +10,11 @@ use App\Models\Akademik;
 use App\Models\Alamat;
 use App\Models\CalonSiswa;
 use App\Models\OrangTua;
+use App\Models\PembayaranHistory;
 use App\Models\Pendaftaran;
 use App\Models\Ppdb;
 use App\Models\ProgramKeahlian;
+use App\Models\SiswaPembayaran;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -270,6 +272,7 @@ class ListPendaftarController extends Controller
             $pendaftaran = Pendaftaran::findOrFail($id);
             $calonSiswa = CalonSiswa::where('id', $pendaftaran->calon_siswa_id)->first();
             $akademik = Akademik::where('id', $calonSiswa->akademik_id)->first();
+            $siswaId = $calonSiswa->id;
             $orangTua = OrangTua::where('calon_siswa_id', $calonSiswa->id)->get();
             $alamat = Alamat::where('id', $calonSiswa->alamat_id)->first();
             $wali = OrangTua::where('calon_siswa_id', $calonSiswa->id)->where('jenis', 'wali')->first();
@@ -278,6 +281,7 @@ class ListPendaftarController extends Controller
                 $alamatWali = Alamat::where('id', $wali->alamat_id)->first();
                 $alamatWali->delete();
             }
+            
             $pendaftaran->delete();
             $calonSiswa->delete();
             $akademik->delete();
@@ -286,6 +290,13 @@ class ListPendaftarController extends Controller
             }
             $alamat->delete();
             
+            // delete siswa_pembayaran
+            $siswaPembayaran = SiswaPembayaran::where('siswa_id', $siswaId)->first();
+            if ($siswaPembayaran) {
+                $historyPembayaran = PembayaranHistory::where('pembayaran_id', $siswaPembayaran->id)->delete();
+                $siswaPembayaran->delete();
+            }
+
 
             DB::commit();
         } catch (\Throwable $th) {
