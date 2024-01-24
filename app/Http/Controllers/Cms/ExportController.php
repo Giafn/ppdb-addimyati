@@ -150,7 +150,7 @@ class ExportController extends Controller
             "gelombang" => $gelombang,
             "is_all" => $request->is_all ? true : false
         ];
-        $namaFile = "DataUkuranSeragam" . ($tahunAjaran ? "-(" . $tahunAjaran . ")" : "") . ($gelombang ? "-gel-" . $gelombang : "") . ".xlsx";
+        $namaFile = "DataPPDB" . ($tahunAjaran ? "-(" . $tahunAjaran . ")" : "") . ($gelombang ? "-gel-" . $gelombang : "") . ".xlsx";
         
         $namaFile = str_replace('/', '-', $namaFile);
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\Cms\PembayaranController;
 use App\Http\Controllers\Cms\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Cms\Administrasi\KeringananController;
 use App\Http\Controllers\Cms\Administrasi\NominalAdministrasiController;
+use App\Http\Controllers\Cms\ExportController;
 use App\Http\Controllers\Cms\Master\PpdbSettingController;
 use App\Http\Controllers\Cms\Master\JurusanController;
 use App\Http\Controllers\Cms\Informasi\FaqController;
@@ -156,10 +157,12 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('export')->group(function () {
-            Route::post('/lengkap', [PembayaranController::class, 'index'])->name('cmsPembayaran');
-            Route::get('/{id}', [PembayaranController::class, 'showInfoAndHistory']);
-            Route::post('/{id}', [PembayaranController::class, 'bayar']);
-            Route::post('/{id}/total', [PembayaranController::class, 'setHarga']);
+            Route::get('/lengkap', [ExportController::class, 'dataAll']);
+            Route::get('/calon-siswa', [ExportController::class, 'dataSiswa']);
+            Route::get('/pembayaran', [ExportController::class, 'dataPembayaran']);
+            Route::get('/nama-siswa', [ExportController::class, 'dataNamaSiswa']);
+            Route::get('/asal-sekolah', [ExportController::class, 'dataAsalSekolah']);
+            Route::get('/ukuran-seragam', [ExportController::class, 'dataUkuranSeragam']);
         });
     });
 

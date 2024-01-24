@@ -1137,10 +1137,31 @@
         loading(false)
     }
 </script>
+@if (ManaCms::checkAccess('laporan', 'hak-akses'))
 <script>
     // onclick #cardDataLengkap
     $('#cardDataLengkap').click(function() {
         exportExcel('lengkap');
+    });
+
+    $('#cardDataCalonSiswa').click(function() {
+        exportExcel('calon-siswa');
+    });
+
+    $('#cardDataPembayaran').click(function() {
+        exportExcel('pembayaran');
+    });
+
+    $('#cardDataNamaSiswa').click(function() {
+        exportExcel('nama-siswa');
+    });
+
+    $('#cardDataAsalSekolah').click(function() {
+        exportExcel('asal-sekolah');
+    });
+
+    $('#cardDataUkuranSeragam').click(function() {
+        exportExcel('ukuran-seragam');
     });
 
     function exportExcel(type) {
@@ -1152,4 +1173,5 @@
 
     }
 </script>
+@endif
 @endsection
