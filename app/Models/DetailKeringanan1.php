@@ -9,11 +9,13 @@ class DetailKeringanan extends Model
 {
     use HasFactory;
     protected $table = 'detail_item_keringanan';
+    
     protected $fillable = [
         'keringanan_id',
         'item_id',
         'nominal',
     ];
+
     public $timestamps = false;
 
     public function keringanan()
