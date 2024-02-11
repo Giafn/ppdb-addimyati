@@ -1,5 +1,5 @@
 @extends('cms.layouts.dashboard-admin')
-@section('title', 'Keringanan | ')
+@section('title', 'Keringanan dan nominal lainya | ')
 @section('content')
 <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
     <div class="w-full mb-1">
@@ -24,7 +24,7 @@
                     </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Pengaturan Keringanan pembayaran</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Pengaturan Keringanan pembayaran dan Nominal Lainya</h1>
         </div>
         <div class="sm:flex">
             <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
@@ -129,7 +129,7 @@
         <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">
-                        Tambah Keringanan
+                        Tambah Keringanan / Nominal Lainya
                     </h3>
                     <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-mana-modal-toggle="tambahModal">
                         @includeif('components.icons.close')
@@ -139,7 +139,7 @@
                     <div class="">
                         {{ csrf_field() }}
                         <div class="mb-2">
-                            <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Keringanan <span class="text-red-500">*</span></label>
+                            <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Jenis <span class="text-red-500">*</span></label>
                             <input type="text" name="nama" id="nama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="nama" required>
                         </div>
                         @foreach($listItem as $item)
@@ -167,7 +167,7 @@
             <!-- Modal header -->
             <div class="modal-header">
                 <h3 class="modal-title">
-                    Edit Keringanan
+                    Edit Keringanan / Nominal Lainya
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-mana-modal-toggle="editModal">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -181,7 +181,7 @@
                         {{ csrf_field() }}
                         <input type="hidden" name="id" id="editId">
                         <div class="mb-2">
-                            <label for="editNama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Keringanan <span class="text-red-500">*</span></label>
+                            <label for="editNama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Jenis <span class="text-red-500">*</span></label>
                             <input type="text" name="nama" id="editNama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="nama" required>
                         </div>
                         @foreach($listItem as $item)

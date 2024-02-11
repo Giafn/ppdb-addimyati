@@ -326,15 +326,6 @@
                 if (response.data.status == "OK") {
                     document.getElementById("editId").value = response.data.results.id;
                     document.getElementById("editName").value = response.data.results.name;
-                    document.getElementById("editParentUserLevel").value = response.data.results.parent_user_level_id;
-
-                    document.querySelectorAll("#editParentUserLevel option").forEach(opt => {
-                        if (opt.value == response.data.results.id) {
-                            opt.disabled = true;
-                        } else {
-                            opt.disabled = false;
-                        }
-                    });
 
                     toggleModal('editUserLevelModal');
 

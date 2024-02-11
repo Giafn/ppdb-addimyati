@@ -491,22 +491,56 @@
 
         // bayar
         $('#bayarBtn').on('click', function() {
-            if  ($('#keterangan').val() == '') {
-                alert('keterangan tidak boleh kosong');
-                return false;
-            }
-            if (!confirm('Yakin bayar, aksi ini tidak dapat di batalkan')) {
-                return false;
-            }
             let id = $('#infoId').val();
             let nominal_bayar = $('#nominalBayar').val();
             let keterangan = $('#keterangan').val();
             if (!nominal_bayar) {
-                alert('nominal tidak boleh kosong');
+                if ($('#errorNominal').length) {
+                    $('#errorNominal').remove();
+                }
+                let errorElement = `<p class="text-red-500 text-xs mt-1" id="errorNominal">Nominal bayar tidak boleh kosong</p>`;
+                $('#nominalBayar').addClass('border-red border-2');
+                $('#nominalBayar').after(errorElement);
+
                 return false;
             }
+
             nominal_bayar = nominal_bayar.split('.').join("");
             maximalBayar = $('#sisaBayar').val();
+
+            console.log(nominal_bayar, maximalBayar);
+            if (parseInt(nominal_bayar) > parseInt(maximalBayar)) {
+                if ($('#errorNominal').length) {
+                    $('#errorNominal').remove();
+                }
+                let errorElement = `<p class="text-red-500 text-xs mt-1" id="errorNominal">Nominal bayar tidak boleh melebihi sisa pembayaran</p>`;
+                $('#nominalBayar').addClass('border-red border-2');
+                $('#nominalBayar').after(errorElement);
+                return false;
+            }
+
+            $('#nominalBayar').removeClass('border-red border-2');
+            $('#errorNominal').remove();
+
+            if  ($('#keterangan').val() == '') {
+                if ($('#errorKeterangan').length) {
+                    $('#errorKeterangan').remove();
+                }
+                let errorElement = `<p class="text-red-500 text-xs mt-1" id="errorKeterangan">Keterangan tidak boleh kosong</p>`;
+                $('#keterangan').addClass('border-red border-2');
+                $('#keterangan').after(errorElement);
+
+                return false;
+            }
+
+            $('#keterangan').removeClass('border-red border-2');
+            $('#errorKeterangan').remove();
+
+            if (!confirm('Yakin bayar, aksi ini tidak dapat di batalkan')) {
+                return false;
+            }
+            
+            
             axios({
                     method: 'post',
                     url: '/cms/pembayaran/' + id,

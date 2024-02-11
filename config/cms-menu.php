@@ -131,7 +131,7 @@ return [
 			],
 			[
 				'code'		 => "keringanan",
-				'name'		 => "Keringanan",
+				'name'		 => "Keringanan & Lainnya",
 				'label'		 => "keringanan",
 				'icon'		 => "",
 				'route_name' => "cmsKeringanan",
