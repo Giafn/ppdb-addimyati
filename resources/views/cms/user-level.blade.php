@@ -320,8 +320,7 @@
 
         axios({
                 method: 'get',
-                url: '/cms/user-level/' + id,
-                responseType: 'stream'
+                url: '/cms/user-level/' + id
             })
             .then(function(response) {
                 if (response.data.status == "OK") {

@@ -370,7 +370,6 @@
         axios({
                 method: 'get',
                 url: '/cms/user/' + id,
-                responseType: 'stream'
             })
             .then(function(response) {
                 if (response.data.status == "OK") {
