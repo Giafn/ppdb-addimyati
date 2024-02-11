@@ -117,7 +117,6 @@
                                 <div class="text-sm text-gray-500 dark:text-gray-400">${data.data.asal_sekolah}</div>
                                 <div class="text-sm font-medium text-gray-900 dark:text-white">Pilihan Jurusan</div>
                                 <div class="text-sm text-gray-500 dark:text-gray-400">${data.data.jurusan}</div>
-                                // status pembayaran
                                 <div class="text-sm font-medium text-gray-900 dark:text-white">Status Pembayaran</div>
                                 <div class="text-sm text-gray-500 dark:text-gray-400">${statusBadge[data.data.status_pembayaran]}</div>
                               </div>
