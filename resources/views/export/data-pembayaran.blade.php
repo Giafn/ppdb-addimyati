@@ -74,8 +74,7 @@
             <td style="font-size: 16px; border-width: 1px; border: 1px solid #000; padding: 5px; text-align: right;">
               {{-- {{ $item['status_pembayaran'] !== 2 ? ( $item['sisa'] !== '-' || $item['sisa'] !== '0' ? "Rp. " . number_format($item['sisa'], 0, ',', '.') : '-' ) : 'LUNAS' }} --}}
               @if ($item['status_pembayaran'] !== 2)
-              @dd($item['sisa'] !== '-' || $item['sisa'] !== '0', $item['sisa'])
-                @if ($item['sisa'] !== '-' || $item['sisa'] !== '0')
+                @if ($item['sisa'] !== '-' && $item['sisa'] !== '0')
                   {{ "Rp. " . number_format($item['sisa'], 0, ',', '.') }}
                 @else
                   LUNAS
