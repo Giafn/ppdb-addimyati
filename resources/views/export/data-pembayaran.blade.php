@@ -72,7 +72,7 @@
             @endfor
             <td style="font-size: 16px; border-width: 1px; border: 1px solid #000; padding: 5px; text-align: right;">{{ "Rp. " . number_format($item['jumlah_dibayar'], 0, ',', '.') }}</td>
             <td style="font-size: 16px; border-width: 1px; border: 1px solid #000; padding: 5px; text-align: right;">
-              {{ $item['status_pembayaran'] !== 2 ? ( $item['sisa'] !== '-' || $item['sisa'] !== '0' ? "Rp. " . number_format($item['sisa'], 0, ',', '.') : '-' ) : 'LUNAS' }}
+              {{ $item['status_pembayaran'] !== 2 ? ( $item['sisa'] !== '-' || $item['sisa'] !== '0' ? "Rp. " . number_format($item['sisa'], 0, ',', '.') : '-' ) : 'LUNAS' }}p
             </td> 
           </tr>
         @endforeach
