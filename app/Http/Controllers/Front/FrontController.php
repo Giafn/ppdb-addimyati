@@ -208,7 +208,7 @@ class FrontController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $validator->errors()->first()
-            ], 422);
+            ], 200);
         }
 
         // $cekNik = new Nik($req->nik);
@@ -225,14 +225,14 @@ class FrontController extends Controller
             ->where('calon_siswa.nik', $req->nik)
             ->where('akademik.nisn', $req->nisn)
             ->where('calon_siswa.tanggal_lahir', $req->tanggal_lahir)
-            ->select('pendaftaran.kode','program_keahlian.nama As jurusan', 'pendaftaran.referensi', 'pendaftaran.created_at As tanggal_daftar', 'calon_siswa.nama_lengkap', 'akademik.asal_sekolah', 'calon_siswa.jenis_kelamin', 'calon_siswa.tempat_lahir', 'calon_siswa.tanggal_lahir', 'calon_siswa.agama')
+            ->select('pendaftaran.kode','program_keahlian.nama As jurusan', 'pendaftaran.referensi', 'pendaftaran.created_at As tanggal_daftar', 'calon_siswa.nama_lengkap', 'akademik.asal_sekolah', 'calon_siswa.jenis_kelamin', 'calon_siswa.tempat_lahir', 'calon_siswa.tanggal_lahir', 'calon_siswa.agama', 'pendaftaran.status_pendaftaran', 'pendaftaran.status_pembayaran')
             ->first();
 
         if (!$data) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Data tidak ditemukan'
-            ], 422);
+            ], 200);
         }
 
         $data->tanggal_lahir_formated = date('d F Y', strtotime($data->tanggal_lahir));
